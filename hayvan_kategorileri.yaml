@@ -1,0 +1,849 @@
+hayvan_kategorileri:
+  kopek:
+    id: "animal_tur_kopek"
+    temel_kimlik:
+      ad: "Köpek"
+      slug: "kopek"
+      aciklama: "İnsanın en sadık dostu olarak bilinen, çeşitli ırkları ve karakter özellikleriyle öne çıkan evcil hayvanlardır. Ailelerin neşe kaynağı ve koruyucusudurlar."
+      gorsel_kimlik: { renk_kodu: "#f59e0b", ikon_adi: "fas fa-dog", emoji: "🐕" }
+    arama_sistemi:
+      alternatif_kelimeler: ["it", "kuçu kuçu", "doggo", "canine", "köpke", "sadık dost", "ev köpeği", "sokak köpeği", "çoban köpeği", "av köpeği", "süs köpeği", "yavru köpek", "pati", "hav hav", "koruyucu", "arkadaş", "koruma köpeği", "poodle", "terrier", "kaniş", "can"]
+      ai_intent_keywords: ["köpek sahiplen", "köpek al", "köpek türleri", "sadık arkadaş köpek", "eğitilebilir köpek", "aile köpeği"]
+      semantic_tags: ["dog", "canine_companion", "dog_breeds", "puppy", "guard_dog", "family_dog", "working_dog"]
+    akilli_filtreler:
+      ozel_filtre_alanlari: # Köpeğe özel filtreler
+        - { alan_adi: "irk_secimi_kopek", label: "Köpek Irkı", tip: "select_dynamic_searchable", kaynak_model_kopek: "KopekIrkTablosu", aciklama: "Golden Retriever, Alman Çoban, Terrier, Poodle, Bulldog, Beagle, Dachshund, vb.", ai_importance: 0.95, zorunlu: false }
+        - { alan_adi: "yas_grubu_kopek", label: "Yaş Grubu", tip: "select", secenekler: ["Yavru (0-1 yaş)", "Genç (1-3 yaş)", "Yetişkin (3-7 yaş)", "Yaşlı (7+ yaş)"], ai_importance: 0.85 }
+        - { alan_adi: "cinsiyet_kopek", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi"], ai_importance: 0.7 }
+        - { alan_adi: "boyut_kopek", label: "Boyut", tip: "select", secenekler: ["Çok Küçük (Toy)", "Küçük", "Orta", "Büyük", "Dev"], ai_importance: 0.8 }
+        - { alan_adi: "enerji_seviyesi_kopek", label: "Enerji Seviyesi", tip: "select", secenekler: ["Düşük", "Orta", "Yüksek", "Çok Yüksek"], ai_importance: 0.9 }
+        - { alan_adi: "egitim_seviyesi_kopek", label: "Eğitim Seviyesi", tip: "select", secenekler: ["Eğitimsiz", "Temel İtaat", "İleri İtaat", "Özel Eğitimli (örn: terapi köpeği)"], ai_importance: 0.8 }
+        - { alan_adi: "cocuk_uyumu_kopek", label: "Çocuklarla Uyumu", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı", "Tavsiye Edilmez"], ai_importance: 0.85 }
+        - { alan_adi: "diger_kopek_uyumu_kopek", label: "Diğer Köpeklerle Uyumu", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı", "Tek Yaşamalı"], ai_importance: 0.75 }
+        - { alan_adi: "diger_hayvan_uyumu_kopek", label: "Diğer Hayvanlarla Uyumu (kedi, kuş vb.)", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı", "Tavsiye Edilmez"], ai_importance: 0.7 }
+        - { alan_adi: "apartman_uyumu_kopek", label: "Apartman Yaşamına Uygunluk", tip: "select", secenekler: ["Uygun", "Orta Düzeyde Uygun", "Uygun Değil"], ai_importance: 0.75 }
+        - { alan_adi: "bahce_ihtiyaci_kopek", label: "Bahçe İhtiyacı", tip: "select", secenekler: ["Yok", "Küçük Bahçe Yeterli", "Geniş Bahçe Gerekli"], ai_importance: 0.7 }
+        - { alan_adi: "tuy_dokme_seviyesi_kopek", label: "Tüy Dökme Seviyesi", tip: "select", secenekler: ["Yok/Çok Az", "Az", "Orta", "Çok"], ai_importance: 0.65 }
+        - { alan_adi: "bakim_ihtiyaci_kopek", label: "Bakım İhtiyacı", tip: "select", secenekler: ["Düşük (haftalık fırçalama)", "Orta (düzenli fırçalama/traş)", "Yüksek (profesyonel bakım)"], ai_importance: 0.7 }
+        - { alan_adi: "saglik_durumu_genel_kopek", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı": false, "Kronik Rahatsızlığı Var": true, "Özel Bakım Gerekiyor": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.9 }
+        - { alan_adi: "saglik_durumu_ozel_not_kopek", label: "Sağlık Durumu Özel Not", tip: "textarea", aciklama: "Varsa özel sağlık notları.", ai_importance: 0.8, zorunlu: false, bagimli_alan_goster: "saglik_durumu_genel_kopek", bagimli_degerler_goster: ["Kronik Rahatsızlığı Var", "Özel Bakım Gerekiyor"] }
+        - { alan_adi: "kisirlastirilmis_kopek", label: "Kısırlaştırılmış Mı?", tip: "boolean_unknown", secenekler: ["Evet", "Hayır", "Bilinmiyor"], ai_importance: 0.7 }
+        - { alan_adi: "asi_durumu_kopek", label: "Aşı Durumu", tip: "select", secenekler: ["Tam", "Eksik", "Bilinmiyor"], ai_importance: 0.8 }
+        - { alan_adi: "tuvalet_aliskanligi_kopek", label: "Tuvalet Alışkanlığı", tip: "select", secenekler: ["Var (dışarı/ped)", "Kısmen Var", "Yok"], ai_importance: 0.85 }
+        - { alan_adi: "yalniz_kalma_toleransi_kopek", label: "Yalnız Kalma Toleransı", tip: "select", secenekler: ["İyi (4+ saat)", "Orta (2-4 saat)", "Zayıf (sürekli ilgi)"], ai_importance: 0.7 }
+        - { alan_adi: "oyunculuk_seviyesi_kopek", label: "Oyunculuk Seviyesi", tip: "select", secenekler: ["Düşük", "Orta", "Yüksek"], ai_importance: 0.8 }
+        - { alan_adi: "koruma_icgudusu_kopek", label: "Koruma İçgüdüsü", tip: "select", secenekler: ["Düşük", "Orta", "Yüksek"], ai_importance: 0.6 }
+        - { alan_adi: "havlama_egilimi_kopek", label: "Havlama Eğilimi", tip: "select", secenekler: ["Az", "Orta", "Çok"], ai_importance: 0.5 }
+        - { alan_adi: "seyahat_uyumu_kopek", label: "Seyahat Uyumu", tip: "select", secenekler: ["İyi", "Orta", "Zayıf"], ai_importance: 0.5 }
+        - { alan_adi: "ilk_sahip_uygunlugu_kopek", label: "İlk Kez Sahiplenecekler İçin Uygunluk", tip: "select", secenekler: ["Uygun", "Deneyim Gerektirir", "Uygun Değil"], ai_importance: 0.8 }
+        - { alan_adi: "hipoalerjenik_kopek", label: "Hipoalerjenik Özellik", tip: "boolean_unknown", secenekler: ["Evet", "Hayır", "Bilinmiyor"], ai_importance: 0.4 }
+        - { alan_adi: "renk_kopek", label: "Renk", tip: "tags_dynamic", secenekler_onerilen: ["Siyah", "Beyaz", "Kahverengi", "Sarı (Altın Sarısı)", "Kızıl", "Gri", "Krem", "Mavi Merle", "Kızıl Merle", "Brindle (Çizgili)", "Sable", "Benekli", "Alacalı (Parti-color)", "Tricolor (Üç Renkli)"], aciklama: "Köpeğinizin renklerini belirtin. Listeden seçebilir veya yeni renkler ekleyebilirsiniz.", ai_importance: 0.6 }
+        - { alan_adi: "karakter_ozellikleri_kopek", label: "Karakter Özellikleri (Ek)", tip: "multiselect", secenekler: ["Sevecen", "Bağımsız", "Zeki", "Sakin", "Korkak", "Meraklı", "İnatçı", "Lider"], ai_importance: 0.85 }
+        - { alan_adi: "egzersiz_ihtiyaci_gunluk_kopek", label: "Günlük Egzersiz İhtiyacı", tip: "select", secenekler: ["30dk az", "30-60dk", "60+ dk"], ai_importance: 0.8 }
+        - { alan_adi: "isirma_gecmisi_kopek", label: "Isırma Geçmişi", tip: "select_aciklamali", secenekler_map: {"Yok":false, "Savunma Amaçlı":true, "Bilinmiyor":false}, aciklama_label: "Detay", ai_importance: 0.7 }
+        - { alan_adi: "mikrocip_durumu_kopek", label: "Mikroçip Durumu", tip: "boolean", ai_importance: 0.65 }
+    platform_ayarlari_kopek:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_TUR_BAZLI"
+        varsayilan_aktif_kalma_suresi_gun: 45
+        yenileme_bildirimi_gun_oncesi: 7
+        maksimum_yenileme_sayisi: 3
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 1.5
+        irk_ozel_tanitim_kampanyalari_aktif_mi: true
+        yasakli_irklar_icin_ozel_gorunurluk_politikasi_aciklamasi: "Yasal düzenlemelere tabi olan (tehlike arz eden olarak tanımlanmış vb.) köpek ırklarının ilanları, platformda özel bir dikkat ve uyarı mekanizması ile yönetilir. Bu ilanlar, sadece belirli şartları (kısırlaştırma, kayıt, ağızlık kullanımı taahhüdü vb.) karşılayan ve bilinçli sahipler tarafından görüntülenebilir şekilde kısıtlanabilir veya ek moderasyon adımlarından geçebilir. Amaç, hem bu hayvanların refahını sağlamak hem de toplum güvenliğini gözetmektir."
+      moderasyon_ayarlari:
+        seviye: "ORTA_IRK_VE_SAGLIK_BEYAN_KONTROLLU"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_KÖPEK_DETAY_ONAYI_BEKLIYOR"
+        yasakli_irk_ilanlari_yonetim_protokolu:
+          - "İlanın ilgili yasal düzenlemelere uygunluğunu kontrol et (yerel yönetim kuralları dahil)."
+          - "Kullanıcıdan gerekli belgeleri (belediye kaydı, kısırlaştırma belgesi, özel eğitim sertifikası vb.) talep et."
+          - "İlanda hayvanın ağızlıklı fotoğrafını zorunlu kıl."
+          - "Sadece 18 yaşından büyük ve deneyimli olduğu beyan edilen kullanıcılara gösterim sağla."
+          - "Yasalara aykırı durumda ilanı derhal kaldır ve kullanıcıyı yasal sorumlulukları konusunda bilgilendir."
+        irk_safligi_ve_saglik_beyan_kontrol_mekanizmasi: "Kullanıcı tarafından yüklenen fotoğrafların ve belgelerin (varsa soy kütüğü, sağlık karnesi) beyan edilen ırk ve sağlık bilgileriyle tutarlılığı incelenir. Şüphe durumunda ek bilgi veya kanıt talep edilebilir. Yanıltıcı veya yanlış bilgilendirme tespit edilirse ilan düzenlenir veya kaldırılır."
+      dogrulama_ve_guvenlik_protokolleri_kopek:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Köpek sahiplenme ve sahiplendirme süreçlerinin güvenliğini ve şeffaflığını artırmak, özellikle yasal düzenlemelere tabi olan veya özel bakım gerektiren ırklar için sorumlu sahiplendirmeyi teşvik etmek amacıyla platformumuz bazı doğrulama adımları uygulayabilir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "YASAKLI_OZEL_IRK_BELGE_KONTROLU_KÖPEK"
+            senaryo_aciklamasi_kullanici: "Belirli köpek ırkları (örn: Pitbull Terrier, Dogo Argentino, American Staffordshire Terrier vb. ve melezleri) için, 5199 sayılı Hayvanları Koruma Kanunu ve ilgili yönetmelikler gereği kısırlaştırıldıklarına, belediyeye kayıtlı olduklarına ve diğer yasal yükümlülüklerin yerine getirildiğine dair belgelerin (kısırlaştırma belgesi, belediye kayıt belgesi, mikroçip numarası, ağızlıklı güncel fotoğraf vb.) sunulması zorunludur. Bu belgeler olmadan ilanınız yayınlanamaz veya kısıtlı gösterime tabi tutulabilir."
+            onemi: "ZORUNLU_YASAL_UYUM_VE_TOPLUM_GUVENLIGI_ICIN"
+            moderator_kontrol_rehberi: "İlgili yasal belgelerin eksiksiz ve güncel olduğundan emin olun. Fotoğrafın gerçekten ilandaki köpeğe ait olduğunu ve ağızlık taktığını teyit edin. Şüphe durumunda ek teyit isteyin. Yasalara uyumsuz ilanları derhal kaldırın."
+          - senaryo_kodu: "SOY_KUTUGU_DAMIZLIK_BEYAN_KONTROLU_KÖPEK"
+            senaryo_aciklamasi_kullanici: "Eğer köpeğinizin safkan olduğunu ve soy kütüğü (seceresi) bulunduğunu belirtiyorsanız veya köpeğinizi 'show quality' ya da 'damızlık' olarak tanımlıyorsanız, bu beyanlarınızı destekleyici belgeleri (FCI, KIF onaylı secere, yarışma dereceleri vb.) ilanınıza eklemeniz, ilanınızın güvenilirliğini ve değerini artıracaktır."
+            onemi: "ONERILIR_BEYAN_DESTEKLEMEK_VE_ALICI_GÜVENİ_İÇİN"
+            moderator_kontrol_rehberi: "Sunulan belgelerin gerçekliğini, uluslararası veya ulusal kinoloji federasyonları tarafından tanınırlığını ve ilandaki köpek ile eşleştiğini kontrol edin. Yanıltıcı veya abartılı beyanlara karşı dikkatli olun."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_kopek:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_kopek", oneri_basligi_kullanici: "Köpeğinizin Irkını ve Öne Çıkan Özelliğini Başlıkta Belirtin", oneri_detayi_kullanici: "Başlıkta köpeğinizin ırkını, yaşını (yavru/genç/yetişkin) ve en dikkat çekici karakter özelliğini (örn: 'Oyuncu', 'Çocuk Dostu', 'Eğitimli') veya sahiplendirme nedenini (örn: 'Acil Yuva') vurgulayın.", neden_onemli_aciklamasi_kullanici: "Doğru anahtar kelimeler, ilanınızın aramalarda daha kolay bulunmasını ve ilgili kişilerin dikkatini çekmesini sağlar.", iyi_ornek_metni_kullanici: "Örn: '3 Aylık Oyuncu Golden Retriever Yavrusu (İstanbul)' veya 'Eğitimli ve Çocuk Dostu Labrador Acil Yuva Arıyor'", ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_kopek", oneri_basligi_kullanici: "Köpeğinizin Hikayesini ve Tüm Detaylarını Paylaşın", oneri_detayi_kullanici: "Köpeğinizin karakterini, enerji seviyesini, eğitim durumunu, sağlık geçmişini, çocuklarla ve diğer hayvanlarla uyumunu, yalnız kalma toleransını, sevdiği şeyleri, varsa özel ihtiyaçlarını ve sahiplendirme koşullarınızı detaylı ve içten bir şekilde anlatın.", neden_onemli_aciklamasi_kullanici: "Kapsamlı ve dürüst bilgi, potansiyel sahiplerin doğru karar vermesine yardımcı olur ve uyum sürecini kolaylaştırır.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+          - { hedef_form_alani_kodu: "fotograf_video_kopek", oneri_basligi_kullanici: "Net ve Çeşitli Görseller Ekleyin", oneri_detayi_kullanici: "Köpeğinizin farklı açılardan çekilmiş, net ve aydınlık fotoğraflarını yükleyin. Mümkünse, oyun oynarken, dinlenirken veya insanlarla etkileşim halindeyken çekilmiş kısa videolar ekleyerek kişiliğini daha iyi yansıtın.", neden_onemli_aciklamasi_kullanici: "Kaliteli görseller, ilana olan ilgiyi artırır ve köpeğinizin sevimliliğini potansiyel sahiplere daha iyi aktarır.", ipucu_tipi: "KRITIK_ONERI" }
+        semantik_zenginlik_onemi_katsayisi: 0.85
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.kopek_adi_ve_irk_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.kopek_aciklamasi_kisa_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Köpekler" }
+              - { schema_alani: "breed", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_irk_secimi_kopek" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_kopek" }
+              - { schema_alani: "size", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_boyut_kopek_schema_uyumlu" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_kopek_schema_uyumlu" }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.yaklasik_dogum_tarihi_kopek_iso" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_kopek_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_kopek", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.kopek_karakter_enerji_egitim_schema_properties" }
+        ozel_meta_etiketler_kopek:
+          - { etiket_adi: "petplatform:dog_breed", icerik_kaynagi: "ilan.akilli_filtre_degeri_irk_secimi_kopek" }
+          - { etiket_adi: "petplatform:dog_age_group", icerik_kaynagi: "ilan.akilli_filtre_degeri_yas_grubu_kopek" }
+          - { etiket_adi: "petplatform:dog_energy_level", icerik_kaynagi: "ilan.akilli_filtre_degeri_enerji_seviyesi_kopek" }
+          - { etiket_adi: "petplatform:dog_good_with_kids", icerik_kaynagi: "ilan.akilli_filtre_degeri_cocuk_uyumu_kopek" }
+          - { etiket_adi: "petplatform:dog_apartment_friendly", icerik_kaynagi: "ilan.akilli_filtre_degeri_apartman_uyumu_kopek" }
+          - { etiket_adi: "petplatform:dog_training_level", icerik_kaynagi: "ilan.akilli_filtre_degeri_egitim_seviyesi_kopek" }
+          - { etiket_adi: "petplatform:dog_health_status_note", icerik_kaynagi: "ilan.akilli_filtre_degeri_saglik_durumu_ozel_not_kopek"}
+      harici_platform_ve_api_entegrasyon_hazirligi_kopek:
+        irk_dernekleri_ve_kurtarma_gruplari_ile_veri_paylasimi_opsiyonu_aktif_mi: true
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Kopek_IRK_YAS_CINSIYET_SEHIR_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_kopek:
+          irk_bilgisinin_dis_sistemlerce_dogrulanabilirligi_icin_yapilandirma: "YAPILANDIRILMIS_IRK_VERISI_VE_FOTOGRAF_ESLESTIRME_DESTEGI_SAGLANIR"
+          karakter_ozelliklerinin_dis_ai_analizi_icin_yapilandirilmis_veri_sunumu: "DAVRANIS_PROFILI_DETAYLI_AKILLI_FILTRE_ALANLARI_VE_ACIK_METIN_ACIKLAMALARININ_SEMANTIK_ETIKETLENMESI_DESTEKLENIR"
+          saglik_bilgilerinin_dis_ai_ile_risk_profili_cikarimina_uygun_yapilandirilmasi: "SAGLIK_GECMISI_FILTRE_SECENEKLERI_VE_IRKA_OZGU_POTANSIYEL_RISK_ALANLARININ_VURGULANMASI_ICIN_BILGILENDIRICI_METINLER_KULLANILIR"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_kopek:
+        irk_dogruluk_beyani_meta_kopek: "petplatform:dog_breed_verification_hint"
+        saglik_bilgisi_detay_seviyesi_meta_kopek: "petplatform:dog_health_info_availability"
+        sahiplendirme_acililiyeti_sinyali_meta_kopek: "petplatform:dog_rehoming_urgency_level"
+    istatistikler_kopek:
+      beklenen_performans_metrikleri_kopek:
+        - "Ortalama ilan görüntülenme: Çok Yüksek"
+        - "Sahiplenme oranı hedefi: %70"
+        - "Ortalama sahiplenme süresi: 20 gün"
+        - "Popüler ırklar için başvuru sayısı: Yüksek"
+        - "Yasaklı/özel ırklar için sorumlu sahiplendirme başarı oranı: %80 (hedeflenen)"
+  kedi:
+    id: "animal_tur_kedi"
+    temel_kimlik:
+      ad: "Kedi"
+      slug: "kedi"
+      aciklama: "Bağımsızlıkları, oyunculukları ve sevecenlikleriyle bilinen, gizemli ve zarif evcil hayvanlardır. Evlere sıcaklık ve eğlence katarlar."
+      gorsel_kimlik: { renk_kodu: "#8b5cf6", ikon_adi: "fas fa-cat", emoji: "🐱" }
+    arama_sistemi:
+      alternatif_kelimeler: ["pisi", "miyav", "pisi pisi", "feline", "tekir", "sarman", "minnoş", "kedicik", "ev kedisi", "sokak kedisi", "yavru kedi", "mırnav", "aslan parçası", "pati dostu", "mistik", "van kedisi", "british shorthair", "scottish fold", "siyam", "iran kedisi"]
+      ai_intent_keywords: ["kedi sahiplen", "kedi al", "kedi türleri", "oyuncu kedi", "ev kedisi ara"]
+      semantic_tags: ["cat", "feline_companion", "cat_breeds", "kitten", "lap_cat", "independent_pet"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "irk_secimi_kedi", label: "Kedi Irkı", tip: "select_dynamic_searchable", kaynak_model_tahmini: "KediIrkTablosu", aciklama: "Tekir, Van Kedisi, British Shorthair, Scottish Fold, Siyam, İran Kedisi, Sphynx vb.", ai_importance: 0.9, zorunlu: false }
+        - { alan_adi: "yas_grubu_kedi", label: "Yaş Grubu", tip: "select", secenekler: ["Yavru (0-6 ay)", "Genç (6 ay-2 yaş)", "Yetişkin (2-8 yaş)", "Yaşlı (8+ yaş)"], ai_importance: 0.85 }
+        - { alan_adi: "cinsiyet_kedi", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi"], ai_importance: 0.7 }
+        - { alan_adi: "kil_uzunlugu_kedi", label: "Kıl Uzunluğu", tip: "select", secenekler: ["Kısa", "Orta", "Uzun", "Tüysüz"], ai_importance: 0.75 }
+        - { alan_adi: "sosyallik_seviyesi_kedi", label: "Sosyallik Seviyesi", tip: "select", secenekler: ["Çok Sosyal (herkese yakın)", "Sosyal (tanıdıklara yakın)", "Utangaç (zamanla alışır)", "Bağımsız (kendi halinde)"], ai_importance: 0.8 }
+        - { alan_adi: "dis_mekan_uyumu_kedi", label: "Dış Mekan Uyumu", tip: "select", secenekler: ["Sadece İç Mekan", "Güvenli Dış Alan Erişimi (balkon, bahçe)", "Dış Mekana Alışkın"], ai_importance: 0.6 }
+        - { alan_adi: "cocuk_uyumu_kedi", label: "Çocuklarla Uyumu", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı (özellikle küçük çocuklarla)", "Tavsiye Edilmez"], ai_importance: 0.8 }
+        - { alan_adi: "diger_kedi_uyumu_kedi", label: "Diğer Kedilerle Uyumu", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı", "Tek Kedi Olmalı"], ai_importance: 0.7 }
+        - { alan_adi: "diger_hayvan_uyumu_kedi", label: "Diğer Hayvanlarla Uyumu (köpek vb.)", tip: "select", secenekler: ["Çok İyi", "İyi", "Dikkatli Olunmalı", "Tavsiye Edilmez"], ai_importance: 0.65 }
+        - { alan_adi: "enerji_seviyesi_kedi", label: "Enerji Seviyesi", tip: "select", secenekler: ["Düşük (sakin)", "Orta (oyuncu)", "Yüksek (çok hareketli)"], ai_importance: 0.8 }
+        - { alan_adi: "oyunculuk_seviyesi_kedi", label: "Oyunculuk Seviyesi", tip: "select", secenekler: ["Sakin", "Orta Derecede Oyuncu", "Çok Oyuncu"], ai_importance: 0.85 }
+        - { alan_adi: "bakim_ihtiyaci_kedi", label: "Bakım İhtiyacı", tip: "select", secenekler: ["Düşük (kısa tüylü)", "Orta (orta/uzun tüylü, düzenli fırçalama)", "Yüksek (özel bakım, banyo)"], ai_importance: 0.7 }
+        - { alan_adi: "saglik_durumu_genel_kedi", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı": false, "Kronik Rahatsızlığı Var": true, "Özel Diyet Gerekiyor": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.9 }
+        - { alan_adi: "saglik_durumu_ozel_not_kedi", label: "Sağlık Durumu Özel Not", tip: "textarea", aciklama: "Varsa özel sağlık notları.", ai_importance: 0.8, zorunlu: false, bagimli_alan_goster: "saglik_durumu_genel_kedi", bagimli_degerler_goster: ["Kronik Rahatsızlığı Var", "Özel Diyet Gerekiyor"] }
+        - { alan_adi: "kisirlastirilmis_kedi", label: "Kısırlaştırılmış Mı?", tip: "boolean_unknown", secenekler: ["Evet", "Hayır", "Bilinmiyor"], ai_importance: 0.75 }
+        - { alan_adi: "asi_durumu_kedi", label: "Aşı Durumu", tip: "select", secenekler: ["Tam", "Eksik", "Bilinmiyor"], ai_importance: 0.8 }
+        - { alan_adi: "tuvalet_aliskanligi_kedi", label: "Tuvalet Alışkanlığı (Kum)", tip: "select", secenekler: ["Kum Eğitimi Var", "Kısmen Var", "Yok"], ai_importance: 0.9 }
+        - { alan_adi: "kucak_kedisi_kedi", label: "Kucak Kedisi Mi?", tip: "boolean_maybe", secenekler: ["Evet", "Hayır", "Bazen (ruh haline göre)"], ai_importance: 0.6 }
+        - { alan_adi: "ses_seviyesi_miyavlama_kedi", label: "Ses Seviyesi (Miyavlama)", tip: "select", secenekler: ["Sessiz", "Orta", "Konuşkan (çok miyavlar)"], ai_importance: 0.5 }
+        - { alan_adi: "tirnak_kesme_toleransi_kedi", label: "Tırnak Kesme Toleransı", tip: "select", secenekler: ["İyi", "Orta", "Zor"], ai_importance: 0.4 }
+        - { alan_adi: "mobilya_tirmalama_egilimi_kedi", label: "Mobilya Tırmalama Eğilimi", tip: "select_aciklamali", secenekler_map: {"Az":false, "Orta":true, "Çok":true}, aciklama_label: "Tırmalama Tahtası Kullanımı?", ai_importance: 0.5 }
+        - { alan_adi: "ilk_sahip_uygunlugu_kedi", label: "İlk Kez Sahiplenecekler İçin Uygunluk", tip: "select", secenekler: ["Uygun", "Deneyim Gerektirebilir (bazı ırklar)", "Uygun Değil"], ai_importance: 0.75 }
+        - { alan_adi: "alerji_potansiyeli_insan_kedi", label: "İnsanlarda Alerji Potansiyeli", tip: "select", secenekler: ["Düşük (bazı ırklar)", "Orta", "Yüksek"], ai_importance: 0.4 }
+        - { alan_adi: "renk_desen_kedi", label: "Renk ve Desen", tip: "tags_dynamic", secenekler_onerilen: ["Siyah", "Beyaz", "Sarı (Sarman)", "Gri (Mavi)", "Krem", "Kızıl (Tarçın)", "Çikolata", "Lila", "Tekir (Tabby - Klasik, Uskumru, Benekli, Parçalı)", "Calico (Üç Renkli)", "Tortoiseshell (Alaca)", "Van Deseni", "Siyam Deseni (Point)", "Benekli", "Dumanlı", "Gölgeli"], aciklama: "Kedinizin renk ve desenlerini belirtin. Listeden seçebilir veya yenilerini ekleyebilirsiniz.", ai_importance: 0.6 }
+        - { alan_adi: "karakter_ozellikleri_kedi", label: "Karakter Özellikleri (Ek)", tip: "multiselect", secenekler: ["Meraklı", "Sevecen", "Bağımsız", "Sakin", "Korkak", "Zeki", "Uykucu", "Lider", "Oyuncu"], ai_importance: 0.85 }
+        - { alan_adi: "avcilik_icgudusu_kedi", label: "Avcılık İçgüdüsü", tip: "select", secenekler: ["Düşük", "Orta", "Yüksek"], ai_importance: 0.5 }
+        - { alan_adi: "su_ile_iliskisi_kedi", label: "Su İle İlişkisi", tip: "select", secenekler: ["Sever (nadir)", "Nötr", "Sevmez"], ai_importance: 0.3 }
+        - { alan_adi: "mikrocip_durumu_kedi", label: "Mikroçip Durumu", tip: "boolean", ai_importance: 0.6 }
+    platform_ayarlari_kedi:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_TUR_BAZLI"
+        varsayilan_aktif_kalma_suresi_gun: 50
+        yenileme_bildirimi_gun_oncesi: 7
+        maksimum_yenileme_sayisi: 3
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 1.4
+        irk_ozel_tanitim_kampanyalari_aktif_mi: true # Popüler veya özel bakım gerektiren ırklar için.
+        "yeni_dogan_yavru_ilanlari_icin_ozel_bekleme_suresi_uygulamasi_aktif_mi": false
+      moderasyon_ayarlari:
+        seviye: "DUSUK_TEMEL_KONTROL"
+        yeni_ilan_varsayilan_durum: "YAYINDA_HIZLI_KONTROL_GEREKLI"
+        "irk_safligi_ve_saglik_beyani_detayli_kontrol_protokolu_aktif_mi": false
+      dogrulama_ve_guvenlik_protokolleri_kedi:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Kedi sahiplenme süreçlerinde güveni artırmak, özellikle safkan ırklar veya özel sağlık durumu (örn: FIP geçmişi, kronik hastalıklar) olan kediler için sorumlu sahiplendirmeyi teşvik etmek amacıyla platformumuz bazı doğrulama adımları ve bilgi taleplerinde bulunabilir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "SAFKAN_IRK_VE_SECERE_BEYAN_KONTROLU_KEDI"
+            senaryo_aciklamasi_kullanici: "Eğer kedinizin safkan bir ırka ait olduğunu ve seceresi (soy kütüğü) bulunduğunu belirtiyorsanız, bu beyanlarınızı destekleyici belgeleri (dernek onaylı secere, ebeveyn bilgileri vb.) ilanınıza eklemeniz, ilanınızın güvenilirliğini artırır."
+            onemi: "ONERILIR_BEYAN_DESTEKLEMEK_VE_ALICI_GÜVENİ_İÇİN"
+            moderator_kontrol_rehberi: "Sunulan belgelerin (varsa) gerçekliğini ve ilandaki kedi ile eşleştiğini kontrol edin. Yanıltıcı veya abartılı beyanlara karşı dikkatli olun."
+          - senaryo_kodu: "OZEL_SAGLIK_DURUMU_FIP_BEYAN_KONTROLU_KEDI"
+            senaryo_aciklamasi_kullanici: "Eğer kedinizin FIP (Feline Infectious Peritonitis) gibi özel bir sağlık geçmişi veya kronik bir rahatsızlığı varsa, bu durumu ve mevcut sağlık protokolünü (tedavi, takip, özel bakım) şeffaf bir şekilde açıklamanız ve varsa veteriner raporlarını paylaşmanız beklenir."
+            onemi: "ZORUNLU_SEFFAFLIK_VE_HAYVAN_REFAHI_ICIN"
+            moderator_kontrol_rehberi: "Kullanıcının özel sağlık durumu hakkında verdiği bilgilerin net ve dürüst olduğundan emin olun. Gerekirse ek bilgi veya veteriner raporu talep edin. Potansiyel sahiplenicinin bu durumu anlayıp kabul edebilecek bilgi ve kapasitede olup olmadığını değerlendirmesine yardımcı olacak bilgiler sunulmalı."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_kedi:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_kedi", oneri_basligi_kullanici: "Kedinizin Irkını, Yaşını ve Sevimli Bir Özelliğini Başlıkta Belirtin", oneri_detayi_kullanici: "Örn: 'British Shorthair Yavrusu Oyuncu ve Kucakçı (İstanbul)' veya 'Tekir Kedi 2 Yaşında Sakin ve Uysal Yuva Arıyor'.", neden_onemli_aciklamasi_kullanici: "Doğru anahtar kelimeler ve ilgi çekici bir başlık, ilanınızın daha çok kişiye ulaşmasını sağlar.", ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_kedi", oneri_basligi_kullanici: "Kedinizin Karakterini, Alışkanlıklarını ve Hikayesini Detaylıca Anlatın", oneri_detayi_kullanici: "Kedinizin oyunculuk seviyesi, insanlarla ve diğer hayvanlarla ilişkisi, tüy bakımı ihtiyacı, tuvalet alışkanlığı, sağlık durumu, sevdiği şeyler ve sahiplendirme nedeniniz gibi konulara değinin.", neden_onemli_aciklamasi_kullanici: "Aday sahiplerin kedinizle uyumlu olup olmayacaklarını anlamalarına yardımcı olur.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+          - { hedef_form_alani_kodu: "fotograf_video_kedi", oneri_basligi_kullanici: "Kedinizin En Güzel Hallerini Kaliteli Fotoğraflarla Gösterin", oneri_detayi_kullanici: "Kedinizin yüzünün net göründüğü, farklı açılardan çekilmiş, aydınlık ve doğal fotoğraflar yükleyin. Mümkünse oyun oynarken veya sevgi dolu anlarını gösteren kısa bir video ekleyin.", neden_onemli_aciklamasi_kullanici: "İyi görseller, kedinizin ne kadar özel olduğunu potansiyel sahiplere aktarır ve ilana olan ilgiyi artırır.", ipucu_tipi: "KRITIK_ONERI" }
+        semantik_zenginlik_onemi_katsayisi: 0.75
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.kedi_adi_ve_irk_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.kedi_aciklamasi_kisa_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Kediler" }
+              - { schema_alani: "breed", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_irk_secimi_kedi" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_desen_kedi" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_kedi_schema_uyumlu" }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.yaklasik_dogum_tarihi_kedi_iso" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_kedi_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_kedi", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.kedi_karakter_enerji_bakim_schema_properties" }
+        ozel_meta_etiketler_kedi:
+          - { etiket_adi: "petplatform:cat_breed", icerik_kaynagi: "ilan.akilli_filtre_degeri_irk_secimi_kedi" }
+          - { etiket_adi: "petplatform:cat_age_group", icerik_kaynagi: "ilan.akilli_filtre_degeri_yas_grubu_kedi" }
+          - { etiket_adi: "petplatform:cat_energy_level", icerik_kaynagi: "ilan.akilli_filtre_degeri_enerji_seviyesi_kedi" }
+          - { etiket_adi: "petplatform:cat_good_with_kids", icerik_kaynagi: "ilan.akilli_filtre_degeri_cocuk_uyumu_kedi" }
+          - { etiket_adi: "petplatform:cat_hair_length", icerik_kaynagi: "ilan.akilli_filtre_degeri_kil_uzunlugu_kedi" }
+          - { etiket_adi: "petplatform:cat_health_status_note", icerik_kaynagi: "ilan.akilli_filtre_degeri_saglik_durumu_ozel_not_kedi"}
+      harici_platform_ve_api_entegrasyon_hazirligi_kedi:
+        irk_dernekleri_ve_kurtarma_gruplari_ile_veri_paylasimi_opsiyonu_aktif_mi: true # Kullanıcı onayı ile
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Kedi_IRK_YAS_CINSIYET_SEHIR_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_kedi:
+          irk_bilgisinin_dis_sistemlerce_dogrulanabilirligi_icin_yapilandirma: "YAPILANDIRILMIS_IRK_VERISI_VE_FOTOGRAF_ESLESTIRME_DESTEGI_SAGLANIR_KEDI"
+          karakter_ozelliklerinin_dis_ai_analizi_icin_yapilandirilmis_veri_sunumu: "DAVRANIS_PROFILI_DETAYLI_AKILLI_FILTRE_ALANLARI_VE_ACIK_METIN_ACIKLAMALARININ_SEMANTIK_ETIKETLENMESI_DESTEKLENIR_KEDI"
+          saglik_bilgilerinin_dis_ai_ile_risk_profili_cikarimina_uygun_yapilandirilmasi: "SAGLIK_GECMISI_FILTRE_SECENEKLERI_VE_IRKA_OZGU_POTANSIYEL_RISK_ALANLARININ_VURGULANMASI_ICIN_BILGILENDIRICI_METINLER_KULLANILIR_KEDI"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_kedi:
+        irk_dogruluk_beyani_meta_kedi: "petplatform:cat_breed_verification_hint"
+        saglik_bilgisi_detay_seviyesi_meta_kedi: "petplatform:cat_health_info_availability"
+        sahiplendirme_acililiyeti_sinyali_meta_kedi: "petplatform:cat_rehoming_urgency_level"
+    istatistikler_kedi:
+      beklenen_performans_metrikleri_kedi:
+        - "Ortalama ilan görüntülenme: Yüksek"
+        - "Sahiplenme oranı hedefi: %65"
+        - "Ortalama sahiplenme süresi: 25 gün"
+        - "Yavru kedi ilanları için talep: Çok Yüksek"
+        - "Özel ırklar (British Shorthair, Scottish Fold vb.) için ilgi: Yüksek"
+  kus:
+    id: "animal_tur_kus"
+    temel_kimlik:
+      ad: "Kuş"
+      slug: "kus"
+      aciklama: "Cıvıltıları, renkli tüyleri ve bazı türlerinin konuşma yetenekleriyle evlere neşe katan kanatlı dostlardır. Doğru bakımla uzun yıllar eşlik edebilirler."
+      gorsel_kimlik: { renk_kodu: "#06b6d4", ikon_adi: "fas fa-dove", emoji: "🐦" }
+    arama_sistemi:
+      alternatif_kelimeler: ["kanarya", "muhabbet kuşu", "papağan", "saka", "güvercin", "bülbül", "cik cik", "kanatlı", "tüylü dost", "ötücü kuş", "konuşan kuş", "ev kuşu", "kafes kuşu", "uçan hayvan", "gökyüzü", "jako", "sultan papağanı", "hint bülbülü", "forpus", "sevda papağanı", "kakadu", "macaw"]
+      ai_intent_keywords: ["kuş sahiplen", "konuşan papağan al", "ötücü kanarya", "muhabbet kuşu çifti", "satılık jako", "evcil kuş türleri"]
+      semantic_tags: ["bird", "avian_pet", "talking_bird", "songbird", "cage_bird", "parrot", "finch", "canary"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "tur_kus", label: "Kuş Türü", tip: "select_dynamic_searchable", kaynak_model_tahmini: "KusTurTablosu", aciklama: "Muhabbet Kuşu, Sultan Papağanı, Kanarya, Jako Papağanı, Hint Bülbülü, Cennet Papağanı, Forpus, Kakadu, Macaw vb.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "yas_grubu_kus", label: "Yaş Grubu", tip: "select_text", secenekler: ["Yavru (bilezik yaşı/tahmini)", "Genç (Yetişkinliğe Yakın)", "Yetişkin"], aciklama_text: "Bilezik yaşı veya tahmini yaş.", ai_importance: 0.7 }
+        - { alan_adi: "cinsiyet_kus", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Bilinmiyor (DNA testi gerekebilir/görsel ayrım zor)"], ai_importance: 0.6 }
+        - { alan_adi: "konusma_kabiliyeti_kus", label: "Konuşma/Taklit Kabiliyeti", tip: "select", secenekler: ["Yok/Çok Az", "Birkaç Kelime/Ses Taklidi", "Cümle Kurabilir/Geniş Taklit Yeteneği", "Çok İyi Konuşur/Taklitçi"], ai_importance: 0.85 }
+        - { alan_adi: "ses_seviyesi_otme_kus", label: "Ses Seviyesi (Ötme/Çağrı)", tip: "select", secenekler: ["Sessiz/Nadiren Ses Çıkarır", "Orta (Melodik/Hoş Sesli)", "Yüksek/Gürültülü (Sık ve Güçlü Çağrılar)"], ai_importance: 0.7 }
+        - { alan_adi: "egitim_seviyesi_kus", label: "Eğitim Seviyesi/İnsana Alışkanlık", tip: "select", secenekler: ["Eğitimsiz/Vahşi", "Ele Alışkın/Temel Komutlar", "İleri Düzeyde Eğitilmiş (Numara, Konuşma)", "Serbest Uçuş Eğitimli (İç/Dış Mekan)"], ai_importance: 0.7 }
+        - { alan_adi: "sosyallik_diger_kuslarla_kus", label: "Diğer Kuşlarla Uyumu", tip: "select", secenekler: ["Tek Yaşamalı (Agresif/Asosyal)", "Kendi Türüyle İyi Anlaşır", "Farklı Türlerle Uygun Koşullarda Yaşayabilir", "Sürü Halinde Yaşamaya Alışkın"], ai_importance: 0.6 }
+        - { alan_adi: "sosyallik_insanlarla_kus", label: "İnsanlarla Etkileşimi", tip: "select", secenekler: ["Utangaç/İnsandan Kaçar", "Alışkın/Meraklı", "Çok Sosyal/İlgi ve Oyun Bekler", "Sahibine Bağlı/Tek Kişiye Yakınlık"], ai_importance: 0.75 }
+        - { alan_adi: "kafes_boyutu_ihtiyaci_kus", label: "Minimum Kafes/Yaşam Alanı İhtiyacı", tip: "select", secenekler: ["Küçük Boy Kafes (örn: kanarya, ispinoz)", "Orta Boy Kafes (örn: muhabbet, sevda)", "Büyük Boy Kafes/Salma (örn: papağan türleri)", "Oda Büyüklüğünde Salma (Aviary)"], ai_importance: 0.8 }
+        - { alan_adi: "bakim_ihtiyaci_beslenme_kus", label: "Beslenme İhtiyacı (Özel Diyet Gereksinimi)", tip: "textarea", aciklama: "Günlük beslenme rutini, özel tohum karışımları, taze meyve/sebze, ek vitamin/mineral ihtiyaçları, pelet mama kullanımı vb.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "CITES_belgesi_durumu_kus", label: "CITES Belgesi Durumu (Gerekliyse)", tip: "select_aciklamali", secenekler_map: {"Gerekmiyor":false, "Var (Belge No Eklenebilir)":true, "Başvurusu Yapıldı/Beklemede":true, "Bilgim Yok/Araştırılmalı":false}, aciklama_label: "Belge No/Detay", aciklama:"Koruma altındaki türler (örn: Jako Papağanı, bazı Amazon ve Macaw türleri) için zorunludur.", ai_importance: 0.9, zorunlu: false }
+        - { alan_adi: "elde_tasima_aliskanligi_kus", label: "Ele Gelme/Omuza Konma Alışkanlığı", tip: "select", secenekler: ["Yok/Korkar", "Nadiren/Çekinerek", "İstekli/Sever"], ai_importance: 0.65 }
+        - { alan_adi: "oyuncak_ve_aktivite_ihtiyaci_kus", label: "Oyuncak ve Aktivite İhtiyacı", tip: "select", secenekler: ["Düşük", "Orta (Birkaç oyuncak yeterli)", "Yüksek (Sürekli yeni uyaran ve aktivite ister)"], ai_importance: 0.7 }
+        - { alan_adi: "saglik_durumu_genel_kus", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı ve Dinç": false, "Geçmişte Sağlık Sorunu Yaşadı (Şu an İyi)": true, "Kronik Rahatsızlığı Var (Yönetilebilir)": true, "Özel Bakım/İlaç Gerekiyor": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.85 }
+        - { alan_adi: "bilezik_mikrocip_bilgisi_kus", label: "Bilezik veya Mikroçip Bilgisi", tip: "text", aciklama: "Varsa bilezik numarası veya mikroçip numarası.", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "renk_desen_kus", label: "Tüy Rengi ve Desenleri", tip: "tags_dynamic", secenekler_onerilen: ["Mavi", "Yeşil", "Sarı", "Beyaz", "Gri", "Lutino", "Albino", "Parçalı", "Benekli", "Opalin", "Spangle", "Cinnamon", "Violet", "Pastel"], aciklama: "Kuşunuzun tüy renklerini ve desenlerini belirtin. Listeden seçebilir veya yeni etiketler ekleyebilirsiniz.", ai_importance: 0.6, zorunlu: false }
+    platform_ayarlari_kus:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_TUR_BAZLI"
+        varsayilan_aktif_kalma_suresi_gun: 60 # Orjinal: 60
+        yenileme_bildirimi_gun_oncesi: 10
+        maksimum_yenileme_sayisi: 2
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 1.1 # Orjinal: 1.1
+        CITES_belgeli_ve_sorumlu_yetistirici_ilanlarini_one_cikarma_aktif_mi: true
+        nesli_tehlikedeki_turler_icin_farkindalik_mesajlari_gosterimi_aktif_mi: true
+      moderasyon_ayarlari:
+        seviye: "ORTA_CITES_VE_TUR_DOGRULAMA_ODAKLI" # Orjinal: ORTA_CITES_VE_TUR_DOGRULAMA_ODAKLI
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_KUŞ_BILGI_ONAYI_BEKLIYOR"
+        CITES_kapsamindaki_turler_icin_belge_kontrol_protokolu:
+          - "Kullanıcının belirttiği kuş türünün CITES listesindeki (Ek-I, Ek-II) durumunu kontrol et."
+          - "Eğer tür CITES kapsamında ise, geçerli CITES belgesinin (ithalat/ihracat/sertifika) yüklenip yüklenmediğini kontrol et."
+          - "Belge üzerindeki bilgilerin (tür adı, bilezik/mikroçip no, menşei, düzenlenme tarihi) ilan bilgileriyle tutarlı olup olmadığını doğrula."
+          - "Şüphe durumunda veya eksik belgede, kullanıcıdan ek bilgi/belge talep et veya ilanı yayınlama/kısıtla."
+          - "Yasa dışı yollarla elde edildiği şüphesi olan kuşların ilanlarını derhal kaldır ve ilgili mercilere bildirim yapmayı değerlendir."
+        yaniltici_tur_beyani_ve_fotograf_eslesmeme_kontrolu_aktif_mi: true
+      dogrulama_ve_guvenlik_protokolleri_kus:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Platformumuzda listelenen kuşların yasalara uygunluğunu, türlerinin doğru beyan edilmesini ve özellikle CITES (Nesli Tehlike Altında Olan Yabani Hayvan ve Bitki Türlerinin Uluslararası Ticaretine İlişkin Sözleşme) kapsamındaki kuşlar için gerekli belgelerin varlığını sağlamak amacıyla doğrulama adımları uygulanmaktadır."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "CITES_BELGESI_DOGRULAMASI_KUS"
+            senaryo_aciklamasi_kullanici: "Eğer sahiplendireceğiniz kuş CITES sözleşmesi kapsamında koruma altında bir tür ise (örn: Jako Papağanı, bazı Macaw türleri), bu kuşun yasal yollarla edinildiğini ve ticaretinin yasal olduğunu gösteren geçerli CITES belgesini (veya eşdeğer resmi belgeyi) sunmanız zorunludur. Belge numarası ve kuşun bilezik/mikroçip numarası eşleşmelidir."
+            onemi: "ZORUNLU_YASAL_UYUM_VE_NESLI_KORUMA_ICIN"
+            moderator_kontrol_rehberi: "CITES belgesinin aslına uygunluğunu, geçerlilik süresini, tür bilgisini ve bireye özgü tanımlayıcıları (bilezik, mikroçip) dikkatle inceleyin. Sahte veya geçersiz belge şüphesinde uzman görüşü alın veya ilgili resmi kurumlara danışın."
+          - senaryo_kodu: "TUR_DOGRULUGU_VE_YAS_BEYANI_KONTROLU_KUS"
+            senaryo_aciklamasi_kullanici: "Kuşunuzun türünü ve yaşını doğru beyan etmeniz beklenir. Özellikle nadir veya değerli türler için, beyanınızı destekleyici ek bilgiler (detaylı fotoğraflar, varsa ebeveyn bilgileri, bilezik bilgileri) talep edilebilir."
+            onemi: "ONERILIR_ALICI_BILGILENDIRMESI_VE_GÜVENİ_İÇİN"
+            moderator_kontrol_rehberi: "Yüklenen fotoğrafların beyan edilen türle uyumlu olup olmadığını kontrol edin. Yaş beyanının (özellikle 'yavru' ise) kuşun genel görünümüyle tutarlı olup olmadığını değerlendirin. Yanıltıcı bilgilere karşı dikkatli olun."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_kus:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_kus", oneri_basligi_kullanici: "Kuşunuzun Türünü ve Çekici Bir Özelliğini Başlıkta Vurgulayın", oneri_detayi_kullanici: "Başlıkta kuşunuzun türünü (örn: Muhabbet Kuşu, Sultan Papağanı), yaşını ve dikkat çekici bir özelliğini (örn: 'Konuşkan', 'Ele Alışkın', 'Şarkıcı') belirtin.", neden_onemli_aciklamasi_kullanici: "Doğru ve ilgi çekici bir başlık, ilanınızın doğru kişiler tarafından fark edilmesini sağlar.", iyi_ornek_metni_kullanici: "Örn: 'Konuşan Jako Papağanı Yavrusu (CITES Belgeli)' veya 'Ele Alışkın Çift Muhabbet Kuşu ve Kafesi'", ipucu_tipi: "IYILESTIRME_ONERISI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_kus", oneri_basligi_kullanici: "Kuşunuzun Karakterini, Bakım İhtiyaçlarını ve Hikayesini Anlatın", oneri_detayi_kullanici: "Kuşunuzun kişiliğini, ötme/konuşma alışkanlıklarını, insanlarla ve diğer kuşlarla ilişkisini, beslenme düzenini, kafes ve oyuncak tercihlerini, sağlık durumunu ve varsa özel bakım ihtiyaçlarını detaylıca açıklayın.", neden_onemli_aciklamasi_kullanici: "Potansiyel sahiplerin, kuşa uygun bir yuva sunup sunamayacaklarını anlamalarına yardımcı olur.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+        semantik_zenginlik_onemi_katsayisi: 0.7 # Orjinal: 0.7
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.kus_tur_ve_ozellik_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.kus_aciklamasi_kisa_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Kuşlar" }
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_kus" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_desen_kus"}
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_kus_schema_uyumlu" }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.yaklasik_dogum_tarihi_kus_iso" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_kus_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_kus", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.kus_konusma_ses_egitim_schema_properties" }
+              - { schema_alani: "disambiguatingDescription", platform_alani_kaynagi: "ilan.CITES_belge_notu_schema_icin_kus" }
+        ozel_meta_etiketler_kus:
+          - { etiket_adi: "petplatform:bird_species", icerik_kaynagi: "ilan.akilli_filtre_degeri_tur_kus" }
+          - { etiket_adi: "petplatform:bird_talking_ability", icerik_kaynagi: "ilan.akilli_filtre_degeri_konusma_kabiliyeti_kus" }
+          - { etiket_adi: "petplatform:bird_CITES_status", icerik_kaynagi: "ilan.akilli_filtre_degeri_CITES_belgesi_durumu_kus" }
+          - { etiket_adi: "petplatform:bird_age_group", icerik_kaynagi: "ilan.akilli_filtre_degeri_yas_grubu_kus" }
+          - { etiket_adi: "petplatform:bird_tame_level", icerik_kaynagi: "ilan.akilli_filtre_degeri_egitim_seviyesi_kus" }
+      harici_platform_ve_api_entegrasyon_hazirligi_kus:
+        kus_gozlem_ve_koruma_platformlari_ile_bilgi_paylasimi_opsiyonu_aktif_mi: false
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Kus_TURU_RENK_OZELLIK_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_kus:
+          kus_turu_tanimlama_model_destegi_icin_yapilandirma: "YAPILANDIRILMIS_TUR_LISTESI_VE_FOTOGRAF_OZELLIK_ESLESTIRME_DESTEGI_SAGLANIR" # Orjinal: breed_identification_model_active: true (benzer mantık)
+          CITES_belge_gecerlilik_kontrolu_icin_dis_servis_entegrasyon_hazirligi: "BELGE_GÖRSELİ_VE_METADATALARININ_OLASI_RESMI_KONTROL_NOKTALARINA_YONLENDIRILEBILIR_YAPIDA_SUNULMASI_PLANLANIR"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_kus:
+        CITES_belge_beyan_durumu_meta_kus: "petplatform:bird_cites_document_status_declared"
+        kus_saglik_bilgisi_detay_seviyesi_meta_kus: "petplatform:bird_health_info_detail_level"
+        yetistirici_sorumluluk_beyani_meta_kus: "petplatform:bird_breeder_responsibility_hint"
+    istatistikler_kus:
+      beklenen_performans_metrikleri_kus:
+        - "Ortalama ilan görüntülenme: Orta"
+        - "Sahiplenme oranı hedefi: %50"
+        - "Ortalama sahiplenme süresi: 30 gün"
+        - "Konuşan papağan türleri için ilgi: Yüksek"
+        - "CITES belgeli türler için yasal ve sorumlu sahiplendirme oranı: %90 (hedeflenen)"
+  balik:
+    id: "animal_tur_balik"
+    temel_kimlik:
+      ad: "Balık"
+      slug: "balik"
+      aciklama: "Sessiz ve huzurlu bir ortam yaratan, renkleri ve hareketleriyle akvaryumları canlandıran su altı canlılarıdır. Farklı türleri ve bakım ihtiyaçları bulunur."
+      gorsel_kimlik: { renk_kodu: "#3b82f6", ikon_adi: "fas fa-fish", emoji: "🐠" }
+    arama_sistemi:
+      alternatif_kelimeler: ["japon balığı", "beta balığı", "lepistes", "akvaryum balığı", "sazan", "melek balığı", "ciklet", "vatoz", "su canlısı", "yüzgeçli", "pul", "akvaryum", "deniz canlısı", "süs balığı", "tetra", "discus", "koi", "molly", "kılıçkuyruk", "neon tetra"]
+      ai_intent_keywords: ["akvaryum balığı al", "japon balığı sahiplen", "beta türleri", "lepistes bakımı"]
+      semantic_tags: ["fish", "aquarium_pet", "freshwater_fish", "saltwater_fish", "ornamental_fish"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "tur_balik", label: "Balık Türü", tip: "select_dynamic_searchable", kaynak_model_tahmini: "BalikTurTablosu", aciklama: "Japon Balığı, Beta, Lepistes, Melek Balığı, Ciklet (Malawi, Tanganyika), Discus, Koi, Vatoz vb.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "su_tipi_balik", label: "Su Tipi", tip: "select", secenekler: ["Tatlı Su", "Tuzlu Su", "Acı Su"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "renk_desen_balik", label: "Renk ve Desen", tip: "tags_dynamic", secenekler_onerilen: ["Kırmızı", "Mavi", "Sarı", "Siyah", "Beyaz", "Turuncu", "Yeşil", "Metalik", "Benekli", "Çizgili", "Alaca", "Neon", "Pastel", "İrideli"], aciklama: "Balığınızın ana renklerini ve desenlerini belirtin. Listeden seçebilir veya yeni etiketler ekleyebilirsiniz.", ai_importance: 0.7 }
+        - { alan_adi: "boyut_yetiskin_balik", label: "Yetişkin Boyutu (Tahmini)", tip: "text_range_cm", aciklama: "Örn: 5 cm, 10-15 cm, 30+ cm. Balığın ulaşacağı maksimum boy.", ai_importance: 0.65 }
+        - { alan_adi: "akvaryum_hacmi_min_balik", label: "Minimum Akvaryum Hacmi (Litre)", tip: "number_integer", aciklama: "Bu tür için önerilen minimum akvaryum hacmi. Örn: 20, 100, 500+", ai_importance: 0.8 }
+        - { alan_adi: "su_sicakligi_ideal_balik", label: "İdeal Su Sıcaklığı (°C)", tip: "text_range_temperature", aciklama: "Balığın sağlıklı yaşayacağı su sıcaklık aralığı. Örn: 22-26°C", ai_importance: 0.7 }
+        - { alan_adi: "ph_degeri_ideal_balik", label: "İdeal pH Değeri", tip: "text_range_ph", aciklama: "İdeal su pH aralığı. Örn: 6.5-7.5", ai_importance: 0.6 }
+        - { alan_adi: "su_sertligi_ideal_balik", label: "İdeal Su Sertliği (GH/KH)", tip: "text", aciklama: "Örn: GH 5-15 dGH, KH 3-8 dKH. Türün ihtiyacına göre.", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "beslenme_tipi_balik", label: "Beslenme Tipi", tip: "select", secenekler: ["Otçul (Herbivore)", "Etçil (Carnivore)", "Hepçil (Omnivore)", "Mikro Yem Avcısı (Micro-predator)"], ai_importance: 0.75 }
+        - { alan_adi: "yuzme_seviyesi_balik", label: "Akvaryumda Yüzme Seviyesi", tip: "multiselect", secenekler: ["Dip Seviye", "Orta Seviye", "Yüzey Seviyesi", "Tüm Seviyeler"], aciklama: "Balığın akvaryumda genellikle hangi seviyede yüzdüğü.", ai_importance: 0.5 }
+        - { alan_adi: "sosyallik_diger_baliklarla_balik", label: "Diğer Balıklarla Uyumu (Mizaç)", tip: "select", secenekler: ["Barışçıl (Karma akvaryum için uygun)", "Yarı Agresif (Dikkatli tür seçimi gerektirir)", "Agresif (Tek tür veya özel tank arkadaşları)", "Sürü Balığı (Kendi türüyle grup halinde yaşamalı)"], ai_importance: 0.8 }
+        - { alan_adi: "bakim_zorlugu_balik", label: "Bakım Zorluğu", tip: "select", secenekler: ["Kolay (Başlangıç seviyesi için uygun)", "Orta (Biraz deneyim gerektirir)", "Zor (Deneyimli akvaristler için)", "Çok Zor (Uzmanlık gerektirir)"], ai_importance: 0.8 }
+        - { alan_adi: "ureme_zorlugu_balik", label: "Üreme Zorluğu (Akvaryum Ortamında)", tip: "select", secenekler: ["Kolay Ürer", "Orta Zorlukta Ürer", "Zor Ürer", "Çok Zor/İmkansız Ürer"], ai_importance: 0.4, zorunlu: false }
+        - { alan_adi: "kaynagi_balik", label: "Kaynağı (Menşei)", tip: "select", secenekler: ["Akvaryum Üretimi (Tank Bred)", "Doğadan Yakalanmış (Wild Caught - Yasal ve belgeli olmalı)", "Bilinmiyor"], ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "bitki_uyumu_balik", label: "Bitkili Akvaryum Uyumu", tip: "select", secenekler: ["Bitkilere Zarar Vermez", "Bazı Dayanıklı Bitkilerle Uygun", "Bitkileri Yiyebilir/Sökebilir", "Bitkili Akvaryum İçin Tavsiye Edilmez"], ai_importance: 0.6 }
+        - { alan_adi: "saglik_durumu_genel_balik", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı ve Aktif": false, "Karantina Sürecinde": true, "Geçmişte Tedavi Gördü (Şu an İyi)": true, "Gözlemlenen Rahatsızlık Var (Açıklama Gerekli)": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.85 }
+        - { alan_adi: "kac_adet_satilik_balik", label: "Kaç Adet Mevcut/Satılık", tip: "number_integer_text", aciklama: "Tek balık, çift veya sürü olarak mı? Adet belirtin.", ai_importance: 0.7, zorunlu: true }
+        - { alan_adi: "ozel_notlar_balik", label: "Balık Hakkında Ek Notlar", tip: "textarea", aciklama: "Balığın özel alışkanlıkları, sevdiği yemler veya yeni sahibi için önemli olabilecek diğer bilgiler.", ai_importance: 0.5, zorunlu: false }
+    platform_ayarlari_balik:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_TUR_BAZLI_KISA" # Daha kısa olabilir
+        varsayilan_aktif_kalma_suresi_gun: 40 # Orjinal: 40 gün
+        yenileme_bildirimi_gun_oncesi: 5
+        maksimum_yenileme_sayisi: 2
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 0.9 # Orjinal: 0.9
+        "nadide_turler_icin_ozel_bolum_aktif_mi": false # Eklenebilir
+      moderasyon_ayarlari:
+        seviye: "DUSUK_TEMEL_KONTROL" # Orjinal: Düşük
+        yeni_ilan_varsayilan_durum: "YAYINDA_HIZLI_KONTROL_GEREKLI"
+        "yasakli_veya_invaziv_tur_kontrolu_aktif_mi": true # Önemli
+      dogrulama_ve_guvenlik_protokolleri_balik:
+        protokol_aktif_mi: true # 'ozel_dogrulama_gerekliligi_tur' nedeniyle.
+        protokol_genel_aciklama_kullanici: "Nadide, ithalatı kısıtlı veya özel bakım gerektiren balık türleri için, türün doğruluğunu ve yasal kaynağını teyit etmek amacıyla ek bilgi veya belge (örn: ithalat belgesi, üretici sertifikası) talep edilebilir. Amaç, sorumlu akvaryum hobisini desteklemektir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "NADIDE_ITHAL_BALIK_BELGE_KONTROLU_BALIK"
+            senaryo_aciklamasi_kullanici: "Eğer sahiplendireceğiniz balık nadir bir türse, ithalatı özel düzenlemelere tabiyse veya CITES kapsamında olabilecek bir türün varyasyonu ise, yasal kaynağını ve menşeini gösteren belgeleri (ithalat izinleri, faturalar, sağlık sertifikaları vb.) sunmanız istenebilir."
+            onemi: "ONERILIR_YASAL_UYUM_VE_SORUMLU_HOBICILIK_ICIN"
+            moderator_kontrol_rehberi: "Özellikle 'Wild Caught' olarak belirtilen veya yüksek değerli türler için menşe ve yasallık belgelerini kontrol edin. Şüphe durumunda uzman görüşüne başvurun."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_balik:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_balik", oneri_basligi_kullanici: "Balığınızın Türünü ve Çekici Bir Özelliğini Başlıkta Belirtin", oneri_detayi_kullanici: "Başlıkta balığınızın türünü (örn: Japon Balığı, Beta), rengini veya boyutunu ve dikkat çekici bir özelliğini (örn: 'Sağlıklı ve Aktif', 'Nadide Renk') belirtin.", neden_onemli_aciklamasi_kullanici: "Doğru ve ilgi çekici bir başlık, ilanınızın doğru kişiler tarafından fark edilmesini sağlar.", iyi_ornek_metni_kullanici: "Örn: 'Sağlıklı Oranda Japon Balığı Sürüsü (5 Adet)' veya 'Nadide Mavi Beta Balığı (Erkek)'", ipucu_tipi: "IYILESTIRME_ONERISI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_balik", oneri_basligi_kullanici: "Balığınızın Bakım İhtiyaçlarını ve Akvaryum Koşullarını Detaylandırın", oneri_detayi_kullanici: "Balığınızın türüne özel su değerleri (sıcaklık, pH), akvaryum hacmi, beslenme alışkanlıkları, diğer balıklarla uyumu, sağlık durumu ve varsa özel bakım ihtiyaçlarını detaylıca açıklayın.", neden_onemli_aciklamasi_kullanici: "Potansiyel sahiplerin, balığa uygun bir yuva sunup sunamayacaklarını anlamalarına yardımcı olur.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+        semantik_zenginlik_onemi_katsayisi: 0.6 # Orjinal: 0.6
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.balik_tur_ve_ozellik_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.balik_aciklamasi_kisa_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Balıklar" }
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_balik" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_desen_balik"}
+              - { schema_alani: "size", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_boyut_yetiskin_balik_schema_uyumlu"}
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_balik_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_balik", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.balik_su_parametreleri_beslenme_schema_properties" }
+        ozel_meta_etiketler_balik:
+          - { etiket_adi: "petplatform:fish_species", icerik_kaynagi: "ilan.akilli_filtre_degeri_tur_balik" }
+          - { etiket_adi: "petplatform:fish_water_type", icerik_kaynagi: "ilan.akilli_filtre_degeri_su_tipi_balik" }
+          - { etiket_adi: "petplatform:fish_care_level", icerik_kaynagi: "ilan.akilli_filtre_degeri_bakim_zorlugu_balik" }
+          - { etiket_adi: "petplatform:fish_aquarium_size_min_L", icerik_kaynagi: "ilan.akilli_filtre_degeri_akvaryum_hacmi_min_balik" }
+      harici_platform_ve_api_entegrasyon_hazirligi_balik:
+        "akvarist_forum_ve_gruplari_ile_bilgi_paylasimi_opsiyonu_aktif_mi": false # Eklenebilir
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Balik_TURU_RENK_SU_TIPI_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_balik:
+          "balik_turu_tanimlama_model_destegi_icin_yapilandirma": "YAPILANDIRILMIS_TUR_LISTESI_VE_FOTOGRAF_OZELLIK_ESLESTIRME_DESTEGI_SAGLANIR_BALIK" # species_identification_model_active
+          "su_parametreleri_uyumluluk_kontrolu_icin_veri_yapilandirma": "AKILLI_FILTRE_ALANLARINDA_BELIRTILEN_SU_DEGERLERININ_TUR_GEREKSINIMLERIYLE_KARSILASTIRILABILIR_FORMATTA_SUNULMASI_DESTEKLENIR_BALIK" # water_parameter_compatibility_checker
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_balik:
+        "balik_saglik_beyani_detay_seviyesi_meta_balik": "petplatform:fish_health_info_detail_level"
+        "akvaryum_kurulum_bilgisi_mevcudiyeti_meta_balik": "petplatform:fish_aquarium_setup_info_availability"
+    istatistikler_balik:
+      beklenen_performans_metrikleri_balik:
+        - "Ortalama ilan görüntülenme: Düşük-Orta"
+        - "Sahiplenme oranı hedefi: %40"
+        - "Ortalama sahiplenme süresi: 35 gün"
+        - "Özel türler ve büyük akvaryumlar için niş bir kitle"
+  kemirgen:
+    id: "animal_tur_kemirgen"
+    temel_kimlik:
+      ad: "Kemirgen ve Küçük Evcil Dostlar"
+      slug: "kemirgen-kucuk-evcil"
+      aciklama: "Küçük boyutları, sevimli görünümleri ve genellikle daha az bakım gereksinimleriyle bilinen popüler evcil hayvanlardır. Hamster, guinea pig, tavşan gibi türler bu kategoride yer alır ve çocuklar için iyi bir başlangıç olabilirler."
+      gorsel_kimlik: { renk_kodu: "#f97316", ikon_adi: "fas fa-paw", emoji: "🐾" }
+    arama_sistemi:
+      alternatif_kelimeler: ["hamster", "ginepig", "tavşan", "fare", "sincap", "chinchilla", "degu", "gerbil", "kemirici", "minik dost", "kafes hayvanı", "sevimli kemirgen", "bunny", "rat", "kobay", "cüce hamster", "surinam hamsterı", "şinşila", "yer faresi", "lop tavşanı", "angora tavşanı"]
+      ai_intent_keywords: ["hamster al", "ginepig sahiplen", "evcil tavşan ara", "kemirgen türleri", "satılık chinchilla", "bakımı kolay küçük hayvan"]
+      semantic_tags: ["rodent", "small_pet", "hamster", "guinea_pig", "rabbit", "lagomorph", "cage_animal", "chinchilla", "gerbil"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "tur_kemirgen", label: "Tür (Kemirgen/Küçük Evcil)", tip: "select_dynamic_searchable", kaynak_model_tahmini: "KemirgenTurTablosu", aciklama: "Hamster (Suriye, Cüce Roborovski, Campbell, Gonzales), Guinea Pig (Abyssinian, Peruvian, American), Tavşan (Hollanda Lop, Netherland Dwarf, Angora, Rex), Fare (Fancy Mouse), Sıçan (Fancy Rat), Chinchilla, Degu, Gerbil", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "yas_grubu_kemirgen", label: "Yaş Grubu", tip: "select", secenekler: ["Yavru (0-3 ay)", "Genç (3-9 ay)", "Yetişkin (9 ay+)"], ai_importance: 0.7 }
+        - { alan_adi: "cinsiyet_kemirgen", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Bilinmiyor/Belirsiz"], ai_importance: 0.6 }
+        - { alan_adi: "sosyallik_kendi_turuyle_kemirgen", label: "Kendi Türüyle Sosyalliği", tip: "select", secenekler: ["Tek Yaşamalı (örn: Suriye Hamster)", "Çift/Grup Halinde Yaşamalı (örn: Guinea Pig, Fareler, Gerbiller)", "Duruma Göre Değişir (örn: Tavşanlar kısırlaştırma ve tanıştırmaya bağlı)"], ai_importance: 0.75 }
+        - { alan_adi: "sosyallik_insanlarla_kemirgen", label: "İnsanlarla Etkileşimi/Ele Alışkınlığı", tip: "select", secenekler: ["Çok Sosyal/İlgi Sever", "Ele Alışkın/İnsana Yakın", "Çekingen/Sabır Gerektirir", "Sadece Gözlem İçin Uygun"], ai_importance: 0.7 }
+        - { alan_adi: "aktivite_zamani_kemirgen", label: "Aktif Olduğu Zaman Dilimi", tip: "select", secenekler: ["Gece Aktif (örn: Hamster, Chinchilla)", "Gündüz Aktif (örn: Guinea Pig, Tavşan)", "Alacakaranlık/Şafak Vakti Aktif (örn: Gerbil)"], ai_importance: 0.6 }
+        - { alan_adi: "kafes_yasam_alani_ihtiyaci_kemirgen", label: "Kafes/Yaşam Alanı İhtiyacı", tip: "select_text_area", secenekler: ["Küçük Boy (tekil küçük türler için min.)", "Orta Boy (çiftler veya daha büyük tekiller için)", "Büyük Boy (tavşan, guinea pig için geniş alan)", "Çok Katlı/Tünelli Sistemler", "Oda İçinde Serbest Alan (gözetimli)"], aciklama_text: "Minimum boyut önerileri (cm cinsinden), taban malzemesi, tekerlek, yuva, suluk/mama kabı gibi temel ekipmanlar hakkında bilgi.", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "beslenme_diyet_ozellikleri_kemirgen", label: "Beslenme ve Diyet Özellikleri", tip: "textarea", aciklama: "Temel diyeti (kaliteli pelet yem, kuru ot - özellikle tavşan/guinea pig için sınırsız olmalı), taze sebze/meyve takviyeleri (hangileri güvenli), özel tohum karışımları, kemirme taşları, yasaklı yiyecekler.", ai_importance: 0.75, zorunlu: true }
+        - { alan_adi: "bakim_zorlugu_deneyim_kemirgen", label: "Bakım Zorluğu / Gerekli Deneyim", tip: "select", secenekler: ["Başlangıç Seviyesi (Çocuklar için uygun, az bakım)", "Orta Seviye (Düzenli bakım ve bilgi gerektirir)", "Deneyim Gerektirir (Hassas tür, özel ihtiyaçlar)"], ai_importance: 0.7 }
+        - { alan_adi: "ortalama_yasam_suresi_bilgisi_kemirgen", label: "Ortalama Yaşam Süresi (Türe Göre)", tip: "text", aciklama: "Bu tür için bilinen ortalama yaşam süresi (örn: Suriye Hamsterı 2-3 yıl, Tavşan 8-12 yıl, Chinchilla 10-15 yıl).", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "renk_tuy_tipi_kemirgen", label: "Renk ve Tüy Tipi", tip: "tags_dynamic", secenekler_onerilen: ["Albino", "Siyah", "Beyaz", "Gri", "Kahverengi", "Krem", "Altın Sarısı", "Benekli", "Çizgili", "Dalmaçyalı", "Uzun Tüylü", "Kısa Tüylü", "Rex (Kıvırcık)", "Satin (Parlak)", "Teddy", "Angora"], aciklama: "Hayvanınızın renklerini ve tüy tipini belirtin. Listeden seçebilir veya yeni etiketler ekleyebilirsiniz.", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "saglik_durumu_genel_kemirgen", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı": false, "Bilinen Bir Rahatsızlığı Yok": false, "Özel Dikkat/Takip Gerektiren Durum": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.8 }
+        - { alan_adi: "mikrocip_durumu_kemirgen", label: "Mikroçip Durumu", tip: "boolean", ai_importance: 0.5 } # Eklendi
+    platform_ayarlari_kemirgen:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_TUR_BAZLI_KISA"
+        varsayilan_aktif_kalma_suresi_gun: 35
+        yenileme_bildirimi_gun_oncesi: 5
+        maksimum_yenileme_sayisi: 2
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 1.2
+        sorumlu_yetistiricilik_ve_bakim_bilgisi_sunan_ilanlari_one_cikarma_aktif_mi: true
+      moderasyon_ayarlari:
+        seviye: "DUSUK_TEMEL_TUR_VE_REFAH_KONTROLU"
+        yeni_ilan_varsayilan_durum: "YAYINDA_HIZLI_KONTROL_GEREKLI"
+        uygunsuz_yasam_kosulu_gorseli_kontrolu_aktif_mi: true
+        turler_arasi_yanlis_bilgilendirme_kontrolu_aktif_mi: true # Özellikle tavşanların kemirgen olmadığı vurgusu.
+      dogrulama_ve_guvenlik_protokolleri_kemirgen:
+        protokol_aktif_mi: true # Tavşanlar için önemli olabilir.
+        protokol_genel_aciklama_kullanici: "Kemirgen ve küçük evcil hayvanların sahiplendirilmesinde, hayvan refahını ve doğru bilgilendirmeyi sağlamak amacıyla, özellikle tavşan gibi özel bakım gereksinimleri olan türler için ek bilgiler talep edilebilir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "TAVSAN_BAKIM_BILINCI_KONTROLU_KEMIRGEN"
+            senaryo_aciklamasi_kullanici: "Eğer bir tavşan sahiplendiriyorsanız, tavşanların özel diyet (sınırsız kuru ot, taze yeşillik, sınırlı pelet) ve yaşam alanı (geniş hareket alanı) ihtiyaçları konusunda bilgi sahibi olduğunuzu ve yeni sahibini bu konularda bilgilendireceğinizi teyit etmeniz istenebilir. Tavşanlar kemirgenlerden farklı beslenme ve bakım gereksinimlerine sahiptir."
+            onemi: "ONERILIR_HAYVAN_REFAHI_ICIN"
+            moderator_kontrol_rehberi: "İlanda tavşan bakımıyla ilgili doğru bilgiler (özellikle beslenme - saman/ot önemi) yer alıyor mu kontrol edin. Gerekirse kullanıcıya ek bilgi veya ilanında düzeltme yapması için yönlendirme yapın."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_kemirgen:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_kemirgen", oneri_basligi_kullanici: "Minik Dostunuzun Türünü ve Sevimli Bir Özelliğini Belirtin", oneri_detayi_kullanici: "Başlıkta hayvanınızın türünü (örn: Suriye Hamsterı, Hollanda Lop Tavşanı), yaşını ve dikkat çekici bir özelliğini (örn: 'Ele Alışkın', 'Oyuncu', 'Çok Sakin') belirtin.", neden_onemli_aciklamasi_kullanici: "Doğru ve sevimli bir başlık, arayanların ilgisini çeker.", iyi_ornek_metni_kullanici: "Örn: 'Ele Alışkın Yavru Suriye Hamsterı' veya 'Oyuncu Hollanda Lop Tavşanı Yuva Arıyor'", ipucu_tipi: "IYILESTIRME_ONERISI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_kemirgen", oneri_basligi_kullanici: "Bakım İhtiyaçlarını, Karakterini ve Yaşam Alanını Detaylandırın", oneri_detayi_kullanici: "Hayvanınızın türüne özgü bakım ihtiyaçlarını (beslenme, kafes düzeni, temizlik), karakterini, insanlarla ve (varsa) diğer hayvanlarla ilişkisini, sağlık durumunu ve sahiplendirme koşullarınızı açıklayın.", neden_onemli_aciklamasi_kullanici: "Doğru ve eksiksiz bilgi, minik dostunuz için en uygun ve kalıcı yuvayı bulmanıza yardımcı olur.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+        semantik_zenginlik_onemi_katsayisi: 0.5
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.kemirgen_tur_ve_ozellik_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.kemirgen_aciklamasi_kisa_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Kemirgenler ve Küçük Evciller" }
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_kemirgen" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_tuy_tipi_kemirgen" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_kemirgen_schema_uyumlu" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_kemirgen_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_kemirgen", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.kemirgen_sosyallik_aktivite_schema_properties" }
+        ozel_meta_etiketler_kemirgen:
+          - { etiket_adi: "petplatform:small_pet_species", icerik_kaynagi: "ilan.akilli_filtre_degeri_tur_kemirgen" } # rodent_species yerine daha genel
+          - { etiket_adi: "petplatform:small_pet_social_needs", icerik_kaynagi: "ilan.akilli_filtre_degeri_sosyallik_kendi_turuyle_kemirgen" }
+          - { etiket_adi: "petplatform:small_pet_activity_time", icerik_kaynagi: "ilan.akilli_filtre_degeri_aktivite_zamani_kemirgen" }
+          - { etiket_adi: "petplatform:small_pet_handling_ease", icerik_kaynagi: "ilan.akilli_filtre_degeri_sosyallik_insanlarla_kemirgen" } # elde_tutma_aliskanligi_kemirgen yerine
+      harici_platform_ve_api_entegrasyon_hazirligi_kemirgen:
+        "kucuk_hayvan_refah_organizasyonlari_ile_bilgi_paylasimi_opsiyonu_aktif_mi": false # Eklenebilir
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "KucukEvcil_TURU_RENK_PLATFORMADI" # Kemirgen yerine daha genel
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_kemirgen:
+          "kucuk_evcil_turu_tanimlama_model_destegi_icin_yapilandirma": "YAPILANDIRILMIS_TUR_LISTESI_VE_FOTOGRAF_OZELLIK_ESLESTIRME_DESTEGI_SAGLANIR_KUCUKEVCIL"
+          "tavsan_lagomorf_ozel_ihtiyac_vurgusu_yapilandirma": "TAVSAN_SECILDIGINDE_LAGOMORF_OLDUGU_VE_OZEL_BAKIM_GEREKSINIMLERI_METADATA_ILE_DESTEKLENIR"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_kemirgen:
+        "bakim_bilgisi_detay_seviyesi_meta_kucuk_evcil": "petplatform:small_pet_care_info_detail_level"
+        "sorumlu_sahiplendirme_beyani_meta_kucuk_evcil": "petplatform:small_pet_responsible_rehoming_hint"
+    istatistikler_kemirgen:
+      beklenen_performans_metrikleri_kemirgen:
+        - "Ortalama ilan görüntülenme: Orta-Yüksek"
+        - "Sahiplenme oranı hedefi: %60"
+        - "Ortalama sahiplenme süresi: 15-20 gün"
+        - "Özellikle çocuklar için popüler bir tercih."
+        - "Tavşanlar için bilinçli sahiplendirme oranı: %70 (hedeflenen)"
+  surungen:
+    id: "animal_tur_surungen"
+    temel_kimlik:
+      ad: "Sürüngen"
+      slug: "surungen"
+      aciklama: "Farklı görünümleri ve yaşam tarzlarıyla ilgi çeken, özel bakım ve ortam gereksinimleri olan egzotik hayvanlardır. Bilinçli ve deneyimli sahipler ararlar."
+      gorsel_kimlik: { renk_kodu: "#059669", ikon_adi: "fas fa-dragon", emoji: "🦎" }
+    arama_sistemi:
+      alternatif_kelimeler: ["kertenkele", "yılan", "kaplumbağa", "iguana", "bukalemun", "gekko", "varan", "boa", "piton", "sakallı ejder", "leopar geko", "mısır yılanı", "kraliyet pitonu", "sulcata", "reptile", "teraryum hayvanı", "soğukkanlı", "pullu dost", "egzotik sürüngen"]
+      ai_intent_keywords: ["sürüngen sahiplen", "yılan al", "kaplumbağa bakımı", "egzotik kertenkele"]
+      semantic_tags: ["reptile", "exotic_pet", "terrarium_animal", "lizard", "snake", "turtle", "cold_blooded"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "tur_surungen", label: "Sürüngen Türü", tip: "select_dynamic_searchable", kaynak_model_tahmini: "SurungenTurTablosu", aciklama: "Sakallı Ejder, Leopar Geko, Mısır Yılanı, Kraliyet Pitonu, Su Kaplumbağası (Kırmızı Yanaklı), Kara Kaplumbağası (Tosbağa), İguana, Bukalemun vb.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "yas_grubu_surungen", label: "Yaş Grubu", tip: "select", secenekler: ["Yavru (Hatchling/Baby)", "Genç (Juvenile/Subadult)", "Yetişkin (Adult)"], ai_importance: 0.75 }
+        - { alan_adi: "cinsiyet_surungen", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Bilinmiyor (Bazı türlerde belirlemek zor/test gerekir)"], ai_importance: 0.65 }
+        - { alan_adi: "boyut_yetiskin_surungen", label: "Yetişkin Boyutu (Tahmini)", tip: "text_range_cm_gr", aciklama: "Türün ortalama yetişkin boyu (uzunluk ve/veya ağırlık). Örn: 20-30 cm, 1.5-2 m, 100-200 gr.", ai_importance: 0.7 }
+        - { alan_adi: "renk_desen_morph_surungen", label: "Renk, Desen ve Morph Bilgisi", tip: "tags_dynamic", secenekler_onerilen: ["Normal (Wild Type)", "Albino", "Melanistik", "Hipomelanistik", "Anerythristic", "Pastel", "Striped (Çizgili)", "Banded (Bantlı)", "Spotted (Benekli)", "Patternless (Desensiz)", "Red (Kırmızı)", "Orange (Turuncu)", "Yellow (Sarı)", "Blue (Mavi)", "Green (Yeşil)", "Black (Siyah)", "White (Beyaz)", "Brown (Kahverengi)", "Lavender", "Blizzard", "Banana", "Pinstripe"], aciklama: "Sürüngeninizin renklerini, desenlerini ve varsa özel morph (genetik varyasyon) adlarını belirtin. Örn: 'Albino Mısır Yılanı', 'Hypo Tangerine Leopard Gecko'. Listeden seçebilir veya yeni etiketler ekleyebilirsiniz.", ai_importance: 0.8 }
+        - { alan_adi: "beslenme_tipi_surungen", label: "Beslenme Tipi", tip: "select", secenekler: ["Otçul (Herbivore) - örn: İguana, bazı kaplumbağalar", "Etçil (Carnivore) - örn: Yılanlar", "Böcekçil (Insectivore) - örn: Leopard Geko, Bukalemun", "Hepçil (Omnivore) - örn: Sakallı Ejder, bazı su kaplumbağaları"], ai_importance: 0.85 }
+        - { alan_adi: "karakter_mizac_surungen", label: "Karakter ve Mizaç", tip: "multiselect", secenekler: ["Sakin", "Meraklı", "Hareketli", "Utangaç/Saklanmayı Seven", "Savunmacı (Nadiren)", "Uysal (Ele Alışkın)", "Bölgeci (Territorial)", "Gündüz Aktif (Diurnal)", "Gece Aktif (Nocturnal)", "Alacakaranlık Aktif (Crepuscular)"], aciklama: "Sürüngeninizin genel davranış ve mizaç özelliklerini seçin.", ai_importance: 0.7 }
+        - { alan_adi: "elde_tasima_toleransi_surungen", label: "Ele Alma / Elde Taşıma Toleransı", tip: "select", secenekler: ["Çok İyi (Rahatlıkla ele alınabilir)", "İyi (Sabırlı yaklaşımla alışkın)", "Orta (Sınırlı ve dikkatli olunmalı)", "Zayıf (Stres olur, tavsiye edilmez)", "Sadece Gözlem İçin Uygun"], ai_importance: 0.75 }
+        - { alan_adi: "bakim_zorlugu_surungen", label: "Bakım Zorluğu", tip: "select", secenekler: ["Başlangıç Seviyesi (Kolay)", "Orta Seviye (Araştırma ve özen gerektirir)", "İleri Seviye (Deneyim ve özel ekipman şart)", "Uzman Seviyesi (Çok hassas ve zorlayıcı)"], ai_importance: 0.9 }
+        - { alan_adi: "yasam_alani_kurulumu_surungen", label: "Yaşam Alanı Kurulumu (Teraryum/Vivaryum)", tip: "select_text_area", secenekler: ["Basit Kurulum", "Orta Düzey Kurulum (Isıtma, UVB, nemlendirme)", "Gelişmiş Biyoaktif Kurulum", "Çok Büyük veya Özel Kurulum"], aciklama_text: "Kullanılan teraryum tipi (cam, ahşap, PVC), boyutları, ısıtma (ped, lamba), aydınlatma (UVB yüzdesi, tam spektrum), nem kontrolü, havalandırma, taban malzemesi, dekorasyon (saklanma alanları, tırmanma dalları, su kabı) hakkında detaylı bilgi.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "sicaklik_nem_ihtiyaci_surungen", label: "Sıcaklık ve Nem İhtiyaçları", tip: "textarea", aciklama: "İdeal sıcak nokta (°C), soğuk alan (°C) ve gece sıcaklığı (°C). Gerekli nem aralığı (%).", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "uvb_isik_ihtiyaci_detay_surungen", label: "UVB Işık İhtiyacı ve Kullanılan Lamba", tip: "select_text_area", secenekler: ["Evet, Hayati (örn: Sakallı Ejder, Kaplumbağalar, İguanalar)", "Evet, Faydalı (örn: Bazı Gekolar, Bukalemunlar)", "Hayır, Gerekli Değil (örn: Çoğu Yılan, Bazı Gece Aktif Gekolar)", "Türüne Göre Değişir/Araştırılmalı"], aciklama_text: "Eğer UVB gerekliyse, kullanılan lambanın tipi (T5, T8, Kompakt), UVB yüzdesi (örn: %5.0, %10.0, %12.0) ve ne sıklıkta değiştirildiği hakkında bilgi.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "koken_menşei_surungen", label: "Kökeni / Menşei", tip: "select", secenekler: ["Yasal Üretim (Captive Bred - CB)", "Yasal İthalat (Doğrulanabilir Kaynak)", "Uzun Süredir Evde Bakılan (Long Term Captive - LTC)", "Bilinmiyor/Belirtilmedi"], aciklama: "Hayvanın yasal kaynağı hakkında bilgi.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "CITES_belgesi_durumu_surungen", label: "CITES Belgesi Durumu (Gerekliyse)", tip: "select_aciklamali", secenekler_map: {"Gerekmiyor (Tür CITES kapsamında değil veya Ek-II için üretici belgesi yeterli)":false, "Var (Belge No ve Detay Eklenebilir)":true, "Başvurusu Yapıldı/Beklemede":true, "Yasal Menşei Kanıtı Var (Fatura, Üretici Sertifikası vb.)":true, "Bilgim Yok/Araştırılmalı":false}, aciklama_label: "Belge No/Detay/Açıklama", aciklama:"Birçok sürüngen türü CITES sözleşmesi kapsamındadır. İlgili belgelerin varlığı yasal sahiplendirme için kritiktir.", ai_importance: 0.9, zorunlu: false }
+        - { alan_adi: "zehirlilik_tehlike_durumu_surungen", label: "Zehirlilik / Potansiyel Tehlike Durumu", tip: "select_text_area", secenekler: ["Zehirli Değil / Tehlikesiz", "Hafif Zehirli (İnsan için ciddi risk oluşturmaz, özel dikkat gerektirir)", "Zehirli (Deneyim ve özel güvenlik önlemleri gerektirir - Sadece uzmanlar için!)", "Büyük ve Güçlü (Fiziksel zarar verme potansiyeli, deneyim gerektirir)"], aciklama_text: "Eğer tür zehirli veya potansiyel olarak tehlikeliyse, bu konuda detaylı bilgi ve alınması gereken önlemler.", ai_importance: 0.85, zorunlu: false }
+        - { alan_adi: "saglik_durumu_genel_surungen", label: "Genel Sağlık Durumu", tip: "select_aciklamali", secenekler_map: {"Sağlıklı ve Sorunsuz": false, "Geçmişte Tedavi Gördü (Şu an İyi)": true, "Kronik Rahatsızlığı Var (Yönetilebilir)": true, "Özel Bakım/İlaç Gerekiyor": true, "Gözlem Altında/Yeni Edinildi": true}, aciklama_label: "Sağlık Detayı/Notu", ai_importance: 0.85 }
+        - { alan_adi: "ilk_kez_surungen_sahiplenecek_icin_uygunluk_surungen", label: "İlk Kez Sürüngen Sahiplenecekler İçin Uygunluk", tip: "select", secenekler: ["Uygun (İyi araştırma ve hazırlıkla)", "Şartlı Uygun (Bazı türler, deneyimli bir rehber eşliğinde)", "Tavsiye Edilmez (Deneyim gerektirir)", "Kesinlikle Uygun Değil (Uzmanlık şart)"], ai_importance: 0.8 }
+        - { alan_adi: "ek_notlar_ve_sahiplendirme_sartlari_surungen", label: "Ek Notlar ve Sahiplendirme Şartları", tip: "textarea_rich", aciklama: "Sürüngeninizle ilgili paylaşmak istediğiniz diğer önemli bilgiler, özel alışkanlıkları, sahiplendirme için özel şartlarınız (varsa).", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "mikrocip_durumu_surungen", label: "Mikroçip Durumu", tip: "boolean_unknown", ai_importance: 0.6 } # Eklendi
+    platform_ayarlari_surungen:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_UZUN_TUR_BAZLI" # Daha uzun
+        varsayilan_aktif_kalma_suresi_gun: 75 # Orjinal: 75 gün
+        yenileme_bildirimi_gun_oncesi: 10
+        maksimum_yenileme_sayisi: 2
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 0.8 # Orjinal: 0.8
+        "CITES_belgeli_ve_deneyimli_sahiplendiricileri_one_cikarma_aktif_mi": true
+      moderasyon_ayarlari:
+        seviye: "YUKSEK_CITES_BAKIM_VE_DENEYIM_KONTROLLU" # Orjinal: Yüksek
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_SURUNGEN_DETAY_ONAYI_BEKLIYOR"
+        "CITES_ve_yasal_mevzuat_kontrol_protokolu_surungen": # Kuş kategorisindekine benzer, sürüngene özel vurgularla
+            - "İlanda belirtilen sürüngen türünün Türkiye'deki güncel yasal statüsünü ve uluslararası CITES listelerindeki yerini kontrol et."
+            - "Eğer CITES kapsamında ise veya yerel yasalarla özel izne tabi ise, sunulan tüm belgelerin (CITES sertifikaları, menşe belgeleri, faturalar, sağlık sertifikaları, Tarım Orman Bakanlığı izinleri) eksiksiz, güncel ve orijinal/onaylı kopya olduğunu doğrula."
+            - "Belgelerdeki bilgilerle ilandaki bilgilerin ve hayvanın fotoğraflarının tutarlılığını karşılaştır."
+            - "Yasa dışı yollarla elde edildiği veya ticaretinin yapıldığına dair en ufak bir şüphede ilanı derhal kaldır ve durumu ilgili resmi kurumlara bildir."
+        "uygunsuz_bakim_kosullari_ve_yaniltici_morph_beyani_kontrolu_aktif_mi": true
+      dogrulama_ve_guvenlik_protokolleri_surungen:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Sürüngen sahiplendirme süreçlerinin güvenliğini, şeffaflığını ve yasalara uygunluğunu sağlamak, özellikle CITES kapsamındaki türler, zehirli veya özel uzmanlık gerektiren sürüngenler için sorumlu ve bilinçli sahiplendirmeyi teşvik etmek amacıyla platformumuz kapsamlı doğrulama adımları ve bilgi taleplerinde bulunabilir. Bu, hem hayvanın refahı hem de toplum güvenliği için kritik öneme sahiptir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "CITES_BELGESI_VE_YASAL_KOKEN_DOGRULAMASI_SURUNGEN"
+            senaryo_aciklamasi_kullanici: "Eğer sahiplendireceğiniz sürüngen CITES sözleşmesi kapsamında koruma altında bir tür ise (örn: birçok kaplumbağa, yılan, kertenkele türü), bu hayvanın yasal yollarla edinildiğini gösteren geçerli CITES belgesini (veya eşdeğer resmi menşe/üretim belgesini) sunmanız zorunludur."
+            onemi: "ZORUNLU_YASAL_UYUM_VE_NESLI_KORUMA_ICIN"
+            moderator_kontrol_rehberi: "CITES belgesinin aslına uygunluğunu, geçerlilik süresini, tür bilgisini ve bireye özgü tanımlayıcıları (varsa mikroçip) dikkatle inceleyin. Sahte/geçersiz belge şüphesinde uzman görüşü alın veya ilgili resmi kurumlara danışın. Yasal olmayan ilanları derhal kaldırın."
+          - senaryo_kodu: "BAKIM_ORTAMI_VE_DENEYIM_TEYIDI_SURUNGEN"
+            senaryo_aciklamasi_kullanici: "Sürüngenlerin türlerine göre çok özel yaşam alanı (terrarium/vivarium kurulumu, ısıtma, nem, UVB aydınlatma) ve bakım ihtiyaçları vardır. İlanınızda bu koşulları detaylı olarak belirtmeniz ve mümkünse fotoğraflarla desteklemeniz beklenir. Özellikle deneyim gerektiren türler için, bu konudaki bilgi ve tecrübenizi de paylaşmanız önemlidir."
+            onemi: "ZORUNLU_HAYVAN_REFAHI_VE_BILINCLI_SAHIPLENDIRME_ICIN"
+            moderator_kontrol_rehberi: "İlanda belirtilen yaşam alanı ve bakım bilgilerinin, söz konusu sürüngen türünün asgari refah standartlarına uygun olup olmadığını değerlendirin. Yetersiz veya yanlış bilgiler varsa kullanıcıdan düzeltme isteyin. Gerekirse fotoğraf/video ile teyit talep edin."
+          - senaryo_kodu: "ZEHIRLI_VEYA_TEHLIKELI_TUR_BILGILENDIRME_VE_GÜVENLIK_SURUNGEN"
+            senaryo_aciklamasi_kullanici: "Eğer sahiplendireceğiniz sürüngen zehirli veya potansiyel olarak tehlike arz eden (örn: büyük boğucu yılanlar, agresif varanlar) bir tür ise, bu durumu, risklerini ve alınması gereken tüm güvenlik önlemlerini ilanınızda AÇIKÇA ve EKSİKSİZ olarak belirtmeniz ZORUNLUDUR. Bu tür ilanlar sadece çok deneyimli ve yasal gereklilikleri karşılayabilecek kişilere yönelik olmalıdır."
+            onemi: "HAYATI_ONEM_TASIYAN_YASAL_VE_GÜVENLİK_SORUMLULUGU"
+            moderator_kontrol_rehberi: "Bu tür ilanlar en yüksek dikkatle incelenmelidir. İlan sahibinin ve potansiyel alıcının deneyimi, güvenlik önlemleri ve yasal yükümlülükler (varsa özel izinler) sorgulanmalıdır. En ufak bir şüphede ilan yayınlanmamalı veya kısıtlanmalıdır."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_surungen:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_surungen", oneri_basligi_kullanici: "Sürüngeninizin Türünü, Morphunu ve Önemli Bir Özelliğini Başlıkta Yazın", oneri_detayi_kullanici: "Örn: 'Albino Mısır Yılanı (Yavru) Ele Alışkın' veya 'Sakallı Ejder (Bearded Dragon) Yetişkin Erkek - Full Kurulumlu Teraryumuyla'.", neden_onemli_aciklamasi_kullanici: "Detaylı başlık, doğru ve bilgili alıcıların dikkatini çeker.", ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_surungen", oneri_basligi_kullanici: "Tüm Bakım Detaylarını, Yaşam Alanını ve Yasal Bilgileri Eksiksiz Paylaşın", oneri_detayi_kullanici: "Sürüngeninizin türüne özel sıcaklık, nem, UVB ihtiyaçları, beslenme düzeni, teraryum kurulumu, karakteri, sağlık durumu, CITES belge durumu (gerekliyse) ve sahiplendirme koşullarınızı çok detaylı ve dürüst bir şekilde yazın.", neden_onemli_aciklamasi_kullanici: "Sorumlu sahiplendirme için şeffaflık ve doğru bilgi hayati önemdedir.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI_KRITIK" }
+        semantik_zenginlik_onemi_katsayisi: 0.9 # Orjinal: 0.9
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.surungen_tur_morph_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.surungen_aciklamasi_detayli_ozet" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Sürüngenler" }
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_surungen" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_desen_morph_surungen" }
+              - { schema_alani: "size", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_boyut_yetiskin_surungen_schema_uyumlu" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_surungen_schema_uyumlu" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_surungen_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_surungen", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.surungen_bakim_davranis_schema_properties" }
+              - { schema_alani: "disambiguatingDescription", platform_alani_kaynagi: "ilan.CITES_belge_ve_yasal_not_schema_icin_surungen" }
+        ozel_meta_etiketler_surungen:
+          - { etiket_adi: "petplatform:reptile_species", icerik_kaynagi: "ilan.akilli_filtre_degeri_tur_surungen" }
+          - { etiket_adi: "petplatform:reptile_morph", icerik_kaynagi: "ilan.akilli_filtre_degeri_morph_surungen" } # Morph bilgisi için
+          - { etiket_adi: "petplatform:reptile_care_difficulty", icerik_kaynagi: "ilan.akilli_filtre_degeri_bakim_zorlugu_surungen" }
+          - { etiket_adi: "petplatform:reptile_CITES_status", icerik_kaynagi: "ilan.akilli_filtre_degeri_CITES_belgesi_durumu_surungen_metin" }
+          - { etiket_adi: "petplatform:reptile_uvb_needs", icerik_kaynagi: "ilan.akilli_filtre_degeri_uvb_ihtiyaci_surungen_metin" }
+          - { etiket_adi: "petplatform:reptile_handling_tolerance", icerik_kaynagi: "ilan.akilli_filtre_degeri_elde_tasima_toleransi_surungen" }
+      harici_platform_ve_api_entegrasyon_hazirligi_surungen:
+        "surungen_ve_egzotik_hayvan_dernekleri_ile_veri_paylasimi_opsiyonu_aktif_mi": true # Kullanıcı onayı ile
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Surungen_TUR_MORPH_YAS_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_surungen:
+          "surungen_turu_ve_morph_tanimlama_model_destegi_icin_yapilandirma": "YAPILANDIRILMIS_TUR_VE_MORPH_LISTELERI_FOTOGRAF_OZELLIK_ESLESTIRME_DESTEGI_SAGLANIR_SURUNGEN" # species_identification_model_active
+          "CITES_belge_gecerlilik_kontrolu_icin_dis_servis_entegrasyon_hazirligi_surungen": "BELGE_GORSELI_VE_METADATALARININ_OLASI_RESMI_KONTROL_NOKTALARINA_YONLENDIRILEBILIR_YAPIDA_SUNULMASI_PLANLANIR_SURUNGEN" # CITES_document_verification_support
+          "yasam_alani_uygunluk_kontrolu_icin_veri_yapilandirma_surungen": "TERARYUM_KURULUM_BILGILERI_VE_TUR_IHTIYACLARININ_YAPILANDIRILMIS_VERI_OLARAK_SUNULMASI_DESTEKLENIR_SURUNGEN" # habitat_suitability_checker
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_surungen:
+        "CITES_belge_beyan_durumu_meta_surungen": "petplatform:reptile_cites_document_status_declared"
+        "bakim_bilgisi_detay_seviyesi_meta_surungen": "petplatform:reptile_care_info_detail_level"
+        "deneyimli_sahip_sarti_meta_surungen": "petplatform:reptile_experience_required_hint"
+    istatistikler_surungen:
+      beklenen_performans_metrikleri_surungen:
+        - "Ortalama ilan görüntülenme: Düşük"
+        - "Sahiplenme oranı hedefi: %30 (bilinçli sahiplendirme önemli)"
+        - "Ortalama sahiplenme süresi: 45+ gün"
+        - "Niş bir kitleye hitap eder, ancak sadık bir topluluğu vardır."
+        - "Yasal ve sorumlu sahiplendirme başarı oranı (CITES'li türler için): %95 (hedeflenen)"
+  egzotik: # Bu kategori zaten detaylıydı, kopek şablonuna göre sub-key'ler kontrol edildi.
+    id: "animal_tur_egzotik"
+    temel_kimlik:
+      ad: "Egzotik ve Özel Bakım Gerektiren Canlılar"
+      slug: "egzotik-ozel-bakim"
+      aciklama: "Standart evcil hayvan kategorilerine girmeyen; sürüngenler, amfibiler, bazı özel memeliler ve omurgasızlar gibi özel bilgi, deneyim, yasal düzenlemelere ve çok hassas yaşam koşullarına tabi olabilen benzersiz canlılardır. Sahiplenmeden önce kapsamlı araştırma ve sorumluluk bilinci şarttır."
+      gorsel_kimlik: { renk_kodu: "#dc2626", ikon_adi: "fas fa-atom", emoji: "⚛️" }
+    arama_sistemi:
+      alternatif_kelimeler: ["şeker planör", "kirpi", "gelincik", "akrep", "örümcek", "kurbağa", "semender", "aksolotl", "böcek", "yengeç", "salyangoz", "mini domuz", "farklı hayvan", "sıradışı pet", "özel bakım hayvanı", "koleksiyon hayvanı", "amfibi", "reptil", "omurgasız", "terra-fauna", "vivarium canlısı", "egzotik memeli", "bukalemun", "iguana", "yılan türleri"]
+      ai_intent_keywords: ["egzotik hayvan al", "şeker planör sahiplen", "tarantula türleri", "özel pet ara", "yasal egzotik hayvan", "CITES belgeli egzotik"]
+      semantic_tags: ["exotic_pet", "unusual_pet", "special_care_animal", "reptile", "amphibian", "invertebrate", "miniature_pig", "sugar_glider", "hedgehog", "ferret", "cites_species"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "tur_ana_grup_egzotik", label: "Ana Grup", tip: "select", secenekler: ["Memeli (Özel)", "Sürüngen (Reptil)", "Amfibi", "Omurgasız (Eklembacaklı, Yumuşakça vb.)", "Diğer Özel Türler"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "tur_detay_bilimsel_ad_egzotik", label: "Tür Detayı (Latince Adıyla Birlikte)", tip: "text_suggestion_api", kaynak_model_tahmini: "EgzotikTurVeritabaniAPI", aciklama: "Örn: Şeker Planör (Petaurus breviceps), Afrika Cüce Kirpisi (Atelerix albiventris), Kırmızı Dizli Tarantula (Brachypelma smithi), Leopar Geko (Eublepharis macularius). Bilimsel adını belirtmek önemlidir.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "bakim_zorlugu_deneyim_seviyesi_egzotik", label: "Bakım Zorluğu ve Gerekli Deneyim Seviyesi", tip: "select", secenekler: ["Orta (Detaylı araştırma ve özel ekipman gerektirir)", "Zor (İleri düzey bilgi, deneyim ve hassas bakım şart)", "Çok Zor (Sadece profesyoneller veya uzun yıllar deneyimli uzmanlar için)"], ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "CITES_belgesi_durumu_egzotik", label: "CITES Belgesi Durumu", tip: "select_aciklamali", secenekler_map: {"Gerekmiyor (Tür CITES kapsamında değil veya üretici belgesi yeterli)":false, "Var (Belge No ve Detay Eklenebilir)":true, "Başvurusu Yapıldı/Beklemede":true, "Yasal Menşei Kanıtı Var (Fatura, Üretici Belgesi vb.)":true, "Bilgim Yok/Araştırılmalı":false}, aciklama_label: "Belge No/Detay/Açıklama", aciklama: "Birçok egzotik tür CITES kapsamındadır. Belge yoksa sahiplendirme yasa dışı olabilir.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "ilk_sahip_uygunlugu_egzotik", label: "İlk Kez Egzotik Hayvan Sahiplenecekler İçin Uygunluk", tip: "select", secenekler: ["Kesinlikle Uygun Değil (Çok özel bilgi ve deneyim gerektirir)", "Sadece Belirli Koşullar ve Kapsamlı Hazırlıkla Düşünülebilir (Uzman danışmanlığı önerilir)"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "yasam_alani_kurulumu_egzotik", label: "Yaşam Alanı (Terraryum/Vivaryum/Akvaryum) Kurulumu ve Özellikleri", tip: "textarea_rich", aciklama: "Boyutlar, malzeme, ısıtma, aydınlatma (UVB vb.), nemlendirme, havalandırma, taban malzemesi, dekorasyon (saklanma alanları, tırmanma dalları vb.) hakkında detaylı bilgi.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "sicaklik_nem_gereksinimi_egzotik", label: "Sıcaklık ve Nem Gereksinimleri", tip: "text", aciklama: "Gündüz/gece ideal sıcaklık aralıkları (°C), nem oranı (%), ölçüm ve kontrol yöntemleri.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "beslenme_diyet_tipi_egzotik", label: "Beslenme Tipi ve Özel Diyet Gereksinimleri", tip: "textarea_rich", aciklama: "Etçil, otçul, böcekçil? Canlı yem mi, dondurulmuş mu, özel formül mama mı? Beslenme sıklığı, porsiyon miktarları, vitamin/mineral takviyeleri.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "ortalama_omur_ve_yetiskin_boyut_egzotik", label: "Ortalama Ömür ve Yetişkin Boyutu", tip: "text", aciklama: "Bu türün ortalama yaşam süresi ve ulaşacağı maksimum yetişkin boyutu hakkında bilgi.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "elde_tutma_etkilesim_seviyesi_egzotik", label: "Elle Tutma ve İnsanla Etkileşim Seviyesi/Tavsiyesi", tip: "select", secenekler: ["Elle Tutulmaya Uygun Değil/Stres Olur", "Sınırlı ve Dikkatli Elle Tutulabilir", "Düzenli ve Nazik Etkileşime Alışkın/İhtiyaç Duyar"], ai_importance: 0.75 }
+        - { alan_adi: "zehirlilik_saldirganlik_potansiyeli_egzotik", label: "Zehirlilik/Saldırganlık Potansiyeli ve Güvenlik Önlemleri", tip: "textarea", aciklama: "Eğer tür zehirli ise zehir seviyesi, ısırık/sokma riski ve alınması gereken güvenlik önlemleri. Saldırganlık potansiyeli ve nasıl yönetileceği.", ai_importance: 0.9, zorunlu: false }
+        - { alan_adi: "kaynak_menşei_bilgisi_egzotik", label: "Hayvanın Kaynağı/Menşei (Doğal Ortamdan mı, Üretim mi?)", tip: "select_text_area", secenekler: ["Yasal Yollarla Üretim (Captive Bred - CB)", "Yasal Yollarla İthal Edilmiş", "Doğadan Toplanmış (Yasal İzinli - WC - Nadiren ve Çok Özel Koşullarda)", "Bilgim Yok/Belirsiz"], aciklama_text: "Eğer üretimse, üretici bilgileri. Eğer ithalse, ithalat belgeleri. Doğadan toplanmışsa yasal izin belgeleri.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "mikrocip_durumu_egzotik", label: "Mikroçip Durumu", tip: "boolean_unknown", ai_importance: 0.65 } # Eklendi
+    platform_ayarlari_egzotik:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_UZUN_DETAYLI_KONTROL"
+        varsayilan_aktif_kalma_suresi_gun: 90
+        yenileme_bildirimi_gun_oncesi: 15
+        maksimum_yenileme_sayisi: 1
+        ilan_guncelligi_ve_hayvan_durumu_teyit_periyodu_gun: 30
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 0.7
+        gorunurluk_politikasi: "KISITLI_BILGILENDIRILMIS_KULLANICI_GRUBUNA_ONCELIKLI"
+        egitim_ve_bilgilendirme_materyalleri_entegrasyonu_aktif_mi: true
+      moderasyon_ayarlari:
+        seviye: "COK_YUKSEK_UZMAN_DEGERLENDIRMESI_YASAL_UYUM_VE_REFAH_KRITIK"
+        yeni_ilan_varsayilan_durum: "BEKLEMEDE_UZMAN_MODERATOR_ONAYI_VE_BELGE_KONTROLU_ZORUNLU"
+        yasakli_turler_ve_yasa_disi_ticaret_tolerans_politikasi: "SIFIR_TOLERANS_DERHAL_KALDIRMA_VE_YETKILI_MAKAMLARA_BILDIRIM"
+        CITES_ve_yerel_mevzuat_kontrol_protokolu:
+          - "İlanda belirtilen türün Türkiye'deki güncel yasal statüsünü (Tarım ve Orman Bakanlığı, Doğa Koruma ve Milli Parklar Gn. Md. listeleri) ve uluslararası CITES listelerindeki (Appendiks I, II, III) yerini kontrol et."
+          - "Eğer CITES kapsamında ise veya yerel yasalarla özel izne tabi ise, sunulan tüm belgelerin (CITES sertifikaları, menşe belgeleri, faturalar, sağlık sertifikaları, belediye/bakanlık izinleri) eksiksiz, güncel ve orijinal/onaylı kopya olduğunu doğrula."
+          - "Belgelerdeki bilgilerle (tür, birey sayısı, mikroçip/bilezik no, ithalatçı/ihracatçı, alıcı/satıcı) ilandaki bilgilerin ve hayvanın fotoğraflarının tutarlılığını karşılaştır."
+          - "Şüphe durumunda, ek kanıt (detaylı video, uzman veteriner raporu) talep et veya ilanı reddet."
+          - "Yasa dışı yollarla elde edildiği veya ticaretinin yapıldığına dair en ufak bir şüphede ilanı derhal kaldır, kullanıcı hesabını askıya al/kapat ve durumu ilgili resmi kurumlara (DKMP, Emniyet, Gümrük Muhafaza) bildir."
+        hayvan_refahi_ve_uygun_bakim_kosullari_degerlendirmesi: "İlan sahibi tarafından sunulan yaşam alanı (terrarium, vivarium vb.) fotoğrafları/videoları, beslenme düzeni ve bakım pratikleri, türün bilinen asgari refah standartlarına uygun mu? Uzman moderatör veya danışman veteriner hekim görüşü alınabilir."
+      dogrulama_ve_guvenlik_protokolleri_egzotik:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Egzotik ve özel bakım gerektiren canlıların sahiplendirilmesi, büyük sorumluluk ve bilgi birikimi gerektirir. Platformumuz, bu canlıların refahını korumak, yasa dışı ticareti önlemek ve potansiyel sahipleri doğru bilgilendirmek amacıyla, ilan verenlerden türün yasallığı, CITES belgesi (gerekliyse), hayvanın menşei, sağlık durumu, özel bakım ihtiyaçları ve kendi deneyimleri hakkında detaylı ve kanıtlanabilir bilgiler sunmalarını beklemektedir. Bu süreç, hem hayvanın hem de yeni sahibinin güvenliği için kritik öneme sahiptir."
+        uygulanabilecek_dogrulama_senaryolari: # zorunlu_dogrulama_adimlari_listesi yerine kopek şablonuna uyum
+          - senaryo_kodu: "SAHIP_DENEYIMI_VE_BILGI_SEVIYESI_BEYANI_EGZOTIK"
+            senaryo_aciklamasi_kullanici: "Bu türle veya benzer türlerle ne kadar süredir deneyiminiz var? Türün özel bakım ihtiyaçları (sıcaklık, nem, beslenme, yaşam alanı) hakkında bilgi düzeyiniz nedir? Olası sağlık sorunları ve acil durum müdahaleleri hakkında bilginiz var mı? Daha önce sahiplendiğiniz/baktığınız egzotik hayvanlar ve referanslar (varsa)."
+            onemi: "KRITIK_DEGERLENDIRME_GEREKLI"
+            moderator_kontrol_rehberi: "Kullanıcının beyanlarının tutarlılığı ve gerçekçiliği değerlendirilir. Özellikle zor ve tehlikeli türler için bu adım kritik. Yetersiz deneyim durumunda ilan kısıtlanabilir veya reddedilebilir."
+          - senaryo_kodu: "YASAM_ALANI_FOTOGRAF_VIDEO_KANITI_EGZOTIK"
+            senaryo_aciklamasi_kullanici: "Hayvanın şu anda yaşadığı veya yeni sahibi için hazırlanmış olan yaşam alanının (terrarium, vivarium, akvaryum vb.) detaylı, güncel fotoğrafları ve videoları. Isıtma, aydınlatma, nemlendirme, havalandırma sistemleri, taban malzemesi, saklanma ve tırmanma alanları net bir şekilde görülmeli."
+            onemi: "ZORUNLU_HAYVAN_REFAHI_ICIN"
+            moderator_kontrol_rehberi: "Sunulan yaşam alanının, ilandaki türün bilinen asgari refah standartlarına ve özel ihtiyaçlarına uygun olup olmadığı uzman gözüyle değerlendirilir. Yetersiz veya uygunsuz koşullar varsa ilan onaylanmaz."
+          - senaryo_kodu: "CITES_VE_YASAL_BELGE_KONTROLU_EGZOTIK" # CITES moderasyon protokolünde var, burada bir kez daha vurgu.
+            senaryo_aciklamasi_kullanici: "CITES sözleşmesi kapsamında veya yerel yasalarla özel izne tabi olan türler için ilgili tüm yasal belgelerin (CITES sertifikaları, menşe belgeleri, bakanlık izinleri vb.) sunulması ve doğrulanması zorunludur."
+            onemi: "ZORUNLU_YASAL_UYUM_VE_HAYVAN_KORUMA"
+            moderator_kontrol_rehberi: "CITES ve yerel mevzuat kontrol protokolündeki adımlar titizlikle uygulanır. Eksik veya şüpheli belgelerle ilan yayınlanamaz."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_egzotik:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_egzotik", oneri_basligi_kullanici: "Türün Tam Adını ve 'Özel Bakım' Vurgusunu Başlıkta Kullanın", oneri_detayi_kullanici: "Başlıkta hayvanın tam tür adını (mümkünse bilimsel adıyla), yaşını ve 'Özel Bakım Gerektirir', 'Deneyimli Sahip Aranıyor', 'CITES Belgeli' gibi önemli uyarıları ekleyin.", neden_onemli_aciklamasi_kullanici: "Bu, sadece gerçekten ilgili ve bilgili kişilerin dikkatini çeker, yanlış beklentileri ve zaman kaybını önler.", iyi_ornek_metni_kullanici: "Örn: 'Yetişkin Erkek Jako Papağanı (Psittacus erithacus) - CITES Belgeli, Deneyimli Sahip Şart!'", ipucu_tipi: "KRITIK_UYARI_VE_BILGILENDIRME" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_egzotik", oneri_basligi_kullanici: "Tüm Bakım Detaylarını, Riskleri ve Yasal Bilgileri Eksiksiz Paylaşın", oneri_detayi_kullanici: "Hayvanın menşei, yasal durumu, CITES belge bilgileri, tüm bakım ihtiyaçları (beslenme, sıcaklık, nem, yaşam alanı), karakteri, potansiyel riskleri (zehirlilik, saldırganlık), ortalama ömrü, yetişkin boyutu ve sahiplendirme koşullarınızı (ücret, sözleşme, deneyim şartı) son derece detaylı ve dürüst bir şekilde yazın. Yanlış veya eksik bilgi yasal sorumluluk doğurabilir.", neden_onemli_aciklamasi_kullanici: "Egzotik hayvan sahiplenmek ciddi bir karardır. Şeffaflık, hem hayvanın refahı hem de yasal uyum için hayati önemdedir.", ipucu_tipi: "YASAL_VE_ETIK_SORUMLULUK_VURGUSU" }
+        semantik_zenginlik_onemi_katsayisi: 0.95
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.egzotik_tur_detay_baslik" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.egzotik_aciklama_detayli_ozet" }
+              - { schema_alani: "category", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_ana_grup_egzotik_schema_uyumlu" }
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_tur_detay_bilimsel_ad_egzotik_url_wikidata" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_egzotik_fotograf_url" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_ve_kosul_schema_egzotik", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.egzotik_bakim_yasal_schema_properties" }
+              - { schema_alani: "warning", platform_alani_kaynagi: "ilan.egzotik_ozel_uyari_metinleri_schema" }
+        ozel_meta_etiketler_egzotik:
+          - { etiket_adi: "petplatform:exotic_species_scientific_name", icerik_kaynagi: "ilan.akilli_filtre_degeri_tur_detay_bilimsel_ad_egzotik" }
+          - { etiket_adi: "petplatform:exotic_care_difficulty", icerik_kaynagi: "ilan.akilli_filtre_degeri_bakim_zorlugu_egzotik" }
+          - { etiket_adi: "petplatform:exotic_legal_status_TR", icerik_kaynagi: "ilan.akilli_filtre_degeri_yasal_durum_turkiye_egzotik_ozet" }
+          - { etiket_adi: "petplatform:exotic_CITES_appendix", icerik_kaynagi: "ilan.CITES_ek_bilgisi_egzotik" }
+          - { etiket_adi: "petplatform:exotic_owner_experience_required", icerik_kaynagi: "ilan.akilli_filtre_degeri_ilk_sahip_uygunlugu_egzotik_kod" }
+      harici_platform_ve_api_entegrasyon_hazirligi_egzotik:
+        resmi_kurumlar_ve_uzman_dernekler_ile_bilgi_paylasimi_protokolu_aktif_mi: true
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "Egzotik_TUR_YASAL_DURUM_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_egzotik:
+          yasal_uygunluk_ve_CITES_kontrolu_icin_dis_veri_kaynaklari_ile_eslestirme_altyapisi: "YAPILANDIRILMIS_TUR_VE_BELGE_BILGILERININ_RESMI_VERITABANLARI_ILE_KARSILASTIRILABILIR_FORMATTA_SUNULMASI_HEDEFLENIR"
+          risk_degerlendirme_icin_dis_uzman_sistemlere_veri_aktarimi_protokolu: "SAHIP_DENEYIMI_BEYANLARI_HAYVAN_BAKIM_IHTIYACLARI_VE_YASAM_ALANI_BILGILERININ_ANONIMLESTIRILEREK_VEYA_KULLANICI_IZNIYLE_UZMAN_DEGERLENDIRME_ARACLARINA_UYGUN_FORMATTA_SUNULMASI_PLANLANABILIR"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_egzotik:
+        yasal_belge_durumu_beyani_meta_egzotik: "petplatform:exotic_legal_docs_status"
+        bakim_bilgisi_kaynagi_meta_egzotik: "petplatform:exotic_care_info_source"
+        sahiplendirme_kosulu_deneyim_sarti_meta_egzotik: "petplatform:exotic_experience_level_required_for_adoption"
+    istatistikler_egzotik:
+      beklenen_performans_metrikleri_egzotik:
+        - "Ortalama ilan görüntülenme: Çok Düşük (çok niş ve özel ilgi alanı)"
+        - "Sahiplenme oranı hedefi: %10-20 (çok bilinçli, uzun araştırmalar sonucu ve özel şartlarla gerçekleşen sahiplendirmeler)"
+        - "Ortalama sahiplendirme süresi: 60+ gün, hatta aylar sürebilir"
+        - "Platformun itibarını, yasal sorumluluğunu ve etik duruşunu en çok etkileyebilecek, en yüksek dikkat ve uzmanlık gerektiren kategori."
+        - "Başarılı ve sorumlu sahiplendirme başına platforma itibar katkısı: Çok Yüksek."
+        - "Yasa dışı ticaret veya hayvan refahı ihlali riskini önleme başarısı: %100 (hedeflenen, sıfır tolerans)."
+  diger:
+    id: "animal_tur_diger"
+    temel_kimlik:
+      ad: "Diğer (Çiftlik Hayvanları, Özel Durumlar)"
+      slug: "diger"
+      aciklama: "Yukarıdaki kategorilere girmeyen, genellikle çiftlik hayvanı statüsünde olan veya çok özel durumlarda sahiplendirilmesi gereken hayvanlardır."
+      gorsel_kimlik: { renk_kodu: "#6b7280", ikon_adi: "fas fa-tractor", emoji: "❓" } # İkon fas fa-paw yerine daha uygun bir şey, örn: fas fa-tractor veya fas fa-barn
+    arama_sistemi:
+      alternatif_kelimeler: ["çiftlik hayvanı", "at", "eşek", "keçi", "koyun", "tavuk", "ördek", "kaz", "hindi", "lama", "alpaka", "arı", "kurtarılmış hayvan", "özel ihtiyaçlı hayvan", "yardım bekleyen", "geçici yuva arayan (çok özel)", "sıradışı dost", "köy hayvanı", "bahçe hayvanı"]
+      ai_intent_keywords: ["çiftlik hayvanı sahiplen", "satılık at", "köy tavuğu al", "özel durum hayvan"]
+      semantic_tags: ["farm_animal", "livestock", "horse", "poultry", "special_needs_animal", "rescued_farm_animal", "equine", "bovine", "ovine", "caprine"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "hayvan_tur_diger", label: "Hayvan Türü (Detay)", tip: "text", aciklama: "Lütfen hayvanın türünü net bir şekilde belirtin. Örn: At (Haflinger), Keçi (Saanen), Tavuk (Brahma), Alpaka, Arı Kolonisi, Kurtarılmış Endüstriyel Tavuk vb.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "amac_diger", label: "Sahiplendirme/Satış Amacı", tip: "select", secenekler: ["Evcil Hayvan Olarak (Pet)", "Hobi Amaçlı Çiftlik Hayvanı", "Üretim Dışı (Emekli/Yaşlı)", "Terapi/Destek Hayvanı", "Çalışma Hayvanı (Eğitimli)", "Sadece Kurtarma/Geçici Yuva", "Diğer (Açıklama Gerekli)"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "yas_grubu_diger", label: "Yaş Grubu/Doğum Yılı", tip: "select_text", secenekler: ["Yavru/Civciv/Kuzu vb.", "Genç/Danak/Tay vb.", "Yetişkin", "Yaşlı/Emekli"], aciklama_text: "Hayvanın yaklaşık yaş grubunu seçin veya biliniyorsa doğum yılını/ayını belirtin.", ai_importance: 0.7 }
+        - { alan_adi: "cinsiyet_diger", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Kısırlaştırılmış Erkek", "Kısırlaştırılmış Dişi", "Bilinmiyor", "Sürü/Grup (Karışık Cinsiyet)"], ai_importance: 0.65 }
+        - { alan_adi: "adet_diger", label: "Adet/Sürü Büyüklüğü", tip: "number_integer_text", aciklama: "Eğer birden fazla hayvan sahiplendiriliyorsa (örn: tavuk sürüsü, arı kolonisi), adet veya grup bilgisini girin.", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "renk_belirgin_ozellikler_diger", label: "Renk ve Belirgin Fiziksel Özellikler", tip: "tags_dynamic", secenekler_onerilen: ["Beyaz", "Siyah", "Kahverengi", "Alaca", "Benekli", "Çizgili", "Boynuzlu", "Boynuzsuz", "Sakallı", "Uzun Tüylü", "Kısa Tüylü", "İri Yapılı", "Küçük Yapılı", "Yara İzi", "Özel İşaret"], aciklama: "Hayvanın rengini, desenlerini ve diğer ayırt edici fiziksel özelliklerini etiket olarak ekleyin. Örn: 'Beyaz Keçi', 'Alaca At', 'Siyah Benekli Tavuk'.", ai_importance: 0.7 }
+        - { alan_adi: "karakter_mizac_diger", label: "Karakter ve Mizaç Özellikleri", tip: "multiselect", secenekler: ["Uysal", "İnsan Dostu", "Çocuklarla Uyumlu", "Diğer Hayvanlarla Uyumlu", "Sakin", "Hareketli", "Meraklı", "Lider", "Çekingen", "Koruyucu", "Eğitilebilir", "Bağımsız"], aciklama: "Hayvanın genel karakter ve mizaç özelliklerini seçin. Özellikle evcil hayvan veya terapi hayvanı olarak düşünülüyorsa önemlidir.", ai_importance: 0.75 }
+        - { alan_adi: "saglik_durumu_genel_diger", label: "Genel Sağlık Durumu ve Aşı Bilgileri", tip: "select_aciklamali_textarea", secenekler_map: {"Sağlıklı (Bilinen sorunu yok)": false, "Aşıları Tam/Güncel": false, "Aşıları Eksik/Takip Gerekli": true, "Kronik Rahatsızlığı Var (Açıklama Gerekli)": true, "Özel Bakım/Diyet Gerektiriyor": true, "Kurtarılmış/Tedavi Sürecinde": true}, aciklama_label: "Sağlık Detayları, Aşılar ve Notlar", aciklama: "Hayvanın bilinen sağlık sorunları, düzenli kullandığı ilaçlar, özel diyet ihtiyaçları ve aşı durumu hakkında detaylı bilgi verin.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "bakim_deneyimi_sart_diger", label: "Bakım Deneyimi Şart Mı?", tip: "boolean_strict_unknown", secenekler: ["Evet, kesinlikle deneyim gerektirir", "Hayır, deneyimsiz kişiler de bakabilir (iyi araştırma ile)", "Belirtilmedi/Duruma Göre Değişir"], ai_importance: 0.8 }
+        - { alan_adi: "barinma_ihtiyaci_diger", label: "Barınma ve Yaşam Alanı İhtiyaçları", tip: "textarea_rich", aciklama: "Gerekli barınak tipi (ahır, kümes, ağıl, kovan vb.), kapalı/açık alan ihtiyacı, minimum alan büyüklüğü, zemin özellikleri, çit/güvenlik gereksinimleri gibi detayları belirtin.", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "beslenme_diyet_diger", label: "Beslenme ve Diyet Bilgileri", tip: "textarea", aciklama: "Temel yem türü (kuru ot, karma yem, taze sebze/meyve vb.), günlük yem miktarı, ek besin ihtiyaçları, su ihtiyacı gibi bilgileri girin.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "yasal_izin_belge_gerekliligi_diger", label: "Yasal İzin ve Belge Durumu", tip: "textarea_rich", aciklama: "Bu hayvanın sahiplenilmesi/satışı için Tarım İl Müdürlüğü kaydı, belediye izni, sağlık sertifikası, menşe belgesi, CITES (eğer egzotikse) gibi yasal gereklilikler var mı? Mevcut belgeler nelerdir?", ai_importance: 0.75, zorunlu: false }
+        - { alan_adi: "nakliye_tasima_durumu_diger", label: "Nakliye ve Taşıma Bilgileri", tip: "select_text_area", secenekler: ["Alıcı Tarafından Sağlanmalı", "Satıcı Tarafından Belirli Bir Ücret Karşılığı Sağlanabilir", "Yakın Çevreye Teslim Edilebilir", "Nakliye Konusunda Destek Olunur"], aciklama_text: "Hayvanın yeni yerine nakliyesi nasıl organize edilecek? Bu konudaki şartlar ve olanaklar.", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "sahiplendirme_satış_fiyati_kosullari_diger", label: "Sahiplendirme/Satış Fiyatı ve Koşulları", tip: "text_price_custom_textarea", aciklama: "Talep edilen ücret (eğer varsa), ödeme koşulları ve sahiplendirme/satış için özel şartlarınızı (sözleşme, takip vb.) belirtin.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "ek_bilgiler_hikaye_diger", label: "Ek Bilgiler ve Hayvanın Hikayesi", tip: "textarea_rich", aciklama: "Hayvanla ilgili paylaşmak istediğiniz diğer önemli bilgiler, özel alışkanlıkları, geçmişi veya sahiplendirme nedeniniz hakkında detaylar.", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "mikrocip_kula_kupe_numarasi_diger", label: "Mikroçip / Kulağı Küpe Numarası (Varsa)", tip: "text", ai_importance: 0.7 } # Eklendi
+    platform_ayarlari_diger:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_YENILEME_GEREKLI_UZUN_TUR_BAZLI"
+        varsayilan_aktif_kalma_suresi_gun: 100 # Orjinal: 100 gün
+        yenileme_bildirimi_gun_oncesi: 15
+        maksimum_yenileme_sayisi: 2
+        ilan_guncelligi_kontrol_mekanizmasi_aktif_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 0.5 # Orjinal: 0.5
+        "kurtarilmis_ciftlik_hayvanlari_icin_ozel_gorunurluk_aktif_mi": true # Eklendi
+      moderasyon_ayarlari:
+        seviye: "YUKSEK_YASAL_UYUM_VE_REFAH_KONTROLLU" # Orjinal: Yüksek
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_DIGER_HAYVAN_DETAY_ONAYI_BEKLIYOR"
+        "tarim_ve_hayvancilik_mevzuati_kontrol_protokolu_aktif_mi": true # Eklendi
+        "hayvan_refahi_standartlari_ciftlik_hayvanlari_kontrolu_aktif_mi": true # Eklendi
+      dogrulama_ve_guvenlik_protokolleri_diger:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Çiftlik hayvanları ve özel durumdaki diğer hayvanların sahiplendirilmesinde, hayvan refahını, yasalara uygunluğu ve sorumlu sahiplendirmeyi sağlamak amacıyla platformumuz ek bilgi, belge (Tarım İl Müdürlüğü kaydı, sağlık sertifikası vb.) ve bakım koşulları hakkında teyit talep edebilir."
+        uygulanabilecek_dogrulama_senaryolari:
+          - senaryo_kodu: "CIFTLIK_HAYVANI_YASAL_KAYIT_VE_SAGLIK_BELGESI_KONTROLU_DIGER"
+            senaryo_aciklamasi_kullanici: "Büyükbaş, küçükbaş hayvanlar veya at gibi türler için ilgili Tarım ve Orman Bakanlığı kayıtları (küpe numarası, işletme numarası), sağlık sertifikaları ve aşı karnelerinin sunulması zorunlu olabilir. Bu, hayvanların yasal takibini ve sağlık durumunu güvence altına alır."
+            onemi: "ZORUNLU_YASAL_UYUM_VE_HAYVAN_SAGLIGI_ICIN"
+            moderator_kontrol_rehberi: "Sunulan belgelerin güncelliğini, resmi geçerliliğini ve ilandaki hayvanla eşleştiğini (küpe no, mikroçip vb.) kontrol edin. Eksik veya şüpheli durumda ilanı yayınlamayın veya ek bilgi talep edin."
+          - senaryo_kodu: "BARINMA_VE_BAKIM_KOSULLARI_DEGERLENDIRMESI_DIGER"
+            senaryo_aciklamasi_kullanici: "Sahiplendirilecek hayvanın türüne uygun barınma (ahır, ağıl, kümes vb.) ve bakım koşullarının (yeterli alan, yem, su, veteriner hizmetlerine erişim) sağlandığına dair bilgi ve mümkünse görsel kanıt (fotoğraf, video) sunmanız beklenir."
+            onemi: "ONERILIR_HAYVAN_REFAHI_ICIN"
+            moderator_kontrol_rehberi: "İlan sahibi tarafından beyan edilen ve/veya gösterilen barınma ve bakım koşullarının, hayvanın türüne ve ihtiyaçlarına uygun olup olmadığını değerlendirin. Yetersiz koşullar varsa ilanı onaylamayın veya kullanıcıdan iyileştirme talep edin."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_diger:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ilan_basligi_diger", oneri_basligi_kullanici: "Hayvanın Türünü, Amacını ve Konumunu Başlıkta Belirtin", oneri_detayi_kullanici: "Örn: 'Satılık Safkan Haflinger Atı (Hobi Amaçlı) - Ankara' veya 'Kurtarılmış Endüstriyel Tavuklar İçin Acil Yuva (Bursa)'.", neden_onemli_aciklamasi_kullanici: "Net ve bilgilendirici bir başlık, doğru kişilerin ilana ulaşmasını sağlar.", ipucu_tipi: "IYILESTIRME_ONERISI" }
+          - { hedef_form_alani_kodu: "ilan_aciklamasi_diger", oneri_basligi_kullanici: "Hayvanın Tüm Özelliklerini, Bakım İhtiyaçlarını ve Hikayesini Detaylı Anlatın", oneri_detayi_kullanici: "Hayvanın türü, yaşı, cinsiyeti, sağlık durumu, karakteri, barınma ve beslenme ihtiyaçları, yasal durumu (kayıt, belgeler) ve sahiplendirme/satış koşullarınızı eksiksiz ve dürüst bir şekilde açıklayın.", neden_onemli_aciklamasi_kullanici: "Kapsamlı bilgi, sorumlu ve bilinçli bir sahiplendirme süreci için gereklidir.", ipucu_tipi: "BILGILENDIRME_KAPSAMLI" }
+        semantik_zenginlik_onemi_katsayisi: 0.7 # Orjinal: 0.7
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product" # Veya "IndividualProduct" daha spesifik olabilir
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.hayvan_tur_amac_baslik_diger" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.hayvan_aciklama_detayli_ozet_diger" }
+              - { schema_alani: "category", sabit_deger: "Çiftlik Hayvanları ve Diğerleri" } # Daha genel bir kategori
+              - { schema_alani: "additionalType", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_hayvan_tur_diger" }
+              - { schema_alani: "color", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_renk_belirgin_ozellikler_diger" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_cinsiyet_diger_schema_uyumlu" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_hayvan_fotograf_url_diger" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_satis_fiyati_kosullari_diger_schema_offer", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.diger_hayvan_karakter_saglik_barinma_schema_properties" }
+              - { schema_alani: "identifier", platform_alani_kaynagi: "ilan.akilli_filtre_degeri_mikrocip_kula_kupe_numarasi_diger" } # Küpe/Mikroçip no
+        ozel_meta_etiketler_diger:
+          - { etiket_adi: "petplatform:other_animal_species_detail", icerik_kaynagi: "ilan.akilli_filtre_degeri_hayvan_tur_diger" }
+          - { etiket_adi: "petplatform:other_animal_purpose", icerik_kaynagi: "ilan.akilli_filtre_degeri_amac_diger" }
+          - { etiket_adi: "petplatform:other_animal_legal_status_note", icerik_kaynagi: "ilan.akilli_filtre_degeri_yasal_izin_belge_gerekliligi_diger_ozet" }
+          - { etiket_adi: "petplatform:other_animal_care_experience_needed", icerik_kaynagi: "ilan.akilli_filtre_degeri_bakim_deneyimi_sart_diger_metin" }
+      harici_platform_ve_api_entegrasyon_hazirligi_diger:
+        "ciftlik_hayvanlari_ve_ozel_tur_dernekleri_ile_isbirligi_opsiyonu_aktif_mi": false # Eklenebilir
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+          gorsel_alt_metin_stratejisi: "DigerHayvan_TUR_AMAC_SEHIR_PLATFORMADI"
+        dis_ai_modelleri_icin_veri_yapilandirma_notlari_diger:
+          "yasal_uyumluluk_ve_kayit_kontrolu_icin_veri_yapilandirma_diger": "TARIM_ORMAN_BAKANLIGI_KAYIT_SISTEMLERI_ILE_OLASI_KARSILASTIRMA_ICIN_KAYIT_NUMARALARI_VE_BILGILERININ_YAPILANDIRILMIS_SUNUMU_HEDEFLENIR_DIGER" # regulatory_compliance_checker_support
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_diger:
+        "yasal_kayit_ve_belge_beyan_durumu_meta_diger": "petplatform:other_animal_legal_docs_status_declared"
+        "hayvan_refahi_kosullari_beyan_seviyesi_meta_diger": "petplatform:other_animal_welfare_conditions_declared_level"
+    istatistikler_diger:
+      beklenen_performans_metrikleri_diger:
+        - "Ortalama ilan görüntülenme: Çok Düşük (çok özel kitle)"
+        - "Sahiplenme oranı hedefi: %5-15 (çok spesifik eşleşmeler)"
+        - "Ortalama sahiplenme süresi: 90+ gün"
+        - "Platformun sosyal sorumluluk ve çeşitlilik yönünü gösterir."
+        - "Yasalara uygun ve refahı gözetilmiş sahiplendirme başarı oranı: %90 (hedeflenen)"

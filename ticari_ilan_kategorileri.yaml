@@ -1,0 +1,602 @@
+ticari_ilan_kategorileri:
+  uretici:
+    id: "cat_ticari_uretici_yetistirici"
+    temel_kimlik:
+      ad: "Profesyonel Üreticiler ve Yetiştiriciler"
+      slug: "profesyonel-uretici-yetistirici"
+      aciklama: "Belirli standartlara, sağlık ve etik kurallara uygun olarak profesyonel hayvan yetiştiriciliği yapanlar ile evcil hayvan maması, ürünü veya aksesuarı üreten firmalar/markalar için ilan ve profil kategorisi."
+      gorsel_kimlik: { renk_kodu: "#1E3A8A", tema_notu: "Koyu Mavi (Güven, Kalite ve Profesyonellik)", ikon_adi: "fas fa-certificate", emoji: "🏅" }
+    kategori_tipi: "ticari_profesyonel_hizmet_urun"
+    arama_sistemi:
+      alternatif_kelimeler: ["yetiştirici", "breeder", "kennel", "cattery", "fabrika", "imalatçı", "profesyonel üretim", "safkan üretimi", "pet food üreticisi", "aksesuar imalatı", "kaliteli pet ürünleri", "sertifikalı hayvan yetiştiricisi"]
+      ai_intent_keywords: ["profesyonel yetiştirici bul", "kaliteli hayvan al", "sertifikalı üretici ara", "güvenilir pet ürünleri", "pet ürünleri fabrikası", "safkan kedi köpek al", "etik üretici"]
+      semantic_tags: ["professional_breeder_directory", "certified_pet_producer_listing", "pet_products_manufacturing_showcase", "quality_assurance_pets_marketplace", "commercial_pet_industry_network", "ethical_pet_breeding_standards", "premium_pet_food_manufacturers"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "uretici_ana_faaliyet_alani_uretici", label: "Ana Faaliyet Alanınız", tip: "select", secenekler: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)", "Evcil Hayvan Maması Üretimi", "Evcil Hayvan Aksesuarı/Ekipmanı Üretimi", "Evcil Hayvan Bakım Ürünü Üretimi", "Diğer (Belirtiniz)"], ai_importance: 0.9, zorunlu: true }
+
+        # Hayvan Yetiştiricisine Özel Alanlar
+        - { alan_adi: "yetistirilen_hayvan_turu_uretici", label: "Yetiştirilen Hayvan Türü", tip: "multiselect", secenekler: ["Köpek", "Kedi", "Kuş", "Egzotik Hayvan (Belgeli)", "Diğer (Belirtiniz)"], bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "yetistirilen_irklar_cinsler_uretici", label: "Uzmanlaşılan Irklar/Cinsler", tip: "multiselect_text_tags_suggestion_api", kaynak_model_tahmini: "IrkCinsVeritabaniAPI", aciklama: "Yetiştirdiğiniz tüm ırkları/cinsleri belirtin.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.8 }
+        - { alan_adi: "soy_kutugu_secere_kaydi_durumu_uretici", label: "Soy Kütüğü/Secere Kaydı Durumu", tip: "select_text_area", secenekler: ["Evet, tüm yavrular ulusal/uluslararası federasyonlara kayıtlıdır", "Evet, bazı yavrular/ebeveynler kayıtlıdır", "Hayır, kayıt yapılmamaktadır", "Bilgi Yok/İsteğe Bağlı"], bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], aciklama: "Kayıt yapılan kurumlar ve kayıt detayları.", ai_importance: 0.75 }
+        - { alan_adi: "saglik_tarama_ve_genetik_test_uygulamalari_uretici", label: "Sağlık Taramaları ve Genetik Test Uygulamaları", tip: "textarea_rich", aciklama: "Ebeveynlere ve/veya yavrulara yapılan sağlık taramaları (kalça displazisi, göz testleri vb.) ve ırka özgü genetik hastalık testleri hakkında detaylı bilgi.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.9 }
+        - { alan_adi: "yetistirme_kosullari_ve_felsefesi_uretici", label: "Yetiştirme Koşulları ve Felsefesi", tip: "textarea_rich", aciklama: "Hayvanların yaşadığı ortam (ev ortamı, özel tesis vb.), sosyalleşme programları, beslenme düzenleri ve genel yetiştirme felsefeniz.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.8 }
+        - { alan_adi: "yavru_teslim_sartlari_ve_destek_uretici", label: "Yavru Teslim Şartları ve Sonrası Destek", tip: "textarea_rich", aciklama: "Yavruların teslim yaşı, aşı ve parazit uygulamaları, mikroçip durumu, sahiplendirme sözleşmesi, yeni sahiplere sunulan destek ve eğitimler.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.85 }
+
+        # Ürün Üreticisine Özel Alanlar (Mama, Aksesuar, Bakım Ürünü vb.)
+        - { alan_adi: "urun_hedef_hayvan_turu_uretici", label: "Ürünlerin Hedeflediği Hayvan Türü/Türleri", tip: "multiselect", secenekler: ["Köpek", "Kedi", "Kuş", "Kemirgen/Küçük Evcil", "Balık", "Sürüngen", "Tüm Evcil Hayvanlar"], bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster_degil: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.8 }
+        - { alan_adi: "ana_urun_kategorileri_ve_cesitleri_uretici", label: "Ana Ürün Kategorileri ve Çeşitleri", tip: "textarea_tags", aciklama: "Ürettiğiniz ana ürün gruplarını ve çeşitlerini belirtin (örn: Kuru Mama, Yaş Mama, Ödül Maması, Tasma, Yatak, Oyuncak, Şampuan vb.).", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster_degil: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.75 }
+        - { alan_adi: "urun_icerik_malzeme_kalitesi_vurgulari_uretici", label: "Ürün İçerik/Malzeme Kalitesi ve Öne Çıkan Özellikler", tip: "textarea_rich", aciklama: "Mamalar için: Kullanılan ana protein kaynakları, tahıl durumu, katkı maddeleri, özel formüller. Aksesuarlar için: Kullanılan malzemeler, dayanıklılık, güvenlik, tasarım özellikleri.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster_degil: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.85 }
+        - { alan_adi: "uretim_standartlari_ve_teknolojileri_uretici", label: "Üretim Standartları ve Kullanılan Teknolojiler", tip: "textarea", aciklama: "Sahip olduğunuz üretim standartları (GMP, HACCP, ISO vb.), kalite kontrol süreçleri, kullanılan üretim teknolojileri.", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster_degil: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"], ai_importance: 0.7 }
+
+        # Ortak Alanlar
+        - { alan_adi: "marka_adi_resmi_uretici", label: "Marka Adınız / İşletme Adınız", tip: "text", aciklama: "Piyasada bilinen resmi marka veya işletme adınız.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "kurulus_yili_deneyim_suresi_uretici", label: "Kuruluş Yılı / Sektördeki Deneyim Süresi", tip: "number_year_text", aciklama: "İşletmenizin kuruluş yılı veya bu alandaki deneyim süreniz.", ai_importance: 0.6 }
+        - { alan_adi: "sertifikasyonlar_uyelikler_belgeler_uretici", label: "Sahip Olunan Sertifikasyonlar, Üyelikler ve Resmi Belgeler", tip: "multiselect_text_tags_file_upload_optional", secenekler_onerilen: ["ISO 9001", "GMP", "HACCP", "Organik Sertifikası", "Yerli Üretim Belgesi", "Ulusal/Uluslararası Irk Derneği Üyeliği", "Ticaret Odası Kaydı"], aciklama: "İlgili belgeleri yükleyebilirsiniz.", ai_importance: 0.8 }
+        - { alan_adi: "uretim_tesisi_veya_yetistirme_yeri_konumu_uretici", label: "Üretim Tesisi / Yetiştirme Yeri Konumu", tip: "location_text_city_district_country", aciklama: "Ana üretim tesisinizin veya yetiştirme yerinizin konumu.", ai_importance: 0.7, zorunlu: true }
+        - { alan_adi: "dagitim_kanallari_ve_satis_noktalari_uretici", label: "Dağıtım Kanalları ve Satış Noktaları", tip: "multiselect_text_tags", secenekler_onerilen: ["Türkiye Geneli Distribütör Ağı", "Online Satış (Kendi Web Sitesi)", "Pazaryerleri (Trendyol, Hepsiburada vb.)", "Petshop Zincirleri", "Veteriner Klinikleri", "Bölgesel Bayiler", "İhracat"], aciklama: "Ürünlerinizin/hayvanlarınızın nerelerde bulunabileceği.", ai_importance: 0.65 }
+        - { alan_adi: "b2b_b2c_satis_odagi_uretici", label: "Satış Odağı (B2B / B2C)", tip: "multiselect", secenekler: ["B2B (İşletmeden İşletmeye - Toptan Satış)", "B2C (İşletmeden Tüketiciye - Perakende Satış)"], ai_importance: 0.7 }
+        - { alan_adi: "minimum_siparis_kosullari_toptan_uretici", label: "Minimum Sipariş Koşulları (Toptan Satış/B2B İçin)", tip: "textarea", bagimli_alan_goster: "b2b_b2c_satis_odagi_uretici", bagimli_degerler_goster: ["B2B (İşletmeden İşletmeye - Toptan Satış)"], aciklama: "Toptan alımlar için minimum sipariş miktarı veya tutarı.", ai_importance: 0.5 }
+        - { alan_adi: "referanslar_ve_is_birlikleri_uretici", label: "Referanslar, İş Birlikleri ve Müşteri Yorumları", tip: "textarea_url_list", aciklama: "Varsa önemli referanslarınız, çalıştığınız büyük firmalar veya olumlu müşteri geri bildirimlerine linkler.", ai_importance: 0.7 }
+        - { alan_adi: "fiyat_araligi_ve_kalite_segmenti_uretici", label: "Ürün/Hizmet Fiyat Aralığı ve Kalite Segmenti", tip: "select_text", secenekler: ["Ekonomik Segment", "Orta Segment", "Orta-Üst Segment", "Premium Segment", "Lüks Segment"], aciklama: "Genel fiyatlandırma ve kalite konumlandırmanız.", ai_importance: 0.6 }
+        - { alan_adi: "etik_uretim_hayvan_refahi_politikasi_beyani_uretici", label: "Etik Üretim ve Hayvan Refahı Politikası Beyanı", tip: "textarea_rich_file_upload_optional", aciklama: "İşletmenizin etik üretim, sürdürülebilirlik ve hayvan refahı konularındaki yaklaşımını ve varsa ilgili politika belgelerinizi paylaşın.", ai_importance: 0.85 }
+        - { alan_adi: "iletisim_ve_destek_kanallari_uretici", label: "Müşteri İletişim ve Destek Kanalları", tip: "textarea_multivalue", aciklama: "Müşterilerinizin size ulaşabileceği telefon, e-posta, web sitesi, sosyal medya hesapları vb.", ai_importance: 0.7, zorunlu: true }
+    platform_ayarlari_uretici:
+      ilan_yasam_dongusu_ve_ucretlendirme:
+        ilan_tipi_modeli_uretici: "KREDI_BAZLI_YAYINLAMA_VE_ONE_CIKARMA_PAKET_UYELIK_DESTEKLI"
+        standart_ilan_kredi_maliyetleri:
+          yayinlama_kredisi_90gun: 10
+          yenileme_kredisi_90gun: 8
+        one_cikarma_secenekleri_ve_kredi_maliyetleri:
+          - { secenek_kodu: "ANA_SAYFA_VITRIN_URETICI_7GUN", gosterilecek_ad_kullanici: "Ana Sayfa Vitrin (7 Gün)", ek_kredi_maliyeti: 25, aciklama_kullanici: "Profilinizi/ilanınızı 7 gün boyunca ana sayfa vitrininde sergileyin." }
+          - { secenek_kodu: "KATEGORI_UST_SIRA_URETICI_30GUN", gosterilecek_ad_kullanici: "Kategori Listeleme Üst Sıra (30 Gün)", ek_kredi_maliyeti: 15, aciklama_kullanici: "Profilinizin/ilanınızın kendi kategorisinde 30 gün boyunca üst sıralarda yer almasını sağlayın." }
+          - { secenek_kodu: "SOSYAL_MEDYA_PAYLASIM_DESTEGI_URETICI_TEK_SEFER", gosterilecek_ad_kullanici: "Sosyal Medya Tanıtım Desteği", ek_kredi_maliyeti: 20, aciklama_kullanici: "Profilinizin/ilanınızın platformumuzun sosyal medya hesaplarında bir kez tanıtılmasını sağlayın." }
+        uyelik_paket_secenekleri_uretici:
+          - { paket_kodu: "BASLANGIC_URETICI", ad_kullanici: "Başlangıç Paketi", aylik_ucret_tl: 99, yillik_ucret_tl: 990, ozellikler: ["5 Adet Aktif İlan/Profil Hakkı", "Temel Profil Görünürlüğü", "Standart Destek"] }
+          - { paket_kodu: "PROFESYONEL_URETICI", ad_kullanici: "Profesyonel Paket", aylik_ucret_tl: 249, yillik_ucret_tl: 2490, ozellikler: ["20 Adet Aktif İlan/Profil Hakkı", "Gelişmiş Profil Görünürlüğü", "Aylık 1 Kategori Üst Sıra Öne Çıkarma", "Öncelikli Destek", "Temel İstatistikler"] }
+          - { paket_kodu: "ELIT_URETICI", ad_kullanici: "Elit Paket", aylik_ucret_tl: 499, yillik_ucret_tl: 4990, ozellikler: ["Sınırsız Aktif İlan/Profil Hakkı", "Maksimum Profil Görünürlüğü", "Aylık 1 Ana Sayfa Vitrin + 2 Kategori Üst Sıra Öne Çıkarma", "Sosyal Medya Tanıtım Desteği (Yılda 2 Kez)", "VIP Destek", "Detaylı İstatistik ve Raporlama"] }
+        ilan_performans_raporlamasi_ve_istatistik_arayuzu_sunulur_mu: true
+      operasyonel_onceliklendirme_ve_gorunurluk_uretici:
+        oncelik_katsayisi_platform_ici_dogrulanmis_ve_paket_sahibi_uretici: 1.6
+        dogrulanmis_uretici_ve_sertifikali_urun_rozetleri_ve_filtreleme_secenekleri_aktif_mi: true
+        etik_uretim_ve_hayvan_refahi_odakli_gibi_ozel_etiketlere_sahip_ureticileri_one_cikarma_mekanizmasi_aktif_mi: true
+      moderasyon_ayarlari_uretici:
+        seviye: "YUKSEK_DETAYLI_TICARI_UYGUNLUK_ETIK_STANDARTLAR_VE_YASAL_BELGE_KONTROLU"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_KAPSAMLI_TICARI_ONAY_VE_BELGE_KONTROLU_BEKLIYOR"
+        marka_sahteciligi_yaniltici_beyan_ve_hayvan_refahi_ihlalleri_tolerans_politikasi: "SIFIR_TOLERANS_DERHAL_KALDIRMA_HESAP_KAPATMA_VE_GEREKIRSE_YASAL_BILDIRIM"
+        yasakli_urun_hizmet_ve_etik_disi_yetistirme_pratikleri_listesi_kontrolu_aktif_mi: true
+        fiyatlandirma_stok_ve_teslimat_bilgilerinin_tutarliligi_ve_seffafligi_kontrol_edilir_mi: true
+        kullanici_sikayetleri_ve_olumsuz_yorumlar_icin_ozel_inceleme_ve_arabuluculuk_sureci_aktif_mi: true
+      dogrulama_ve_guvenlik_protokolleri_uretici:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Platformumuzda ticari faaliyet gösteren üreticilerimizin ve yetiştiricilerimizin güvenilirliğini, şeffaflığını ve yasalara uygunluğunu en üst düzeyde sağlamak amacıyla detaylı bir doğrulama süreci uygulanmaktadır."
+        zorunlu_dogrulama_adimlari_listesi_uretici:
+          - { adim_kodu: "ISLETME_YASAL_KIMLIK_DOGRULAMASI_URETICI", gosterilecek_ad_kullanici: "İşletme Yasal Kimlik Doğrulaması", talep_edilecek_bilgiler_kullanici_listesi: ["İşletme Resmi Ticari Unvanı", "Vergi Kimlik Numarası (VKN) / T.C. Kimlik Numarası (Şahıs Şirketleri için)", "Ticaret Sicil Gazetesi veya Esnaf Sicil Kaydı (Varsa)", "Yetkili Kişi Adı Soyadı ve İletişim Bilgileri"] }
+          - { adim_kodu: "FAALIYET_ALANI_VE_YETKINLIK_BELGELERI_URETICI", gosterilecek_ad_kullanici: "Faaliyet Alanı ve Yetkinlik Belgeleri", talep_edilecek_bilgiler_kullanici_listesi: ["Güncel Vergi Levhası", "Faaliyet Belgesi (Ticaret Odası/Esnaf Odası)", "Hayvan Yetiştiricileri için: Varsa Tarım Bakanlığı veya ilgili kurumlardan alınan izin/ruhsat belgeleri", "Ürün Üreticileri için: Varsa üretim izinleri, kalite sertifikaları (ISO, GMP vb.)"] }
+          - { adim_kodu: "MARKA_TESCIL_VE_SATIS_YETKI_BELGELERI_KONTROLU_URETICI", gosterilecek_ad_kullanici: "Marka Tescil / Satış Yetki Belgeleri (Gerekliyse)", talep_edilecek_bilgiler_kullanici_listesi: ["Eğer tescilli bir markanın ürünlerini satıyorsanız marka tescil belgesi", "Eğer bir markanın yetkili satıcısıysanız yetkili satıcılık belgesi veya distribütörlük anlaşması"] }
+          - { adim_kodu: "URETIM_YETISTIRME_ALANI_FIZIKI_KONTROLU_ONERISI_URETICI", gosterilecek_ad_kullanici: "Üretim/Yetiştirme Alanı Değerlendirmesi (Opsiyonel/Risk Bazlı)", talep_edilebilecek_bilgiler_kullanici_listesi: ["Yüksek riskli veya şikayet alan durumlarda, üretim/yetiştirme alanının fotoğrafları, videoları veya yerinde denetim (bağımsız kuruluşlarca) talep edilebilir."] }
+        dogrulama_basarili_uretici_rozetleri_listesi_detayli:
+          - { seviye_kodu: "ISLETME_DOGRULANDI_BRONZ", gosterilecek_ad_kullanici: "Kayıtlı İşletme", ikon: "fas fa-check-circle", renk: "#CD7F32", aciklama_kullanici: "Temel işletme ve yasal kimlik bilgileri platformumuz tarafından doğrulanmıştır." }
+          - { seviye_kodu: "ONAYLI_URETICI_GUMUS", gosterilecek_ad_kullanici: "Onaylı Üretici/Yetiştirici", ikon: "fas fa-shield-alt", renk: "#C0C0C0", aciklama_kullanici: "İşletme yasal kimliği ve faaliyet alanı yetkinlik belgeleri (ruhsat, izin vb.) platformumuzca incelenmiş ve onaylanmıştır." }
+          - { seviye_kodu: "SERTIFIKALI_KALITE_ALTIN", gosterilecek_ad_kullanici: "Sertifikalı ve Kaliteli Üretici/Yetiştirici", ikon: "fas fa-award", renk: "#FFD700", aciklama_kullanici: "Bu üretici/yetiştirici, ulusal/uluslararası kalite standartlarına (ISO, GMP vb.) veya ırk standartlarına uygunluğunu gösteren sertifikalara sahiptir ve bu belgeler platformumuzca doğrulanmıştır." }
+          - { seviye_kodu: "ETIK_VE_REFAH_ODAKLI_PLATIN", gosterilecek_ad_kullanici: "Etik ve Hayvan Refahı Odaklı (Platin Rozet)", ikon: "fas fa-leaf", renk: "#E5E4E2", aciklama_kullanici: "Bu üretici/yetiştirici, etik üretim ve hayvan refahı konusunda yüksek standartlara sahip olduğunu beyan etmiş, ilgili politikalarını paylaşmış ve bu konuda olumlu geri bildirimler almıştır." }
+        dogrulama_sureci_basarisizlik_ve_itiraz_mekanizmasi_uretici: "Eksik veya yanıltıcı bilgi durumunda ilan yayını durdurulur ve kullanıcıya eksikleri tamamlaması veya bilgileri düzeltmesi için bildirim yapılır. İtirazlar, destek ekibimiz tarafından incelenir."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_uretici:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "URUN_HIZMET_BASLIGI_ANAHTAR_KELIMELI_URETICI", oneri_basligi_kullanici: "Profesyonel, Açıklayıcı ve Anahtar Kelime Odaklı Bir Başlık Kullanın!", oneri_detayi_kullanici: "Başlıkta marka adınızı, ana ürün/hizmet türünü ve en önemli özelliği (örn: 'PetLife Pro Tahılsız Yavru Köpek Maması 12KG' veya 'KIF Kayıtlı British Shorthair Yavruları') belirtin." }
+          - { hedef_form_alani_kodu: "URUN_HIZMET_ACIKLAMASI_DETAYLI_IKNA_EDICI_URETICI", oneri_basligi_kullanici: "Ürün/Hizmet Detaylarını Eksiksiz, Şeffaf ve İkna Edici Bir Şekilde Sunun!", oneri_detayi_kullanici: "Ürün içeriği, faydaları, kullanım şekli, üretim standartları, hayvanlar için sağlık ve refah bilgileri, teslimat koşulları gibi tüm önemli detayları açıkça yazın. Müşteri yorumlarına veya referanslara yer verin." }
+        semantik_zenginlik_onemi_katsayisi: 0.85
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.urun_veya_hayvan_adi_marka_ile_uretici" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.urun_hizmet_aciklamasi_detay_kisa_ozet_uretici" }
+              - { schema_alani: "brand", platform_alani_kaynagi: "ilan.marka_adi_uretici_schema_brand_objesi", schema_alt_tip: "Brand" }
+              - { schema_alani: "manufacturer", platform_alani_kaynagi: "ilan.uretici_firma_schema_organization_objesi", schema_alt_tip: "Organization" }
+              - { schema_alani: "sku", platform_alani_kaynagi: "ilan.stok_kodu_veya_hayvan_kimlik_no_uretici" }
+              - { schema_alani: "gtin", platform_alani_kaynagi: "ilan.barkod_numarasi_ean_upc_uretici_opsiyonel" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.urun_veya_hayvan_gorselleri_url_listesi_uretici" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.fiyat_stok_ve_teklif_bilgileri_schema_offer_objesi_uretici", schema_alt_tip: "Offer" }
+              - { schema_alani: "aggregateRating", platform_alani_kaynagi: "ilan.ortalama_kullanici_puani_schema_aggregaterating_objesi_uretici_opsiyonel", schema_alt_tip: "AggregateRating" }
+              - { schema_alani: "review", platform_alani_kaynagi: "ilan.kullanici_yorumlari_schema_review_objeleri_listesi_uretici_opsiyonel", schema_alt_tip: "Review" }
+              - { schema_alani: "category", platform_alani_kaynagi: "ilan.urun_veya_hayvan_kategorisi_metin_uretici" }
+              - { schema_alani: "material", platform_alani_kaynagi: "ilan.urun_malzemesi_metin_uretici_aksesuar_icin" }
+              - { schema_alani: "ingredients", platform_alani_kaynagi: "ilan.urun_icindekiler_listesi_metin_uretici_mama_icin" }
+              - { schema_alani: "animalType", platform_alani_kaynagi: "ilan.yetistirilen_hayvan_turu_metin_uretici", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"] }
+              - { schema_alani: "animalBreed", platform_alani_kaynagi: "ilan.yetistirilen_irk_cins_metin_uretici", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"] }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.hayvan_dogum_tarihi_iso_uretici_opsiyonel", bagimli_alan_goster: "uretici_ana_faaliyet_alani_uretici", bagimli_degerler_goster: ["Evcil Hayvan Yetiştiriciliği (Breeder/Kennel/Cattery)"] }
+          - schema_tipi: "Service"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.hizmet_adi_uretici" }
+              - { schema_alani: "serviceType", platform_alani_kaynagi: "ilan.hizmet_kategorisi_uretici" }
+              - { schema_alani: "provider", platform_alani_kaynagi: "ilan.uretici_firma_schema_organization_objesi", schema_alt_tip: "Organization" }
+          - schema_tipi: "Organization"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "uretici_profili.isletme_resmi_adi" }
+              - { schema_alani: "legalName", platform_alani_kaynagi: "uretici_profili.isletme_resmi_ticari_unvani" }
+              - { schema_alani: "logo", platform_alani_kaynagi: "uretici_profili.isletme_logo_url" }
+              - { schema_alani: "address", platform_alani_kaynagi: "uretici_profili.isletme_adresi_schema_postaladdress_objesi", schema_alt_tip: "PostalAddress" }
+              - { schema_alani: "contactPoint", platform_alani_kaynagi: "uretici_profili.iletisim_bilgileri_schema_contactpoint_objesi_listesi", schema_alt_tip: "ContactPoint" }
+              - { schema_alani: "foundingDate", platform_alani_kaynagi: "uretici_profili.kurulus_yili_iso" }
+              - { schema_alani: "slogan", platform_alani_kaynagi: "uretici_profili.isletme_slogani_metin_opsiyonel" }
+              - { schema_alani: "memberOf", platform_alani_kaynagi: "uretici_profili.sertifikasyon_ve_uyelikler_schema_organization_objeleri_listesi_opsiyonel", schema_alt_tip: "Organization" }
+              - { schema_alani: "vatID", platform_alani_kaynagi: "uretici_profili.vergi_kimlik_numarasi" }
+        ozel_meta_etiketler_uretici:
+          - { etiket_adi: "petplatform:producer_official_name_commercial", icerik_kaynagi: "ilan.uretici_firma_adi_meta_etiket_icin" }
+          - { etiket_adi: "petplatform:product_or_service_type_commercial", icerik_kaynagi: "ilan.uretici_ana_faaliyet_alani_uretici_metin_kisa" }
+          - { etiket_adi: "petplatform:brand_name_commercial", icerik_kaynagi: "ilan.marka_adi_resmi_uretici" }
+          - { etiket_adi: "petplatform:certifications_list_commercial", icerik_kaynagi: "ilan.sertifikasyonlar_uyelikler_belgeler_uretici_virgulle_ayrilmis_liste" }
+          - { etiket_adi: "petplatform:producer_verification_level_commercial", icerik_kaynagi: "ilan.uretici_dogrulama_rozet_kodu_meta" }
+          - { etiket_adi: "petplatform:ethical_production_focus_commercial", icerik_kaynagi: "ilan.etik_uretim_hayvan_refahi_politikasi_var_mi_boolean" }
+      harici_platform_ve_api_entegrasyon_hazirligi_uretici:
+        urun_katalog_sayfasina_veya_marka_web_sitesine_direkt_yonlendirme_linki_alani_aktif_mi: true
+        toplu_urun_veya_hayvan_kaydi_yukleme_sistemleri_destegi_aktif_mi: true
+        b2b_siparis_ve_stok_sorgulama_api_endpoint_gelistirme_plani_uretici: "DEGERLENDIRILIYOR_ILERI_ASAMA_HEDEFI"
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_uretici:
+          gorsel_alt_metin_stratejisi_uretici: "URUN_ADI_MARKA_ADI_URETICI_FIRMA_ADI_PETPLATFORM"
+          yuksek_cozunurluklu_gorseller_icin_ayri_url_ve_cdn_destegi_aktif_mi: true
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_uretici:
+        uretici_dogrulama_rozetlerinin_meta_etiket_ve_schema_org_karsiligi_gosterimi: "petplatform:producer_verification_badges_commercial_list"
+        ortalama_musteri_memnuniyet_puani_ve_yorum_sayisi_meta_etiketi_uretici: "petplatform:customer_average_rating_commercial"
+        isletmenin_platformdaki_faaliyet_suresi_ve_ilan_gecmisi_meta_etiketi_uretici: "petplatform:business_activity_duration_on_platform_commercial"
+        yanit_verme_hizi_ve_iletisim_kalitesi_gostergesi_meta_uretici: "petplatform:producer_response_time_indicator_commercial"
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Doğrulanmış ve kaliteli üreticiler için ortalama ilan/profil görüntülenme: Yüksek (Hedef kitle tarafından özellikle aranır)"
+        - "Satışa/sahiplendirmeye dönüşüm oranı (güvenilir üreticiler için): %60-75 (Kalite algısı ve şeffaflıkla artar)"
+        - "Ortalama işlem/iletişim süresi: Ürün/hayvan türüne ve müşterinin araştırma sürecine göre değişken (Birkaç günden birkaç haftaya)"
+        - "Platformun genel kalite, güvenilirlik ve profesyonellik algısını önemli ölçüde yükseltir."
+        - "Kullanıcıların bilinçli ve güvenli tercihler yapmasına olanak tanır."
+        - "Etik ve sorumlu üreticiliği/yetiştiriciliği teşvik eder, sektör standartlarının yükselmesine katkıda bulunur."
+        - "Sahte ilan, kalitesiz ürün veya etik dışı yetiştiricilik kaynaklı kullanıcı mağduriyetlerini minimize etme hedefi: %99+"
+
+  ev_uretimi:
+    id: "cat_ticari_ev_uretimi_hobi_yetistirici"
+    temel_kimlik:
+      ad: "Ev Ortamında Sorumlu Hobi Yetiştiriciliği"
+      slug: "sorumlu-ev-uretimi-hobi-yetistiriciligi"
+      aciklama: "Ev ortamında, büyük bir sevgiyle, derin bir sorumluluk bilinciyle ve genellikle hobi amaçlı olarak, belirli evcil hayvan türlerini/ırklarını sağlıkla ve özenle yetiştiren, sınırlı sayıda doğum alan ve yavrularını özenle yeni yuvalarına hazırlayan kişiler için ilan kategorisi."
+      gorsel_kimlik: { renk_kodu: "#EC4899", tema_notu: "Pembe (Sevgi, Şefkat ve Özenli Yetiştirme)", ikon_adi: "fas fa-heart-home", emoji: "🏡❤️🐾" }
+    kategori_tipi: "ticari_hobi_etik_odakli"
+    arama_sistemi:
+      alternatif_kelimeler: ["hobi yetiştiricisi", "evde üretim kedi köpek", "sorumlu yetiştirici", "aile yanı yavrular", "küçük ölçekli yetiştirici", "ırk standartlarına uygun yavrular", "sağlıklı ev yavruları", "sosyalize edilmiş yavrular", "anne altından yavrular", "bilinçli yetiştirici", "evcil hayvan hobi üretimi", "pet hobi yetiştiriciliği", "yavru kedi (ev üretimi)", "yavru köpek (ev üretimi)", "özel ırk hobi yetiştiricisi", "güvenilir hobi breeder", "satınalma sahiplen (hobi)", "yavru sahiplenme (yetiştiriciden)", "evde doğan yavrular", "anne sütüyle büyüyen yavrular", "etik hobi yetiştirici", "evde sosyalleşen yavrular", "sınırlı sayıda üretim"]
+      ai_intent_keywords: ["hobi yetiştiricisinden yavru bul", "evde yetişen kedi/köpek al", "sorumlu ev üretimi pet", "sağlıklı ve sosyal yavru ara", "küçük yetiştiriciden hayvan edinme", "belirli bir ırkı evden almak istiyorum", "etik ve sevgi dolu yetiştirici ara", "aile ortamında büyüyen yavru"]
+      semantic_tags: ["hobby_breeder_pets", "home_raised_puppies_kittens", "responsible_small_scale_breeding", "ethical_hobbyist_pet_breeder", "family_environment_pet_breeder", "well_socialized_pets_from_home", "health_screened_parent_animals_hobbyist", "limited_litters_hobby_breeder", "pet_acquisition_from_responsible_hobbyist", "transparent_hobby_breeding_practices"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "yetistirilen_hayvan_turu_ev_uretimi", label: "Yetiştirilen Hayvan Türü", tip: "select", secenekler: ["Köpek", "Kedi", "Kuş (Belirli Türler)", "Kemirgen/Küçük Evcil (Belirli Türler)"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "yetistirilen_irk_cins_ev_uretimi", label: "Yetiştirilen Irk/Cins", tip: "text_suggestion_api", kaynak_model_tahmini: "IrkCinsVeritabaniAPI", aciklama: "Yetiştirdiğiniz ırkı/cinsi belirtin.", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "yetistiricilik_felsefesi_ve_amaci_ev_uretimi", label: "Yetiştiricilik Felsefeniz ve Amacınız", tip: "textarea_rich", aciklama: "Neden bu ırkı/türü yetiştiriyorsunuz? Amacınız nedir? Hayvan refahı ve etik ilkeler konusundaki yaklaşımınız.", ai_importance: 0.8 }
+        - { alan_adi: "ebeveyn_hayvan_sayisi_ve_bilgileri_ev_uretimi", label: "Ebeveyn Hayvan Sayısı ve Bilgileri", tip: "textarea_numeric_limited", aciklama: "Kaç adet dişi ve erkek ebeveyn hayvanınız var? İsimleri, yaşları, sağlık durumları ve karakterleri hakkında kısa bilgi.", ai_importance: 0.75 }
+        - { alan_adi: "yillik_dogum_sayisi_planlamasi_ev_uretimi", label: "Yıllık Ortalama Doğum Sayısı Planlaması", tip: "select_numeric_range", secenekler: ["Yılda 1 Doğum", "Yılda 1-2 Doğum (Nadiren)", "Çok Sınırlı / Düzensiz"], aciklama: "Sorumlu hobi yetiştiriciliği kapsamında planladığınız ortalama doğum sayısı.", ai_importance: 0.7 }
+        - { alan_adi: "ebeveyn_saglik_tarama_ve_genetik_testler_ev_uretimi", label: "Ebeveyn Hayvanların Sağlık Taramaları ve Genetik Testleri", tip: "multiselect_text_tags_file_upload_optional", secenekler_onerilen: ["Irka Özgü Genetik Testler Yapıldı", "Kalça/Dirsek Displazi Taraması Yapıldı", "Göz Taraması Yapıldı", "Kardiyak Muayene Yapıldı", "Veteriner Kontrolünde Sağlıklı"], aciklama: "Yapılan testlerin sonuçlarını ve ilgili belgeleri paylaşabilirsiniz.", ai_importance: 0.9 }
+        - { alan_adi: "yavrularin_buyutuldugu_ortam_ev_uretimi", label: "Yavruların Büyütüldüğü Ortam ve Koşullar", tip: "textarea_rich_photo_upload_optional", aciklama: "Yavrular evinizin hangi bölümünde büyüyor? (Örn: Aile içinde, özel bir odada). Yaşam alanlarının temizliği, güvenliği ve uygunluğu hakkında bilgi ve fotoğraf/video ekleyebilirsiniz.", ai_importance: 0.85 }
+        - { alan_adi: "yavrularin_sosyallesme_programi_ev_uretimi", label: "Yavruların Sosyalleşme Programı", tip: "textarea_rich", aciklama: "Yavruların insanlarla, farklı seslerle, objelerle ve mümkünse diğer hayvanlarla (güvenli şekilde) nasıl sosyalleştirildiğini anlatın.", ai_importance: 0.8 }
+        - { alan_adi: "yavru_teslim_yasi_ve_kosullari_ev_uretimi", label: "Yavru Teslim Yaşı ve Koşulları", tip: "select_text_area", secenekler: ["En Az 8 Haftalık (Köpek/Kedi)", "En Az 10-12 Haftalık (Irka ve Gelişime Göre)", "Diğer (Açıklayınız)"], aciklama: "Yavruları hangi yaşta ve hangi koşullarda (ilk aşıları, parazit tedavileri, mikroçip, sahiplendirme sözleşmesi vb.) teslim ediyorsunuz?", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "yeni_sahiplere_sunulan_destek_ve_bilgilendirme_ev_uretimi", label: "Yeni Sahiplere Sunulan Destek ve Bilgilendirme", tip: "textarea", aciklama: "Yavru sahiplendikten sonra yeni sahiplere ne tür destekler (beslenme, eğitim, bakım konularında) sunuyorsunuz? İletişiminiz devam ediyor mu?", ai_importance: 0.75 }
+        - { alan_adi: "yetistiricilik_deneyimi_ve_referanslar_ev_uretimi", label: "Yetiştiricilik Deneyimi ve Referanslar (İsteğe Bağlı)", tip: "textarea_url_list", aciklama: "Kaç yıldır bu ırkı/türü yetiştiriyorsunuz? Varsa önceki sahiplendirmelerinizden referanslar veya sosyal medya gruplarınız.", ai_importance: 0.6 }
+        - { alan_adi: "fiyatlandirma_politikasi_ve_neleri_kapsadigi_ev_uretimi", label: "Fiyatlandırma Politikası ve Neleri Kapsadığı", tip: "textarea_numeric_currency", para_birimi: "TRY", aciklama: "Yavrular için talep ettiğiniz ücret nedir ve bu ücrete neler dahildir (aşı, mikroçip, mama paketi, sağlık garantisi vb.)?", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "ziyaret_ve_tanisma_politikasi_ev_uretimi", label: "Ebeveynleri ve Yavruları Ziyaret Politikası", tip: "select_text_area", secenekler: ["Evet, randevu ile ziyaret kabul ediyorum", "Evet, belirli bir aşamadan sonra (örn: yavrular 4-5 haftalık olduktan sonra)", "Hayır, sağlık nedenleriyle sınırlı/ziyaret yok (video görüşme vb. alternatifler sunulur)", "Görüşülür"], aciklama: "Potansiyel sahiplerin ebeveynleri ve yavruları görme/tanışma süreci nasıl işliyor?", ai_importance: 0.7 }
+    platform_ayarlari_ev_uretimi:
+      ilan_yasam_dongusu_ve_ucretlendirme:
+        ilan_tipi_modeli_ev_uretimi: "DUSUK_MALIYETLI_KREDI_VEYA_HOBI_PAKETI_LISTELEME"
+        standart_hobi_ilan_kredi_maliyetleri:
+          yayinlama_kredisi_60gun: 5
+          yenileme_kredisi_60gun: 4
+        one_cikarma_secenekleri_hobi_ilanlari_icin_limitli_olabilir_mi: true
+        hobi_yetistirici_destek_paketi_ornek:
+          - { paket_kodu: "SORUMLU_HOBI_PAKETI", ad_kullanici: "Sorumlu Hobi Yetiştirici Paketi", yillik_ucret_tl: 299, ozellikler: ["Yılda En Fazla 2-3 Farklı Doğum İlanı Yayınlama Hakkı", "Doğrulanmış Hobi Yetiştiricisi Rozeti", "Temel İlan Görünürlüğü", "Platform İçi Mesajlaşma"] }
+        ilan_performans_raporlamasi_sunulmaz_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk_ev_uretimi:
+        oncelik_katsayisi_platform_ici_dogrulanmis_hobi_yetistirici: 1.3
+        dogrulanmis_sorumlu_hobi_yetistirici_rozeti_ve_filtreleme_secenegi_aktif_mi: true
+        ev_ortaminda_sosyallestirilmis_yavrular_gibi_ozel_etiketlerle_one_cikarma_aktif_mi: true
+      moderasyon_ayarlari_ev_uretimi:
+        seviye: "YUKSEK_DETAYLI_ETIK_SORUMLULUK_VE_HAYVAN_REFAHI_ODAKLI_KONTROL"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_SORUMLU_HOBI_YETISTIRICILIGI_ONAYI_BEKLIYOR"
+        etik_disi_yetistirme_ve_hayvan_refahi_ihlali_suphesi_tolerans_politikasi: "SIFIR_TOLERANS_DERHAL_KALDIRMA_VE_KULLANICI_ENGELLEME"
+        kullanici_sikayetleri_ve_referans_kontrolu_onemli_mi: true
+      dogrulama_ve_guvenlik_protokolleri_ev_uretimi:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Ev ortamında hobi amaçlı yetiştiricilik yapan değerli üyelerimizin, platformumuzun etik ve sorumlu yetiştiricilik ilkelerine bağlılığını teyit etmek, hayvan refahını güvence altına almak ve alıcılar için güvenli bir ortam sağlamak amacıyla bir doğrulama süreci uygulanmaktadır."
+        zorunlu_dogrulama_adimlari_listesi_ev_uretimi:
+          - { adim_kodu: "YETISTIRICI_KIMLIK_VE_IKAMET_DOGRULAMASI_EV_URETIMI", gosterilecek_ad_kullanici: "Yetiştirici Kimlik ve İkametgah Bilgileri", talep_edilecek_bilgiler_kullanici_listesi: ["Ad Soyad", "T.C. Kimlik No (Son 4 Hane Maskeli)", "Güncel İkametgah Belgesi veya Adres Kayıtlı Fatura", "Telefon Numarası (SMS Doğrulamalı)", "E-posta Adresi (Doğrulamalı)"] }
+          - { adim_kodu: "EBEVEYN_HAYVAN_SAGLIK_VE_REFAH_BELGELERI_EV_URETIMI", gosterilecek_ad_kullanici: "Ebeveyn Hayvanların Sağlık ve Refah Bilgileri", talep_edilecek_bilgiler_kullanici_listesi: ["Ebeveyn hayvanların fotoğrafları ve temel sağlık bilgileri (aşı kartları, varsa genetik test sonuçları özeti).", "Yetiştiricinin hayvan refahı konusundaki beyanı."] }
+          - { adim_kodu: "YAVRULARIN_YASAM_ALANI_VE_SOSYALLESME_KOSULLARI_GORSEL_KANIT_EV_URETIMI", gosterilecek_ad_kullanici: "Yavruların Yaşam Alanı ve Sosyalleşme Koşulları (Fotoğraf/Video)", talep_edilecek_bilgiler_kullanici_listesi: ["Yavruların doğduğu ve büyüdüğü ortamın güncel fotoğrafları ve/veya videoları.", "Sosyalleşme süreçlerine dair kısa açıklamalar."] }
+          - { adim_kodu: "SORUMLU_YETISTIRICILIK_ILKELERI_KABUL_BEYANI_EV_URETIMI", gosterilecek_ad_kullanici: "Sorumlu Yetiştiricilik İlkeleri Kabul Beyanı", talep_edilecek_bilgiler_kullanici_listesi: ["Platformumuzun belirlediği sorumlu ve etik yetiştiricilik ilkelerini okuyup kabul ettiğinize dair dijital onay."] }
+        dogrulama_basarili_hobi_yetistirici_rozetleri_listesi:
+          - { seviye_kodu: "DOGRULANMIS_SORUMLU_HOBI_YETISTIRICI", gosterilecek_ad_kullanici: "Doğrulanmış Sorumlu Hobi Yetiştiricisi", ikon: "fas fa-home-heart", renk: "#EC4899", aciklama_kullanici: "Bu yetiştirici, platformumuzun temel kimlik, yaşam alanı ve sorumlu yetiştiricilik beyanı doğrulama adımlarını başarıyla tamamlamıştır." }
+          - { seviye_kodu: "SAGLIK_TARAMALI_EBEVEYN_HOBI_YETISTIRICI", gosterilecek_ad_kullanici: "Sağlık Taramalı Ebeveynler", ikon: "fas fa-stethoscope", renk: "#10B981", aciklama_kullanici: "Bu yetiştirici, ebeveyn hayvanların sağlık taramaları ve/veya genetik testleri hakkında bilgi ve belge sunmuştur." }
+        dogrulama_sureci_basarisizlik_ve_itiraz_mekanizmasi_ev_uretimi: "Doğrulama kriterlerini karşılamayan veya şeffaf olmayan başvurular reddedilir. Reddedilme nedenleri kullanıcıya bildirilir ve eksiklerini tamamlaması için fırsat tanınabilir."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_ev_uretimi:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "YAVRU_ILAN_BASLIGI_EV_URETIMI", oneri_basligi_kullanici: "Sevgi Dolu Yuva Arayan Yavrularınız İçin Sıcak Bir Başlık Yazın!", oneri_detayi_kullanici: "Başlıkta yavruların ırkını, yaşını (örn: 8 haftalık) ve 'ev üretimi', 'aile yanı' gibi anahtar kelimeleri kullanın. Örn: 'Ev Üretimi Sağlıklı British Shorthair Yavruları - Aile Yanı Sosyalize'." }
+          - { hedef_form_alani_kodu: "YETISTIRICILIK_HIKAYENIZ_VE_YAVRULARIN_TANITIMI_EV_URETIMI", oneri_basligi_kullanici: "Yetiştiricilik Hikayenizi, Yavruların Kişiliklerini ve Büyüme Ortamlarını Anlatın!", oneri_detayi_kullanici: "Ebeveyn hayvanlarınızdan, yavruların doğumundan, nasıl bir ortamda büyüdüklerinden, karakter özelliklerinden ve yeni sahiplerinden beklentilerinizden bahsedin. Bolca fotoğraf ve video ekleyin." }
+        semantik_zenginlik_onemi_katsayisi: 0.9
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.yavru_ilan_basligi_kisa_ev_uretimi" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.yavrularin_detayli_tanitimi_kisa_ozet_ev_uretimi" }
+              - { schema_alani: "brand", platform_alani_kaynagi: "ilan.yetistirilen_irk_cins_ev_uretimi_metin", schema_alt_tip: "Brand" }
+              - { schema_alani: "manufacturer", platform_alani_kaynagi: "ilan.hobi_yetistirici_adi_veya_kullanici_adi_schema_person_objesi", schema_alt_tipi: "Person" }
+              - { schema_alani: "sku", platform_alani_kaynagi: "ilan.yavru_kimlik_kodu_veya_ilan_id_ev_uretimi" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.yavru_fotograflari_url_listesi_ev_uretimi" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.fiyat_ve_teslim_kosullari_schema_offer_objesi_ev_uretimi", schema_alt_tipi: "Offer" }
+              - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Hobi Yetiştiriciliği > [Hayvan Türü] > [Irk]" }
+              - { schema_alani: "animalType", platform_alani_kaynagi: "ilan.yetistirilen_hayvan_turu_ev_uretimi_metin" }
+              - { schema_alani: "animalBreed", platform_alani_kaynagi: "ilan.yetistirilen_irk_cins_ev_uretimi_metin" }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.yavru_dogum_tarihi_yaklasik_iso_ev_uretimi" }
+              - { schema_alani: "additionalProperty", schema_alt_tip: "PropertyValue", coklu_deger_kaynagi: "ilan.yavru_ozellikleri_schema_propertyvalue_listesi_ev_uretimi" }
+        ozel_meta_etiketler_ev_uretimi:
+          - { etiket_adi: "petplatform:breeder_type_hobby", icerik_kaynagi: "sabit_deger_HOBBYIST" }
+          - { etiket_adi: "petplatform:home_raised_pet_ev_uretimi", icerik_kaynagi: "sabit_deger_TRUE" }
+          - { etiket_adi: "petplatform:animal_species_hobby", icerik_kaynagi: "ilan.yetistirilen_hayvan_turu_ev_uretimi_metin" }
+          - { etiket_adi: "petplatform:animal_breed_hobby", icerik_kaynagi: "ilan.yetistirilen_irk_cins_ev_uretimi_metin" }
+          - { etiket_adi: "petplatform:breeder_verification_status_hobby", icerik_kaynagi: "ilan.hobi_yetistirici_dogrulama_rozet_kodu_meta" }
+          - { etiket_adi: "petplatform:socialization_level_hobby", icerik_kaynagi: "ilan.yavru_sosyallesme_seviyesi_metin_ozet_ev_uretimi" }
+      harici_platform_ve_api_entegrasyon_hazirligi_ev_uretimi:
+        sorumlu_yetistirici_platformlari_ve_irk_dernekleri_ile_bilgi_paylasimi_opsiyonu_aktif_mi: false
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_ev_uretimi:
+          gorsel_alt_metin_stratejisi_ev_uretimi: "YAVRU_IRK_CINSIYET_EV_URETIMI_YETISTIRICI_SEHIR_PETPLATFORM"
+          yavrularin_buyume_surecini_gosteren_album_ozelligi_icin_altyapi_hazirligi_var_mi: true
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_ev_uretimi:
+        hobi_yetistirici_dogrulama_rozetinin_meta_etiket_ve_schema_org_karsiligi: "petplatform:hobby_breeder_verification_badge_code"
+        ebeveyn_hayvan_saglik_bilgisi_seffaflik_duzeyi_meta: "petplatform:parent_health_info_transparency_hobby"
+        yavru_sosyallesme_detay_seviyesi_meta: "petplatform:puppy_kitten_socialization_detail_level_hobby"
+        onceki_sahiplendirme_referanslari_ve_geri_bildirim_puani_meta_opsiyonel: "petplatform:hobby_breeder_past_litter_feedback_score"
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: Orta-Yüksek (Bilinçli ve ırk/tür özelinde arama yapan hedef kitle tarafından)"
+        - "Başarılı ve sorumlu sahiplendirme oranı hedefi: %70-80 (Şeffaflık, güven ve doğru eşleşme ile)"
+        - "Ortalama sahiplendirme süresi: Yavruların uygun teslim yaşına (8-12 hafta) ve talebe göre değişken (Birkaç haftadan birkaç aya kadar)"
+        - "Platformun 'sorumlu ve etik hayvan sahiplenme' misyonuna önemli katkı sağlar."
+        - "Kullanıcıların, ev ortamında büyümüş, iyi sosyalleşmiş ve sağlıklı yavrulara ulaşması için güvenilir bir alternatif sunar."
+        - "Irkların korunması ve geliştirilmesine hobi düzeyinde katkıda bulunan bilinçli yetiştiricileri destekler."
+        - "Kötü niyetli 'arka bahçe üreticiliği' (puppy/kitten mill) ile mücadelede önemli bir ayrım ve farkındalık yaratır."
+        - "Doğrulanmış sorumlu hobi yetiştiricilerinden yapılan sahiplendirmelerde kullanıcı memnuniyeti: Yüksek"
+
+  ithalat:
+    id: "cat_ticari_ithalat"
+    temel_kimlik:
+      ad: "İthalat / Yurt Dışı Tedarik ve Aracılık"
+      slug: "ithalat-yurt-disi-tedarik-aracilik"
+      aciklama: "Yurt dışından özel hayvan ırkları, benzersiz evcil hayvan ürünleri (mama, aksesuar, bakım ürünleri) veya özel ekipmanlar ithal eden, bu ürünleri tedarik eden veya ithalat sürecinde aracılık/danışmanlık hizmeti sunan profesyonel firmalar ve bireyler için ilan kategorisi."
+      gorsel_kimlik: { renk_kodu: "#0D9488", tema_notu: "Turkuaz (Uluslararası Ticaret, Güven ve Uzmanlık)", ikon_adi: "fas fa-plane-departure", emoji: "✈️🌍" }
+    kategori_tipi: "ticari_profesyonel_hizmet_urun_uluslararasi"
+    arama_sistemi:
+      alternatif_kelimeler: ["ithal pet", "yurtdışı hayvan getirme", "pet import", "ithal kedi köpek", "egzotik hayvan ithalatı", "ithal mama", "yurtdışı pet ürünleri", "CITES belgeli ithalat", "pet kargo", "uluslararası hayvan nakli", "ithalat danışmanlığı pet", "yurtdışından evcil hayvan", "uluslararası pet taşıma"]
+      ai_intent_keywords: ["ithal hayvan nasıl alınır", "yurtdışından [IRK] getirmek", "güvenilir pet ithalatçısı", "ithal pet ürünleri satanlar", "CITES'li hayvan ithalatı yapanlar", "yurtdışı pet kargo fiyatları", "evcil hayvan gümrük işlemleri"]
+      semantic_tags: ["pet_import_services", "international_pet_shipping", "exotic_animal_import", "imported_pet_products", "cites_documentation_services", "pet_relocation_international", "animal_customs_brokerage", "international_pet_trade_facilitation", "global_pet_sourcing"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "ithalat_hizmet_kapsami_ithalat", label: "Sunulan İthalat Hizmeti/Ürün Kapsamı", tip: "multiselect", secenekler: ["Canlı Hayvan İthalatı (Belirli Türler)", "Evcil Hayvan Maması İthalatı", "Evcil Hayvan Aksesuarı/Ekipmanı İthalatı", "İthalat Danışmanlığı ve Belgelendirme Hizmetleri", "Uluslararası Nakliye ve Lojistik Çözümleri"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "ithal_edilen_hayvan_turleri_ithalat", label: "İthal Edilen Hayvan Türleri (Canlı Hayvan ise)", tip: "multiselect_text_tags", secenekler_onerilen: ["Köpek (Özel Irklar)", "Kedi (Özel Irklar)", "Kuş (Egzotik Türler)", "Sürüngen (CITES Kontrollü)", "Balık (Nadir Türler)", "Diğer Egzotik Memeliler (Belgeli)"], bagimli_alan_goster: "ithalat_hizmet_kapsami_ithalat", bagimli_degerler_goster: ["Canlı Hayvan İthalatı (Belirli Türler)"], aciklama: "İthalatını yaptığınız veya aracılık ettiğiniz hayvan türlerini belirtin.", ai_importance: 0.85 }
+        - { alan_adi: "ithal_edilen_urun_kategorileri_ithalat", label: "İthal Edilen Ürün Kategorileri (Ürün ise)", tip: "textarea_tags", aciklama: "İthal edilen mama markaları, özel diyet mamalar, teknolojik aksesuarlar, bakım ürünleri, sağlık takviyeleri vb. detaylı olarak belirtin.", bagimli_alan_goster: "ithalat_hizmet_kapsami_ithalat", bagimli_degerler_goster: ["Evcil Hayvan Maması İthalatı", "Evcil Hayvan Aksesuarı/Ekipmanı İthalatı"], ai_importance: 0.8 }
+        - { alan_adi: "kaynak_ulkeler_ithalat", label: "Ana Kaynak Ülkeler/Bölgeler", tip: "multiselect_text_tags", secenekler_onerilen: ["Avrupa Birliği Ülkeleri", "ABD", "Kanada", "Rusya", "Ukrayna", "Güney Amerika Ülkeleri (Belirli)", "Asya Ülkeleri (Belirli)", "Avustralya/Yeni Zelanda"], aciklama: "Hayvan veya ürünlerin genellikle hangi ülkelerden tedarik edildiği.", ai_importance: 0.7 }
+        - { alan_adi: "CITES_ve_yasal_belgelendirme_uzmanligi_ithalat", label: "CITES ve Yasal Belgelendirme Uzmanlığı", tip: "select_aciklamali_file_upload_optional", secenekler_map: {"Evet, tam kapsamlı uzmanlık ve destek sunulur (CITES Ek I, II, III ve diğer tüm yasal prosedürler)":true, "Evet, belirli türler/belgeler için destek sunulur (Açıklayınız)":true, "Hayır, bu konuda genel yönlendirme yapılır":false, "Bu hizmet kapsamında değil/Gerekmiyor":false}, aciklama: "CITES belgeleri, sağlık sertifikaları, gümrük işlemleri, karantina süreçleri konularındaki uzmanlık seviyeniz. İlgili yetki belgelerinizi yükleyebilirsiniz.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "referans_ve_basari_hikayeleri_ithalat", label: "Referanslar ve Başarılı İthalat Örnekleri", tip: "textarea_url_list", aciklama: "Daha önceki başarılı ithalatlarınız, müşteri yorumları, işbirliği yapılan uluslararası firmalar veya referans olabilecek kişiler/kurumlar.", ai_importance: 0.75 }
+        - { alan_adi: "ortalama_surec_suresi_ve_maliyet_bilgisi_ithalat", label: "Ortalama Süreç Süresi ve Tahmini Maliyet Aralığı", tip: "textarea", aciklama: "Tipik bir ithalat sürecinin (hayvan veya ürün türüne göre) ne kadar sürdüğü ve genel maliyetler (nakliye, gümrük, vergiler, hizmet bedeli vb.) hakkında potansiyel müşterilere fikir verecek bilgiler.", ai_importance: 0.6 }
+        - { alan_adi: "firma_deneyimi_ve_akreditasyonlar_ithalat", label: "Firma Deneyimi ve Akreditasyonlar", tip: "text_file_upload_optional", aciklama: "Kaç yıldır bu alanda faaliyet gösteriyorsunuz? Varsa uluslararası üyelikler (örn: IPATA - International Pet and Animal Transportation Association) veya diğer akreditasyonlar.", ai_importance: 0.8 }
+        - { alan_adi: "sunulan_garanti_ve_sigorta_kosullari_ithalat", label: "Sunulan Garanti ve Sigorta Koşulları", tip: "textarea", aciklama: "İthalat sürecinde hayvan sağlığı, ürün kalitesi veya nakliye risklerine karşı sunulan garanti veya sigorta seçenekleri nelerdir?", ai_importance: 0.7 }
+    platform_ayarlari_ithalat:
+      ilan_yasam_dongusu_ve_ucretlendirme:
+        ilan_tipi_modeli_ithalat: "KREDI_BAZLI_YAYINLAMA_VE_PAKET_UYELIK_YUKSEK_SEGMENT"
+        standart_ilan_kredi_maliyetleri: { yayinlama_kredisi_120gun: 20, yenileme_kredisi_120gun: 15 }
+        one_cikarma_secenekleri_ve_kredi_maliyetleri:
+          - { secenek_kodu: "ANA_SAYFA_VITRIN_ITHALAT_15GUN", gosterilecek_ad_kullanici: "Ana Sayfa İthalat Vitrini (15 Gün)", ek_kredi_maliyeti: 40 }
+          - { secenek_kodu: "KATEGORI_UST_SIRA_ITHALAT_30GUN", gosterilecek_ad_kullanici: "İthalat Kategorisi Üst Sıra (30 Gün)", ek_kredi_maliyeti: 25 }
+        uyelik_paket_secenekleri_ithalat:
+          - { paket_kodu: "TEMEL_ITHALATCI", ad_kullanici: "Temel İthalatçı Paketi", aylik_ucret_tl: 199, yillik_ucret_tl: 1990, ozellikler: ["3 Adet Aktif İlan/Profil", "Standart Görünürlük", "Temel Doğrulama Rozeti"] }
+          - { paket_kodu: "UZMAN_ITHALATCI", ad_kullanici: "Uzman İthalatçı Paketi", aylik_ucret_tl: 499, yillik_ucret_tl: 4990, ozellikler: ["10 Adet Aktif İlan/Profil", "Gelişmiş Görünürlük", "CITES Uzmanı Rozeti (Doğrulanırsa)", "Öncelikli Destek", "İlan İstatistikleri"] }
+      operasyonel_onceliklendirme_ve_gorunurluk_ithalat:
+        oncelik_katsayisi_platform_ici_dogrulanmis_ve_paket_sahibi_ithalat: 1.7
+        dogrulanmis_ithalatci_ve_CITES_uzmani_rozetleri_aktif_mi: true
+        yasal_ve_etik_ithalat_vurgusu_olan_ilanlari_one_cikarma_mekanizmasi_aktif_mi: true
+      moderasyon_ayarlari_ithalat:
+        seviye: "COK_YUKSEK_YASAL_UYGUNLUK_CITES_HAYVAN_REFAHI_VE_GUMRUK_MEVZUATI_KONTROLU"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_KAPSAMLI_ITHALAT_ONAYI_VE_BELGE_KONTROLU_ZORUNLU"
+        yasa_disi_hayvan_ticareti_ve_sahte_belge_tolerans_politikasi: "SIFIR_TOLERANS_DERHAL_KALDIRMA_HESAP_KAPATMA_YASAL_BILDIRIM"
+        hayvan_refahini_onceliklendirmeyen_ve_yaniltici_bilgi_iceren_ilanlarin_engellenmesi_aktif_mi: true
+      dogrulama_ve_guvenlik_protokolleri_ithalat:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "İthalat kategorisindeki ilanların güvenilirliği, yasalara tam uyumu ve hayvan refahı standartlarının korunması en yüksek önceliğimizdir. Bu nedenle, tüm ilan sahiplerinden kapsamlı bir doğrulama süreci talep edilmektedir."
+        zorunlu_dogrulama_adimlari_listesi_ithalat:
+          - { adim_kodu: "ISLETME_YASAL_KIMLIK_VE_GUMRUK_KAYDI_DOGRULAMASI_ITHALAT", gosterilecek_ad_kullanici: "İşletme Yasal Kimlik ve Gümrük Kaydı Doğrulaması", talep_edilecek_bilgiler_kullanici_listesi: ["Firma Ticari Unvanı", "Vergi Numarası", "Ticaret Sicil Kaydı", "Gümrük Müşavirliği Yetki Belgesi (Aracılar için)", "İthalatçı/İhracatçı Birlik Kaydı (Varsa)"] }
+          - { adim_kodu: "CITES_VE_ULUSLARARASI_TASİMA_LISANSLARI_KONTROLU_ITHALAT", gosterilecek_ad_kullanici: "CITES ve Uluslararası Taşıma Lisansları Kontrolü", talep_edilecek_bilgiler_kullanici_listesi: ["CITES kapsamındaki türler için yetki ve izin belgeleri", "IATA veya benzeri uluslararası taşıma standartlarına uygunluk belgeleri (Hayvan nakliyatı için)", "Karantina ve sağlık sertifikası düzenleme yetkisi/prosedürleri"] }
+          - { adim_kodu: "REFERANS_VE_GECMIS_ISLEM_KONTROLU_ITHALAT", gosterilecek_ad_kullanici: "Referans ve Geçmiş İşlem Kontrolü", talep_edilecek_bilgiler_kullanici_listesi: ["En az 2-3 adet başarılı ithalat referansı (müşteri veya iş ortağı)", "Geçmişte yapılan işlemlere dair örnek belgeler (konşimento, gümrük beyannamesi vb. - hassas bilgiler maskelenerek)"] }
+          - { adim_kodu: "HAYVAN_REFAHI_VE_KARANTINA_PROSEDURLERI_BEYANI_ITHALAT", gosterilecek_ad_kullanici: "Hayvan Refahı ve Karantina Prosedürleri Beyanı", talep_edilecek_bilgiler_kullanici_listesi: ["Hayvanların taşınma ve (gerekirse) karantina süreçlerinde hayvan refahı standartlarına (IATA LAR vb.) uyulduğuna dair taahhütname", "Kullanılan karantina tesislerinin uygunluğuna dair bilgi/belge."] }
+        dogrulama_basarili_ithalatci_rozetleri_listesi_detayli:
+          - { seviye_kodu: "DOGRULANMIS_ITHALAT_PROFILI", gosterilecek_ad_kullanici: "Doğrulanmış İthalat Profilı", ikon: "fas fa-stamp", renk: "#0D9488", aciklama_kullanici: "Temel yasal kimlik ve iletişim bilgileri doğrulanmıştır." }
+          - { seviye_kodu: "ONAYLI_PET_ITHALATCISI", gosterilecek_ad_kullanici: "Onaylı Evcil Hayvan İthalatçısı", ikon: "fas fa-plane-circle-check", renk: "#10B981", aciklama_kullanici: "Firma, evcil hayvan ithalatı için gerekli yasal yetkinliklere ve referanslara sahip olduğu platformumuzca teyit edilmiştir." }
+          - { seviye_kodu: "CITES_UZMANI_ITHALATCI", gosterilecek_ad_kullanici: "CITES Uzmanı İthalatçı", ikon: "fas fa-shield-halved", renk: "#F59E0B", aciklama_kullanici: "Bu ithalatçı, CITES kapsamındaki türlerin yasal ithalatı konusunda uzmanlığa ve gerekli belgelere sahip olduğunu kanıtlamıştır." }
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_ithalat:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "ITHALAT_HIZMET_BASLIGI_ITHALAT", oneri_basligi_kullanici: "Net, Güven Veren ve Kapsamlı Bir Başlık Kullanın", oneri_detayi_kullanici: "Başlıkta sunduğunuz ana ithalat hizmetini (örn: 'Avrupa'dan Secereli Köpek İthalatı ve Danışmanlığı') ve uzmanlık alanınızı (örn: 'CITES Belgeli Egzotik Kuş Tedariki') vurgulayın." }
+          - { hedef_form_alani_kodu: "ITHALAT_HIZMET_ACIKLAMASI_ITHALAT", oneri_basligi_kullanici: "Süreci, Güvenceleri ve Uzmanlığınızı Detaylandırın", oneri_detayi_kullanici: "İthalat sürecinin adımlarını, yasal prosedürleri, hayvan refahı standartlarınızı, CITES konusundaki yetkinliğinizi, maliyet unsurlarını ve müşterilere sunduğunuz güvenceleri şeffaf bir şekilde açıklayın. Referanslarınıza yer verin." }
+        semantik_zenginlik_onemi_katsayisi: 0.9
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri: ["Service", "Product", "Organization"]
+        ozel_meta_etiketler_ithalat:
+          - { etiket_adi: "petplatform:import_service_type", icerik_kaynagi: "ilan.ithalat_hizmet_kapsami_ithalat_metin_liste" }
+          - { etiket_adi: "petplatform:cites_expertise_level_import", icerik_kaynagi: "ilan.CITES_ve_yasal_belgelendirme_uzmanligi_ithalat_metin_kisa" }
+          - { etiket_adi: "petplatform:importer_origin_countries", icerik_kaynagi: "ilan.kaynak_ulkeler_ithalat_virgulle_ayrilmis_liste" }
+          - { etiket_adi: "petplatform:importer_verification_status", icerik_kaynagi: "ilan.ithalatci_dogrulama_rozet_kodu_meta" }
+      harici_platform_ve_api_entegrasyon_hazirligi_ithalat:
+        uluslararasi_pet_tasima_ve_gumruk_platformlari_ile_entegrasyon_potansiyeli: "DEGERLENDIRILIYOR_GELECEK_FAZI"
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_ithalat:
+          gorsel_alt_metin_stratejisi_ithalat: "ITHAL_HAYVAN_URUN_KAYNAK_ULKE_FIRMA_ADI_PETPLATFORM"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_ithalat:
+        ithalatci_dogrulama_ve_akreditasyon_meta: "petplatform:importer_verification_accreditation_status"
+        cites_uyumluluk_beyani_meta: "petplatform:cites_compliance_statement_import"
+        musteri_referanslari_ve_basari_orani_meta_ithalat: "petplatform:importer_success_rate_references_available"
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Yüksek değerli ve spesifik talepler için ortalama ilan görüntülenme: Orta-Yüksek"
+        - "Başarılı işlem oranı (güvenilir ve doğrulanmış ithalatçılar için): %50-70"
+        - "Ortalama işlem süresi: Uzun (uluslararası prosedürlere bağlı olarak haftalar/aylar)"
+        - "Platformun uluslararası ve özel ihtiyaçlara cevap verme kapasitesini gösterir."
+        - "Yasal ve etik ithalatı teşvik eder, kaçakçılığın ve hayvan refahı ihlallerinin önlenmesine katkıda bulunur."
+        - "Kullanıcıların nadir ırklara veya özel ürünlere güvenli ve yasal yollarla ulaşmasını sağlar."
+
+  talep_ilani:
+    id: "cat_ticari_talep"
+    temel_kimlik:
+      ad: "Talep İlanı / Özel İstek Bildirimi"
+      slug: "talep-ilani-ozel-istek"
+      aciklama: "Belirli bir hayvanı, ürünü veya özel bir hizmeti arayan kullanıcıların ticari veya özel taleplerini yayınlayabilecekleri kategori. Üreticiler, hizmet sağlayıcılar veya diğer kullanıcılar bu taleplere yanıt verebilir."
+      gorsel_kimlik: { renk_kodu: "#FACC15", tema_notu: "Sarı (Dikkat Çekici Talep/İstek)", ikon_adi: "fas fa-bullhorn", emoji: "📢" }
+    kategori_tipi: "ticari"
+    arama_sistemi:
+      alternatif_kelimeler: ["hayvan arıyorum", "özel ürün talebi", "hizmet arayışı", "pet ihtiyacım var", "bulunamayan ürün", "özel sipariş hayvan", "tedarikçi arıyorum", "istek üzerine üretim", "belirli bir ırk arıyorum", "acil malzeme ihtiyacı", "profesyonel hizmet talebi", "satılık [IRK] arıyorum"]
+      ai_intent_keywords: ["satılık [IRK] kedi/köpek arıyorum", "[ÜRÜN ADI] nerede bulabilirim", "[HİZMET TÜRÜ] hizmeti almak istiyorum", "özel yapım pet aksesuarı talebi", "acil [MAMA TÜRÜ] mama arıyorum", "belirli bir hayvanı sahiplenmek istiyorum"]
+      semantic_tags: ["pet_search_request", "product_sourcing_pets", "service_request_pets", "custom_pet_order", "supplier_search_pets", "specific_breed_wanted", "animal_wanted_ad", "pet_product_inquiry"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "talep_turu_talep", label: "Talep Türü", tip: "select", secenekler: ["Hayvan Arayışı", "Ürün Arayışı", "Hizmet Arayışı", "Özel Üretim Talebi", "İşbirliği/Partnerlik Talebi"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "aranan_hayvan_tur_irk_talep", label: "Aranan Hayvan Türü/Irkı (Hayvan Arayışı ise)", tip: "text_suggestion_api", kaynak_model_tahmini: "IrkCinsVeritabaniAPI", aciklama: "Örn: Safkan Van Kedisi (yavru), Labrador Retriever (yetişkin, siyah), Konuşan Jako Papağanı.", bagimli_alan_goster: "talep_turu_talep", bagimli_degerler_goster: ["Hayvan Arayışı"], ai_importance: 0.85 }
+        - { alan_adi: "aranan_urun_adi_kategori_talep", label: "Aranan Ürün Adı/Kategorisi (Ürün Arayışı ise)", tip: "text", aciklama: "Örn: X Marka Hipoalerjenik Kedi Maması, Y Boyutunda Özel Tasarım Köpek Yatağı, Z Model Akvaryum Filtresi.", bagimli_alan_goster: "talep_turu_talep", bagimli_degerler_goster: ["Ürün Arayışı", "Özel Üretim Talebi"], ai_importance: 0.8 }
+        - { alan_adi: "aranan_hizmet_turu_detay_talep", label: "Aranan Hizmet Türü ve Detayları (Hizmet Arayışı ise)", tip: "textarea", aciklama: "Örn: Ankara'da haftada 3 gün profesyonel köpek gezdirme hizmeti (büyük ırk deneyimli), İstanbul'da evde kedi bakımı (10-15 Temmuz arası), İzmir'de kuş için özel eğitim.", bagimli_alan_goster: "talep_turu_talep", bagimli_degerler_goster: ["Hizmet Arayışı"], ai_importance: 0.75 }
+        - { alan_adi: "talep_aciliyeti_talep", label: "Talep Aciliyeti", tip: "select", secenekler: ["Çok Acil (1-3 gün içinde çözüm bekleniyor)", "Acil (1 Hafta İçinde çözüm bekleniyor)", "Makul Süre (1 Ay İçinde)", "Belirli Bir Tarihe Kadar (Açıklayınız)", "Aciliyeti Yok, Araştırıyorum"], ai_importance: 0.7 }
+        - { alan_adi: "istenilen_ozellikler_detay_talep", label: "İstenilen Özellikler/Detaylar", tip: "textarea_rich", aciklama: "Aradığınız hayvanın/ürünün/hizmetin sahip olması gereken spesifik özellikler, beklentileriniz, miktar, kalite standartları vb. ne kadar detaylı olursa o kadar iyi.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "butce_araligi_talep", label: "Bütçe Aralığı (Opsiyonel)", tip: "text_price_range", para_birimi: "TRY", aciklama: "Bu talep için ayırabileceğiniz yaklaşık bütçe. Örn: 500-1000 TL, Teklife Açık.", ai_importance: 0.6 }
+        - { alan_adi: "konum_tercihi_talep", label: "Konum Tercihi (Şehir/Bölge)", tip: "location_text_city_district_country_multiple", aciklama: "Hizmeti/ürünü/hayvanı hangi şehirlerden veya bölgelerden arıyorsunuz? Birden fazla seçim yapabilirsiniz veya 'Türkiye Geneli' belirtebilirsiniz.", ai_importance: 0.65 }
+        - { alan_adi: "iletisim_tercihi_talep", label: "Tercih Edilen İletişim Yöntemi", tip: "select", secenekler: ["Platform Mesajı (Önerilir)", "Telefon (Doğrulanmış Kullanıcılar İçin)", "E-posta"], ai_importance: 0.5, zorunlu: true }
+    platform_ayarlari_talep_ilani:
+      ilan_yasam_dongusu_ve_ucretlendirme:
+        ilan_tipi_modeli: "KREDI_BAZLI_YAYINLAMA_COK_DUSUK_MALIYETLI_VEYA_PAKET_AVANTAJLI"
+        varsayilan_aktif_kalma_suresi_gun_standart_ilan: 30
+        kredi_maliyeti_standart_ilan_yayinlama: 2
+        one_cikarma_secenekleri_talep_ilanlari:
+          - { secenek_kodu: "TALEP_ONE_CIKAR_TEDARIKCI_BILDIRIMI_7GUN", gosterilecek_ad_kullanici: "Talebi Öne Çıkar + İlgili Tedarikçilere Bildir (7 Gün)", ek_kredi_maliyeti: 5, aciklama_kullanici: "Talebinizin 7 gün boyunca kategorisinde öne çıkmasını ve ilgili olabilecek kayıtlı tedarikçilere bildirilmesini sağlayın." }
+        ilan_yenileme_politikasi_talep:
+          yenileme_kredi_maliyeti_orani_standart_ilana_gore: 1.0
+          otomatik_yenileme_secenegi_sunulacak_mi: false
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici_talep: 0.9
+        tedarikcilere_yonelik_ozel_talep_paneli_aktif_mi: true
+        talep_eslestirme_algoritmasi_ile_otomatik_oneriler_aktif_mi: true # Tedarikçilere uygun talepleri önerme
+      moderasyon_ayarlari:
+        seviye: "DUSUK_ORTA_TEMEL_UYGUNLUK_KONTROLU"
+        yeni_ilan_varsayilan_durum: "YAYINDA_HIZLI_KONTROL_GEREKLI"
+        yasakli_veya_etik_olmayan_talep_kontrolu_aktif_mi: true
+        spam_ve_alakasiz_talep_filtreleme_mekanizmasi_aktif_mi: true
+      dogrulama_ve_guvenlik_protokolleri_talep_ilani:
+        protokol_aktif_mi: false # Genellikle talep ilanları için kapsamlı doğrulama gerekmez.
+        opsiyonel_iletisim_bilgisi_dogrulamasi_aktif_mi: true # Kullanıcının ciddiyetini teyit için.
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_talep_ilani:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "TALEP_BASLIGI_TALEP", oneri_basligi_kullanici: "Ne Aradığınızı Başlıkta Netleştirin", oneri_detayi_kullanici: "Aradığınız hayvanın türünü/ırkını, ürünün adını veya hizmetin türünü başlıkta açıkça belirtin. Örn: 'Aranıyor: Secereli British Shorthair Yavru Kedi' veya 'Talep: X Marka Glutensiz Köpek Maması (Ankara)'." }
+          - { hedef_form_alani_kodu: "ISTENILEN_OZELLIKLER_DETAY_TALEP", oneri_basligi_kullanici: "Talebinizin Tüm Detaylarını Paylaşın", oneri_detayi_kullanici: "Aradığınız şeyin özelliklerini, beklentilerinizi, miktarını, bütçenizi ve diğer önemli kriterleri detaylıca yazın. Bu, doğru teklifleri almanızı kolaylaştırır." }
+        semantik_zenginlik_onemi_katsayisi: 0.6
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Demand"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.talep_basligi_talep" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.istenilen_ozellikler_detay_talep_uzun" }
+              - { schema_alani: "sku", platform_alani_kaynagi: "ilan.aranan_urun_adi_kategori_talep" }
+              - { schema_alani: "mpn", platform_alani_kaynagi: "ilan.aranan_urun_marka_model_talep" }
+              - { schema_alani: "serialNumber", platform_alani_kaynagi: "ilan.aranan_hayvan_tur_irk_talep" }
+              - { schema_alani: "itemOffered", platform_alani_kaynagi: "ilan.talep_turu_talep_schema_uyumlu_nesne" }
+              - { schema_alani: "eligibleQuantity", platform_alani_kaynagi: "ilan.miktar_talep" }
+              - { schema_alani: "priceSpecification", platform_alani_kaynagi: "ilan.butce_araligi_talep_schema" }
+              - { schema_alani: "validFrom", platform_alani_kaynagi: "ilan.yayin_tarihi_iso" }
+              - { schema_alani: "validThrough", platform_alani_kaynagi: "ilan.gecerlilik_bitis_tarihi_iso" }
+              - { schema_alani: "areaServed", platform_alani_kaynagi: "ilan.konum_tercihi_talep_schema" }
+              - { schema_alani: "sender", platform_alani_kaynagi: "ilan.kullanici_profil_schema_talep" , schema_alt_tipi: "Person" }
+        ozel_meta_etiketler_talep_ilani:
+          - { etiket_adi: "petplatform:request_type", icerik_kaynagi: "ilan.talep_turu_talep_metin" }
+          - { etiket_adi: "petplatform:item_searched", icerik_kaynagi: "ilan.aranan_anahtar_kelime_talep" }
+          - { etiket_adi: "petplatform:urgency_request", icerik_kaynagi: "ilan.talep_aciliyeti_talep_metin" }
+          - { etiket_adi: "petplatform:budget_range_request", icerik_kaynagi: "ilan.butce_araligi_talep_metin" }
+      harici_platform_ve_api_entegrasyon_hazirligi_talep_ilani:
+        tedarikci_platformlari_ile_otomatik_talep_eslestirme_aktif_mi: false
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_talep_ilani:
+          gorsel_alt_metin_stratejisi: "TALEP_TURU_VE_ANAHTAR_KELIME_PETPLATFORM"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_talep_ilani:
+        talep_eden_kullanici_dogrulama_durumu_meta: "petplatform:requestor_verification_status"
+        talep_detay_seviyesi_ve_netlik_skoru_meta: "petplatform:request_detail_clarity_score"
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama talep görüntülenme: Orta (tedarikçiler tarafından)"
+        - "Başarılı talep karşılama oranı hedefi: %40"
+        - "Ortalama talep karşılama süresi: 7-15 gün"
+        - "Platforma katkısı: Tedarikçiler için yeni iş fırsatları yaratır, kullanıcıların özel ihtiyaçlarını karşılar."
+
+  ev_sahibi_satisi:
+    id: "cat_ticari_evsahibisatisi"
+    temel_kimlik:
+      ad: "Ev Sahibi Sahiplendirmesi / Kişisel Zorunluluk"
+      slug: "ev-sahibi-sahiplendirmesi-kisisel-zorunluluk"
+      aciklama: "Mevcut hayvan sahiplerinin, yaşamlarındaki kaçınılmaz değişiklikler (taşınma, sağlık, ekonomik vb.) nedeniyle çok sevdikleri evcil hayvanlarını, özenle seçecekleri yeni ve kalıcı bir yuvaya, genellikle masraflarını karşılayacak makul bir ücretle veya ücretsiz olarak devretmek istedikleri ilanlar için kategori."
+      alt_aciklama: "Bu bir ticari satış değil, bir 'yuva aktarımı'dır. Amaç, hayvanın refahını en üst düzeyde tutarak, zorunlu ayrılık sürecini en sağlıklı şekilde yönetmektir. Platform, bu süreçte hem mevcut hem de yeni sahibe destek olmayı hedefler."
+      gorsel_kimlik: { renk_kodu: "#F97316", tema_notu: "Turuncu (Geçiş, Umut ve Sıcaklık)", ikon_adi: "fas fa-hand-holding-heart", emoji: "🏠❤️‍🩹", tema_renk_paleti: { ana_renk: "#F97316", yardimci_renkler: ["#FED7AA", "#FB923C"] } }
+    kategori_tipi: "ticari_ozel_kosullu_refah_odakli"
+    ana_kategori_yorumu: "Hassas bir kategori olup, hayvan refahı ve etik kurallar en üst düzeyde gözetilir. Ticari kar amacı güdülmemelidir."
+    arama_sistemi:
+      alternatif_kelimeler: ["hayvanımı sahiplendirmek zorundayım", "mecburen yuva arıyorum", "taşınma nedeniyle kedi/köpek", "ekonomik zorluk hayvan sahiplendirme", "ailevi nedenlerle pet verme", "ikinci şans arayan dostum", "evde büyümüş hayvan yeni yuva", "sevgili petime kalıcı yuva", "sorumlu aileye emanet", "ücretli sahiplendirme (sahibinden zorunlu)", "masraf karşılığı sahiplendirme", "acil yuva (sahibinden)"]
+      ai_intent_keywords: ["hayvanını vermek zorunda kalanlar", "acil yuva arayan evcil hayvanlar (sahibinden)", "taşınacağım için kedimi/köpeğimi veriyorum", "iyi bakacak birini arıyorum petim için", "sahibinden satılık kedi/köpek (zorunluluktan)", "hayvanımı neden sahiplendirmeliyim"]
+      semantic_tags: ["owner_rehoming_assistance", "pet_relinquishment_support", "compassionate_pet_transfer", "second_chance_pets_from_owner", "urgent_owner_surrender", "responsible_rehoming_by_owner", "rehoming_due_to_life_changes", "pet_adoption_from_current_owner"]
+    akilli_filtreler:
+      ozel_filtre_alanlari_gruplu:
+        satis_gerekce_grubu:
+          grup_basligi: "Sahiplendirme Nedeni ve Motivasyon"
+          alanlar:
+            - { alan_adi: "sahiplendirme_nedeni_ess", label: "Sahiplendirme Nedeni", tip: "select", zorunlu: true, secenekler: ["Taşınma (Şehir/Ülke Değişikliği)", "Ekonomik Koşulların Değişmesi", "Sağlık Sorunları (Sahip veya Hayvan)", "Aile Büyüklüğünde Değişiklik (Bebek, Yeni Evlilik vb.)", "Alerji Durumları", "Hayvanın Diğer Ev Hayvanlarıyla Uyumsuzluğu", "Sahibin Yeterli Zaman Ayıramaması", "Davranış Sorunları (Profesyonel Destek Alınmasına Rağmen Çözülemeyen)", "Sahibin Vefatı/Bakım Veremeyecek Duruma Gelmesi", "Diğer (Lütfen Açıklayınız)"], ai_importance: 0.95 }
+            - { alan_adi: "neden_detay_aciklama_ess", label: "Nedeninizi Detaylandırır mısınız?", tip: "textarea_rich", zorunlu: true, aciklama: "Lütfen durumu içtenlikle ve detaylıca anlatın. Bu, potansiyel yeni sahiplerin durumu anlamasına ve hayvanınıza en uygun yuvayı bulmanıza yardımcı olacaktır.", ai_importance: 0.9 }
+            - { alan_adi: "alternatif_cozum_denendi_mi_ess", label: "Başka Çözümler Aradınız mı?", tip: "radio", secenekler: ["Evet, denedim ama sonuç alamadım", "Hayır, bu ilk ve son çarem", "Kısmen, bazılarını denedim"], aciklama: "Eğer denediyseniz, hangi çözümleri denediğinizi kısaca belirtebilirsiniz.", ai_importance: 0.7 }
+        hayvan_gecmis_grubu:
+          grup_basligi: "Hayvanın Geçmişi ve Mevcut Durumu"
+          alanlar:
+            - { alan_adi: "hayvan_adi_ess", label: "Hayvanın Adı", tip: "text", zorunlu: true, ai_importance: 0.8 }
+            - { alan_adi: "hayvan_turu_ess", label: "Türü", tip: "select", secenekler_kaynagi: "PetTypes", zorunlu: true, ai_importance: 0.9 }
+            - { alan_adi: "hayvan_irki_ess", label: "Irkı (Safkan veya Kırma ise Belirtin)", tip: "text", zorunlu: true, aciklama: "Örn: Tekir, Golden Retriever, Siyam-Sarman Kırması", ai_importance: 0.85 }
+            - { alan_adi: "hayvan_yasi_dogum_tarihi_ess", label: "Yaşı / Doğum Tarihi", tip: "text_date_flexible", zorunlu: true, aciklama: "Örn: 3 Yaşında, Mayıs 2022 doğumlu", ai_importance: 0.9 }
+            - { alan_adi: "hayvan_cinsiyeti_ess", label: "Cinsiyeti", tip: "radio", secenekler_kaynagi: "PetGenders", zorunlu: true, ai_importance: 0.8 }
+            - { alan_adi: "hayvan_kisirlik_durumu_ess", label: "Kısırlık Durumu", tip: "radio", secenekler: ["Kısırlaştırılmış", "Kısırlaştırılmamış", "Bilgim Yok"], zorunlu: true, ai_importance: 0.85 }
+            - { alan_adi: "hayvan_nereden_edinildi_ess", label: "Hayvanı Nasıl Edindiniz?", tip: "select", secenekler: ["Sokaktan Kurtarma", "Barınaktan Sahiplenme", "Arkadaş/Akrabadan", "Petshoptan Alındı", "Yetiştiriciden Alındı", "Doğumundan Beri Benimle", "Diğer (Açıklayınız)"], zorunlu: true, ai_importance: 0.7 }
+            - { alan_adi: "hayvan_ne_kadardir_sizinle_ess", label: "Ne Kadardır Sizinle Birlikte?", tip: "text", zorunlu: true, aciklama: "Örn: 2 yıldır, 6 aydır", ai_importance: 0.75 }
+        karakter_davranis_grubu:
+          grup_basligi: "Karakter ve Davranış Özellikleri"
+          alanlar:
+            - { alan_adi: "hayvan_karakteri_genel_ess", label: "Genel Karakteri (3-5 Kelimeyle)", tip: "text_tags", zorunlu: true, aciklama: "Örn: Oyuncu, Uysal, Meraklı, Bağımsız, Kucakçı", ai_importance: 0.9 }
+            - { alan_adi: "insanlarla_iliskisi_ess", label: "İnsanlarla İlişkisi (Yetişkin, Çocuk, Yabancı)", tip: "textarea", zorunlu: true, aciklama: "Çocuklarla, yabancılarla, misafirlerle arası nasıl? İlgi seviyesi nedir?", ai_importance: 0.85 }
+            - { alan_adi: "diger_hayvanlarla_iliskisi_ess", label: "Diğer Hayvanlarla İlişkisi (Kedi, Köpek, Diğer)", tip: "textarea", zorunlu: true, aciklama: "Evde veya dışarıda başka hayvanlarla nasıl anlaşıyor? Agresif mi, oyuncu mu, çekingen mi?", ai_importance: 0.8 }
+            - { alan_adi: "tuvalet_aliskanligi_ess", label: "Tuvalet Alışkanlığı", tip: "select", secenekler: ["Kum Kullanıyor (Kedi)", "Dışarıya Yapıyor (Köpek)", "Ped Kullanıyor", "Eğitimi Var Ama Bazen Kazalar Oluyor", "Eğitimi Yok/Yeniden Alışması Gerekir"], zorunlu: true, ai_importance: 0.85 }
+            - { alan_adi: "yalniz_kalma_durumu_ess", label: "Yalnız Kalma Durumu", tip: "textarea", zorunlu: false, aciklama: "Evde ne kadar süre yalnız kalabilir? Ayrılık kaygısı var mı? Yalnız kaldığında nasıl davranır?", ai_importance: 0.7 }
+            - { alan_adi: "tasma_gezdirme_aliskanligi_kopek_ess", label: "Tasma ve Gezdirme Alışkanlığı (Köpek ise)", tip: "textarea", zorunlu: false, aciklama: "Tasma takmayı seviyor mu? Gezdirirken çekiştirir mi? Diğer köpeklere/insanlara tepkisi nedir?", ai_importance: 0.7 }
+            - { alan_adi: "bilinen_komutlar_oyunlar_ess", label: "Bildiği Komutlar / Sevdiği Oyunlar", tip: "textarea", zorunlu: false, aciklama: "Hangi komutları biliyor? En sevdiği oyuncaklar veya oyunlar nelerdir?", ai_importance: 0.6 }
+        saglik_bakim_grubu:
+          grup_basligi: "Sağlık ve Bakım Bilgileri"
+          alanlar:
+            - { alan_adi: "hayvan_asi_durumu_ess", label: "Aşıları", tip: "multiselect_text_tags_file_upload_optional", secenekler_onerilen: ["Karma Aşısı Tam", "Kuduz Aşısı Tam", "İç/Dış Parazit Düzenli", "Lösemi Aşısı (Kedi)", "Mantar Aşısı", "Diğer (Belirtiniz)"], aciklama: "Aşı karnesini yükleyebilirsiniz.", zorunlu: true, ai_importance: 0.9 }
+            - { alan_adi: "hayvan_saglik_gecmisi_ess", label: "Bilinen Kronik Hastalığı / Alerjisi / Özel Durumu", tip: "textarea_file_upload_optional", zorunlu: false, aciklama: "Varsa, lütfen detaylı bilgi verin. İlgili veteriner raporlarını yükleyebilirsiniz.", ai_importance: 0.85 }
+            - { alan_adi: "hayvan_kullandigi_ilac_mama_ess", label: "Düzenli Kullandığı İlaç veya Özel Mama", tip: "text", zorunlu: false, aciklama: "Eğer varsa, ilacın veya mamanın adını ve kullanım nedenini belirtin.", ai_importance: 0.7 }
+            - { alan_adi: "hayvan_veteriner_bilgileri_ess", label: "Veteriner Hekim Bilgileri (Opsiyonel)", tip: "text", aciklama: "Takip eden veterinerin adı ve kliniği. Yeni sahibin bilgi alması için paylaşılabilir.", ai_importance: 0.5, zorunlu: false }
+            - { alan_adi: "hayvan_fotograflari_videolari_ess", label: "Hayvanın Güncel Fotoğrafları ve Videoları", tip: "multiple_file_upload_with_preview_guidance", zorunlu: true, aciklama: "Net, farklı açılardan çekilmiş, hayvanın boyutunu ve genel halini gösteren en az 3-5 fotoğraf ve mümkünse kısa bir video yükleyin.", kurallar: {min_fotograf: 3, max_fotograf: 10, onerilen_video_suresi_saniye: 60}, ai_importance: 0.95 }
+        sahiplendirme_sartlari_grubu:
+          grup_basligi: "Sahiplendirme Şartları ve Süreci"
+          alanlar:
+            - { alan_adi: "sahiplendirme_ucreti_talebi_ess", label: "Sahiplendirme Ücreti Talebi", tip: "text_price_custom", zorunlu: true, aciklama: "Ücret talep ediyor musunuz? (Örn: 500 TL, Sadece Masraflar Karşılığı, Ücretsiz - Ancak Refah Odaklı). Bu ücretin ticari bir kar amacı gütmemesi, hayvanın bakım masraflarına (mama, aşı, veteriner vb.) yönelik olması beklenir.", ai_importance: 0.8 }
+            - { alan_adi: "sahiplendirme_sozlesmesi_yapilacak_mi_ess", label: "Sahiplendirme Sözleşmesi Yapılacak mı?", tip: "radio", secenekler: ["Evet, yapılacak (Platform şablonu kullanılabilir)", "Hayır, yapılmayacak", "Karşılıklı görüşülerek karar verilecek"], zorunlu: true, ai_importance: 0.75 }
+            - { alan_adi: "takip_sarti_var_mi_ess", label: "Yeni Evinde Takip Şartı", tip: "radio", secenekler: ["Evet, belirli aralıklarla (fotoğraf/video/ziyaret)", "Hayır, güveneceğim", "Görüşülür"], aciklama: "Hayvanın yeni evindeki durumunu takip etmek istiyor musunuz?", ai_importance: 0.7 }
+            - { alan_adi: "yeni_sahip_ile_tanisma_sureci_ess", label: "Yeni Sahip Adayı ile Tanışma Süreci Nasıl Olacak?", tip: "textarea", zorunlu: true, aciklama: "Örn: Önce telefonla görüşme, sonra görüntülü arama, sonra yüz yüze tanışma. Hayvanla tanışma nerede ve nasıl olacak?", ai_importance: 0.8 }
+        yeni_sahip_tercihleri_grubu:
+          grup_basligi: "Yeni Sahip İçin Tercihleriniz (Varsa)"
+          alanlar:
+            - { alan_adi: "yeni_sahip_deneyim_tercihi_ess", label: "Deneyim Seviyesi", tip: "select", secenekler: ["Deneyimli Sahip Tercih Edilir", "İlk Kez Hayvan Sahiplenecekler İçin Uygun", "Farketmez, Önemli Olan Sevgi ve Sorumluluk", "Özel Irk/Durum Deneyimi Gerekli"], zorunlu: false, ai_importance: 0.6 }
+            - { alan_adi: "yeni_sahip_yasam_kosulu_tercihi_ess", label: "Yaşam Koşulları", tip: "textarea", aciklama: "Örn: Bahçeli ev, apartman dairesi (ancak düzenli gezdirme şartıyla), çocuklu/çocuksuz aile, yalnız yaşayan birey vb.", zorunlu: false, ai_importance: 0.5 }
+        duygusal_pratik_grubu:
+          grup_basligi: "Duygusal ve Pratik Detaylar"
+          alanlar:
+            - { alan_adi: "hayvanla_vedalasma_ess", label: "Hayvanla Vedalaşma ve Geçiş Süreci Planınız", tip: "textarea", zorunlu: false, aciklama: "Yeni sahibine teslim süreci nasıl olacak? Hayvanın adaptasyonuna yardımcı olmak için neler yapılabilir?", ai_importance: 0.6 }
+            - { alan_adi: "yeni_sahibe_verilecek_esyalar_ess", label: "Hayvanla Birlikte Verilecek Eşyalar", tip: "text_tags", aciklama: "Örn: Tasması, yatağı, oyuncakları, kalan maması, taşıma çantası, aşı karnesi", zorunlu: false, ai_importance: 0.5 }
+        iletisim_surec_grubu:
+          grup_basligi: "İletişim ve Görüşme Süreci"
+          alanlar:
+            - { alan_adi: "tercih_edilen_iletisim_yontemi_ess", label: "Tercih Edilen İletişim Yöntemi", tip: "select", secenekler: ["Platform Üzerinden Mesaj (Önerilir)", "Telefon Numarası (Doğrulanmış ve İzinli)", "E-posta (Doğrulanmış ve İzinli)"], zorunlu: true, ai_importance: 0.7 }
+            - { alan_adi: "uygun_gorusme_zamanlari_ess", label: "Görüşme İçin Uygun Zaman Dilimleri", tip: "text", zorunlu: false, aciklama: "Örn: Hafta içi akşamları, Hafta sonu öğleden sonra", ai_importance: 0.4 }
+    platform_ayarlari_ev_sahibi_satisi:
+      ilan_yasam_dongusu_ve_ucretlendirme:
+        ilan_tipi_modeli: "DUSUK_KREDI_MALIYETLI_REFAH_ODAKLI_YAYIN"
+        varsayilan_aktif_kalma_suresi_gun_standart_ilan: 45
+        uzatma_imkani_aktif_mi: true
+        otomatik_uzatma_aktif_mi: false
+        maksimum_uzatma_sayisi: 2
+        kredi_maliyeti_standart_ilan_yayinlama: 5
+        indirim_kriterleri_ve_oranlari_ess:
+          - { kriter_kodu: "ILK_EV_SAHIBI_SAHIPLENDIRME_ILANI", indirim_orani_yuzde: 20, aciklama_kullanici: "Platformumuzda ilk kez bu kategoride ilan veriyorsanız %20 indirim!" }
+          - { kriter_kodu: "ACIL_DURUM_BEYANI_ONAYLI", indirim_orani_yuzde: 30, aciklama_kullanici: "Gerçekten acil bir durumdaysanız (moderatör onayıyla) %30 indirim." }
+          - { kriter_kodu: "DETAYLI_TAKIP_SISTEMI_KABULU", indirim_orani_yuzde: 15, aciklama_kullanici: "Sahiplendirme sonrası detaylı takip sistemimizi kabul ederseniz %15 indirim." }
+        one_cikarma_secenekleri_hassas_kategori:
+          - { secenek_kodu: "ACIL_YUVA_ARAYANLAR_BOLUMU_7GUN", gosterilecek_ad_kullanici: "Acil Yuva Arayanlar Bölümünde Gösterim (7 Gün)", ek_kredi_maliyeti: 7, aciklama_kullanici: "İlanınızın 7 gün boyunca 'Acil Yuva Arayanlar' özel bölümünde ve kategori içinde öncelikli gösterilmesini sağlayın." }
+      operasyonel_onceliklendirme_ve_gorunurluk_ev_sahibi_satisi:
+        oncelik_katsayisi_platform_ici_ess: 1.3
+        algoritma_destekli_gosterim_faktorleri_ess:
+          - { faktor_kodu: "DETAYLI_VE_ICTEN_HIKAYE", bonus_etkisi_aciklama: "Hikayenin uzunluğu, duygusal derinliği ve şeffaflığı, ilanın daha fazla ilgili kişiye ulaşmasına yardımcı olur.", katsayi_etkisi: 0.2 }
+          - { faktor_kodu: "YUKSEK_KALITELI_VE_COKLU_FOTOGRAF_VIDEO", bonus_etkisi_aciklama: "Hayvanı farklı açılardan ve net gösteren görseller, güveni artırır ve ilgiyi çeker.", katsayi_etkisi: 0.25 }
+          - { faktor_kodu: "TAKIP_SISTEMI_VE_SOZLESME_KABULU", bonus_etkisi_aciklama: "Sorumlu sahiplendirme taahhüdü, ilanın ciddiyetini ve güvenilirliğini artırır.", katsayi_etkisi: 0.15 }
+      moderasyon_ayarlari_ev_sahibi_satisi:
+        seviye: "YUKSEK_HASSASIYET_VE_SAMIMIYET_KONTROLU"
+        otomatik_onay_aktif_mi: false
+        hizli_onay_kriterleri_listesi_ess: ["Daha önce platformumuzda sorunsuz işlem yapmış, profili tam ve doğrulanmış kullanıcı.", "İlan formunu eksiksiz, tutarlı ve içten bir şekilde doldurmuş.", "Hayvan refahını riske atacak bir durum belirtilmemiş."]
+        ozel_dogrulama_gereklilikleri_detayli_ess:
+          - { gereklilik_kodu: "YASAM_KOSULLARI_GORSEL_KANIT", aciklama_kullanici: "Hayvanın şu anki yaşam ortamını ve genel durumunu gösteren güncel fotoğraflar veya kısa bir video yüklemeniz, şeffaflık açısından önemlidir." }
+          - { gereklilik_kodu: "VETERINER_KAYITLARI_TEMEL", aciklama_kullanici: "Mümkünse hayvanın aşı kartı, geçmiş sağlık raporları gibi temel veteriner kayıtlarını sunmanız, şeffaflığı artırır ve yeni sahibin bilgi sahibi olmasını sağlar." }
+          - { gereklilik_kodu: "SAHIPLENDIRME_MOTIVASYONU_SAMIMIYET_ANALIZI", aciklama_kullanici: "İlanınızdaki açıklamalar ve sunduğunuz bilgiler, bu zor kararı alma nedenlerinizin anlaşılmasına ve samimiyetinizin değerlendirilmesine yardımcı olur." }
+          - { gereklilik_kodu: "KIMLIK_DOGRULAMA_YENI_SAHIP_ILE_CIDDI_TEMASTA", aciklama_kullanici: "Potansiyel yeni bir sahiple ciddi bir aşamaya geldiğinizde, her iki tarafın güvenliği için platform üzerinden kimlik doğrulama adımlarını tamamlamanız istenebilir." }
+          - { gereklilik_kodu: "ILETISIM_BILGILERI_GECERLILIK_KONTROLU", aciklama_kullanici: "Paylaştığınız iletişim bilgilerinin (telefon, e-posta) ulaşılabilir ve güncel olması gerekmektedir." }
+        ozel_destek_ve_takip_sistemleri_ess:
+          duygusal_destek_paketleri:
+            - { paket_kodu: "AYRILIK_SURECI_REHBERI", ad_kullanici: "Ayrılık Süreci Destek Rehberi", aciklama: "Bu zorlu süreçte size yol gösterecek pratik ve duygusal ipuçları içeren dijital bir rehber." }
+            - { paket_kodu: "PLATFORM_DESTEK_HATTI", ad_kullanici: "Platform Destek Uzmanı ile Görüşme", aciklama: "İhtiyaç duyarsanız, platformumuzun deneyimli destek uzmanlarından biriyle görüşerek süreci daha kolay yönetebilirsiniz." }
+          teknik_destek_araclari:
+            - { arac_kodu: "FOTOGRAF_CEKIM_REHBERI", ad_kullanici: "Etkili İlan Fotoğrafı Çekme Rehberi", aciklama: "Hayvanınızı en iyi şekilde tanıtacak fotoğraflar çekmek için ipuçları ve örnekler." }
+            - { arac_kodu: "HIKAYE_ANLATIM_SABLONLARI", ad_kullanici: "Duygusal ve Etkili Hikaye Anlatımı Şablonları", aciklama: "Hayvanınızın hikayesini ve ihtiyaçlarını en iyi şekilde ifade etmenize yardımcı olacak şablonlar." }
+          takip_ve_garanti_sistemi_secenekleri:
+            - { secenek_kodu: "30GUN_UYUM_TAKIBI_STANDART", ad_kullanici: "Standart Uyum Takibi (30 Gün)", aciklama: "Yeni sahibiyle ilk 30 gün boyunca periyodik (haftalık/iki haftalık) fotoğraf/video paylaşımı veya kısa durum güncellemesi talep edilebilir." }
+            - { secenek_kodu: "GERI_ALMA_GARANTISI_OZEL_KOSULLU", ad_kullanici: "Özel Koşullu Geri Alma Prosedürü", aciklama: "Beklenmedik uyum sorunlarında, belirli koşullar altında (sözleşmeyle belirlenir) hayvanın geri alınması veya alternatif bir yuva bulunması için destek." }
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_ev_sahibi_satisi:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+          - { hedef_form_alani_kodu: "HIKAYE_BASLIGI_ESS", oneri_basligi_kullanici: "Duygusal ve Bilgilendirici Bir Başlık Seçin", oneri_detayi_kullanici: "Hayvanınızın adını, türünü/ırkını ve 'Yeni Yuva Arıyor' gibi bir ifadeyi başlıkta kullanın. Örn: 'Boncuk (Tekir Kedi) - Taşınma Nedeniyle Acil Sevgi Dolu Yuva Arıyor'." }
+          - { hedef_form_alani_kodu: "NEDEN_DETAY_ACIKLAMA_ESS", oneri_basligi_kullanici: "Hikayenizi İçtenlikle ve Dürüstçe Anlatın", oneri_detayi_kullanici: "Neden bu zor kararı aldığınızı, hayvanınızın karakterini, iyi ve zor yanlarını, yeni sahibinden beklentilerinizi samimiyetle yazın. Unutmayın, şeffaflık güven oluşturur." }
+          - { hedef_form_alani_kodu: "HAYVAN_FOTOGRAFLARI_VIDEOLARI_ESS", oneri_basligi_kullanici: "Kaliteli ve Bol Görsel Kullanın", oneri_detayi_kullanici: "Hayvanınızın net, aydınlık, farklı açılardan çekilmiş fotoğraflarını ve mümkünse kısa bir videosunu ekleyin. Bu, onun kişiliğini ve sevimliliğini daha iyi yansıtacaktır." }
+        semantik_zenginlik_onemi_katsayisi: 0.9
+        duygusal_destek_sistemi_ai_semantik_entegrasyonu:
+          ilan_oncesi_rehberler_icin_semantik_anahtar_kelimeler: ["ayrılık acısı", "hayvanımdan vazgeçmek", "doğru karar mı", "yeni yuva bulma stresi"]
+          ilan_sirasinda_sablonlar_icin_nlp_destekli_duygu_yonlendirme: true
+        kalite_guvence_sistemi_ai_semantik_entegrasyonu:
+          hayvan_dogrulama_analizi_icin_semantik_eslesme_kriterleri: ["fotoğraf-açıklama tutarlılığı", "ırk-davranış uyumu"]
+          sahip_dogrulama_sinyalleri_icin_metin_analizi: ["hikaye tutarlılığı", "çelişkili ifadeler tespiti"]
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+          - schema_tipi: "Product"
+            alan_eslestirmeleri:
+              - { schema_alani: "name", platform_alani_kaynagi: "ilan.hayvan_adi_ess_ve_irk" }
+              - { schema_alani: "description", platform_alani_kaynagi: "ilan.neden_detay_aciklama_ess_kisa_ozet" }
+              - { schema_alani: "category", platform_alani_kaynagi: "ilan.hayvan_turu_ess_metin" }
+              - { schema_alani: "breed", platform_alani_kaynagi: "ilan.hayvan_irki_ess" }
+              - { schema_alani: "birthDate", platform_alani_kaynagi: "ilan.hayvan_dogum_tarihi_ess_iso" }
+              - { schema_alani: "gender", platform_alani_kaynagi: "ilan.hayvan_cinsiyeti_ess_metin" }
+              - { schema_alani: "image", platform_alani_kaynagi: "ilan.hayvan_ana_fotograf_url_ess" }
+              - { schema_alani: "offers", platform_alani_kaynagi: "ilan.sahiplendirme_ucret_schema_ess", schema_alt_tipi: "Offer" }
+              - { schema_alani: "additionalProperty", platform_alani_kaynagi: "ilan.sahiplendirme_nedeni_schema_property_ess" }
+              - { schema_alani: "offeredBy", platform_alani_kaynagi: "ilan.mevcut_sahip_kullanici_schema_ess", schema_alt_tipi: "Person" }
+        ozel_meta_etiketler_ev_sahibi_satisi:
+          - { etiket_adi: "petplatform:rehoming_reason", icerik_kaynagi: "ilan.sahiplendirme_nedeni_ess_metin_kisa" }
+          - { etiket_adi: "petplatform:pet_age_rehoming", icerik_kaynagi: "ilan.hayvan_yasi_ess_metin" }
+          - { etiket_adi: "petplatform:pet_temperament_tags_rehoming", icerik_kaynagi: "ilan.hayvan_karakteri_genel_ess_virgullu_liste" }
+          - { etiket_adi: "petplatform:is_urgent_rehoming", icerik_kaynagi: "ilan.aciliyet_durumu_ess_boolean" }
+          - { etiket_adi: "petplatform:rehoming_fee_info", icerik_kaynagi: "ilan.sahiplendirme_ucreti_talebi_ess_metin_ozet" }
+      harici_platform_ve_api_entegrasyon_hazirligi_ev_sahibi_satisi:
+        barinak_ve_kurtarma_gruplari_icin_ozel_feed_aktif_mi: false
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_ev_sahibi_satisi:
+          gorsel_alt_metin_stratejisi: "SAHIPLENDIRME_HAYVAN_ADI_IRK_NEDEN_PETPLATFORM"
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_ev_sahibi_satisi:
+        hikaye_samimiyet_ve_detay_skoru_meta: "petplatform:story_quality_score_rehoming"
+        sahip_dogrulama_seviyesi_meta_ess: "petplatform:owner_verification_level_rehoming"
+        uygun_sahip_eslesme_potansiyeli_sinyali_meta: "petplatform:match_potential_signal_rehoming"
+    istatistikler:
+      beklenen_performans_metrikleri_genel_ess:
+        ortalama_ilan_goruntulenme: "Yüksek (empati ve ihtiyaç odaklı)"
+        basarili_sahiplendirme_hedefi_yuzde: 75
+        ortalama_sahiplendirme_suresi_gun: "20-35"
+        platformda_aktif_kalma_suresi_gun_ortalama_ilan: 25
+        basvuru_alma_orani_yuzde_ilan_basina: 90
+      beklenen_performans_metrikleri_kalite_ess:
+        geri_alinma_veya_basarisiz_sahiplendirme_orani_hedefi_yuzde: "<5"
+        yeni_sahip_memnuniyet_skoru_hedefi_10_uzerinden: "9.2"
+        takip_sistemi_basari_orani_yuzde: 85
+      platforma_katkilari_ess:
+        - "Hayvanların barınağa düşmesini önlemeye yardımcı olur."
+        - "Mevcut sahipler için zor bir süreçte destek ve çözüm sunar."
+        - "Bilinçli ve kalıcı yuvalar bulunmasına aracılık eder."
+        - "Toplumda empati ve sorumluluk bilincini artırır."

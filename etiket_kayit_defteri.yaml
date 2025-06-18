@@ -1,0 +1,152 @@
+# -*- coding: utf-8 -*-
+# 🏷️ Evcil Hayvan Platformu - Etiket Kayıt Defteri
+# ==============================================================================
+# Bu dosya, platformdaki tüm etiketleri merkezi olarak yönetir. Etiketler, 
+# kolay erişim ve yönetim için mantıksal kategorilere ayrılmıştır.
+#
+# Yeni bir etiket eklerken veya mevcut bir etiketi değiştirirken lütfen bu 
+# dosyayı güncelleyin.
+#
+# Kategoriler:
+# -----------
+# - MIZAC_VE_KISILIK: Hayvanın karakter özelliklerini tanımlar.
+# - FIZIKSEL_OZELLIKLER: Hayvanın dış görünüşü ve fiziksel nitelikleri.
+# - SAGLIK_VE_BAKIM: Sağlık durumu, aşılar ve özel bakım ihtiyaçları.
+# - EGITIM_VE_SOSYALLESME: Tuvalet, itaat gibi eğitim durumları.
+# - YAS_VE_DURUM: Hayvanın yaş aralığı ve damızlık gibi durumları.
+# - HAYVAN_TURU: Genel hayvan türleri.
+# - ILAN_GENEL: İlanın türünü ve genel durumunu belirtir (sahiplendirme, kayıp vb.).
+# - TICARI_ILAN: Ticari satışlara özgü profesyonel etiketler.
+# - SAHIPLENDIRME_KOSULLARI: Sahiplendirme ilanları için aranan şartlar.
+# - DESTEK_VE_YARDIM: Sponsorluk, bağış gibi yardım çağrıları.
+# ==============================================================================
+
+etiket_kategorileri:
+  MIZAC_VE_KISILIK:
+    - oyuncu
+    - sakin
+    - enerjik
+    - utangaç
+    - sosyal
+    - korumacı
+    - zeki
+    - meraklı
+    - sevecen
+    - bağımsız
+    - konuşkan
+    - sessiz
+    - kucak_kedisi
+    - çocuklarla_iyi_anlaşan
+    - köpeklerle_iyi_anlaşan
+    - kedilerle_iyi_anlaşan
+    - diğer_evcil_hayvanlarla_uyumlu
+    - evin_tek_hayvanı_olmayı_tercih_eder
+
+  FIZIKSEL_OZELLIKLER:
+    - küçük_ırk
+    - orta_ırk
+    - büyük_ırk
+    - dev_ırk
+    - uzun_tüylü
+    - kısa_tüylü
+    - tüysüz
+    - tüy_dökmeyen
+    - hipoalerjenik
+    - mavi_gözlü
+    - heterokromi
+
+  SAGLIK_VE_BAKIM:
+    - sağlıklı
+    - özel_ihtiyaçlı
+    - engelli
+    - kısırlaştırılmış
+    - aşıları_tam
+    - mikroçipli
+    - parazit_tedavisi_yapıldı
+    - özel_diyet_gerektiren
+    - kronik_rahatsızlığı_olan
+
+  EGITIM_VE_SOSYALLESME:
+    - eğitimli
+    - tuvalet_eğitimli
+    - ev_eğitimli
+    - kutu_eğitimli
+    - itaat_eğitimli
+    - sosyalleştirilmiş
+
+  YAS_VE_DURUM:
+    - yavru
+    - genç
+    - yetişkin
+    - yaşlı
+    - yeni_doğmuş
+    - damızlık
+    - emekli_damızlık
+    - yeni_evine_hazır
+
+  HAYVAN_TURU:
+    - kedi
+    - köpek
+    - kuş
+    - balık
+    - kemirgen
+    - sürüngen
+    - egzotik_hayvan
+    - çiftlik_hayvanı
+
+  ILAN_GENEL:
+    - sahiplendirme
+    - kayıp
+    - bulundu
+    - acil
+    - geçici_yuva_aranıyor
+    - kalıcı_yuva_aranıyor
+    - barınaktan
+    - kurtarılmış
+    - terk_edilmiş
+    - sahibi_tarafından_verilen
+    - ayrılmaz_ikili
+    - anne_yavrusu
+    - barınakta_risk_altında
+
+  TICARI_ILAN:
+    - profesyonel_üretici
+    - lisanslı_üretici
+    - ev_üreticisi
+    - ithal
+    - secereli
+    - safkan
+    - melez
+    - tasarım_ırk
+    - show_kalite
+    - nadir_ırk
+    - sağlık_sertifikalı
+    - sağlık_garantili
+    - genetik_testli
+    - pasaportlu
+    - rezervasyona_açık
+    - fci_kayıtlı
+    - kif_kayıtlı
+    - wcf_kayıtlı
+    - aile_yanında_yetişmiş
+    - pazarlık_payı_var
+    - yeniden_yuvalandırma_ücreti
+
+  SAHIPLENDIRME_KOSULLARI:
+    - sahiplendirme_sözleşmesi_gerekli
+    - takip_şartı_var
+    - ev_kontrolü_gerekli
+    - bahçeli_ev_gerekli
+    - deneyimli_sahip_gerekli
+    - küçük_çocuklu_aileye_uygun_değil
+    - evin_tek_hayvanı_olmalı
+    - sadece_evde_yaşamalı
+    - şehir_dışına_gönderim_yapılır
+    - sadece_yerinden_teslim
+
+  DESTEK_VE_YARDIM:
+    - sponsor_aranıyor
+    - tıbbi_destek_gerekli
+    - veteriner_masrafları_için_bağış
+    - mama_bağışı_gerekli
+

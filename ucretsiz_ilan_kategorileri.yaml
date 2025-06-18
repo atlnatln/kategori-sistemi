@@ -1,0 +1,912 @@
+ucretsiz_ilan_kategorileri:
+  sahiplendirme:
+    id: "cat_ucretsiz_sahiplendirme"
+    temel_kimlik:
+      ad: "Sahiplendirme (Yuva Arayan Canlar)"
+      slug: "sahiplendirme-yuva-arayan-canlar"
+      aciklama: "Sevgi dolu bir yuvaya ihtiyaç duyan köpek, kedi, kuş ve diğer tüm canlar için açılan ilanlar. Onlara kalıcı ve mutlu bir yuva bulmak temel amacımızdır."
+      gorsel_kimlik: { renk_kodu: "#FFDAB9", tema_notu: "Şeftali Rengi (Sıcaklık ve Umut)", ikon_adi: "fas fa-heart-paw", alternatif_ikonlar: "fas fa-paw, fas fa-home-heart", emoji: "🏠❤️" }
+    kategori_tipi: "ucretsiz"
+    arama_sistemi:
+      alternatif_kelimeler: ["yuva arıyorum", "pet sahiplen", "ücretsiz hayvan", "satınalma sahiplen", "evcil hayvan sahiplenme", "kurtarılmış hayvan", "barınaktan sahiplen", "geçici yuvadan kalıcı yuvaya", "arkadaş arıyorum (hayvan)", "aileye can kat", "ömürlük dost", "ikinci şans", "terk edilmiş hayvan", "pati bul", "sevgiye muhtaç", "ev arkadaşı (hayvan)", "can dostu", "sokaktan kurtarılan", "melek arıyor"]
+      ai_intent_keywords: ["yuva bul", "sahiplenmek istiyorum", "ücretsiz pet", "evcil hayvan edinme", "hayvan dostu arıyorum", "ömürlük yuva"]
+      semantic_tags: ["adoption", "rescue", "pet_rehoming", "forever_home", "animal_welfare", "free_pet_adoption"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "hayvan_turu_sahiplendirme", label: "Hayvan Türü", tip: "select", secenekler: ["Köpek", "Kedi", "Kuş", "Kemirgen", "Sürüngen", "Balık", "Diğer (Egzotik olmayan)"], ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "hayvan_irk_sahiplendirme", label: "Hayvan Irkı/Melezlik Durumu", tip: "breed_composition_selector", depends_on_field: "hayvan_turu_sahiplendirme", default_options: ["Bilinmiyor"], ai_importance: 0.75, zorunlu: false, aciklama: "Hayvanın ırk durumunu (safkan, kırma/melez, bilinmiyor) ve ilgili ırk(lar)ı belirtin." }
+        - { alan_adi: "hayvan_yas_sahiplendirme", label: "Yaş Aralığı", tip: "select", secenekler: ["Yavru (0-1 yaş)", "Genç (1-3 yaş)", "Yetişkin (3-7 yaş)", "Yaşlı (7+ yaş)"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "hayvan_cinsiyet_sahiplendirme", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Bilinmiyor"], ai_importance: 0.75, zorunlu: false } # Bilinmiyor eklendi
+        - { alan_adi: "hayvan_boyut_sahiplendirme", label: "Boyut (Türe Göre)", tip: "select", secenekler: ["Çok Küçük", "Küçük", "Orta", "Büyük", "Dev"], ai_importance: 0.7, zorunlu: false } # "Çok Küçük" ve "Dev" eklendi
+        - { alan_adi: "saglik_durumu_sahiplendirme", label: "Sağlık Durumu", tip: "select_aciklamali", secenekler_map: { "Sağlıklı": false, "Özel Bakım Gerektiriyor (Açıklama Gerekli)": true, "Engelli (Açıklama Gerekli)": true, "Kronik Rahatsızlığı Var (Açıklama Gerekli)": true}, ai_importance: 0.9, zorunlu: true, aciklama_label: "Sağlık Durumu Açıklaması" } # Seçenekler detaylandırıldı
+        - { alan_adi: "kisirlastirma_durumu_sahiplendirme", label: "Kısırlaştırma Durumu", tip: "select_aciklamali", secenekler_map: { "Kısırlaştırılmış": false, "Kısırlaştırılacak (Yeni sahip sorumluluğunda/destekle)": true, "Kısırlaştırılmamış (Yavru/Sağlık Nedeniyle - Açıklama Gerekli)": true, "Bilinmiyor": false }, ai_importance: 0.8, zorunlu: true, aciklama_label: "Kısırlaştırma Detayı" } # Zorunluluk ve seçenekler revize edildi
+        - { alan_adi: "asi_durumu_sahiplendirme", label: "Aşı Durumu", tip: "select", secenekler: ["Aşıları Tam", "Aşıları Eksik (Tamamlanacak)", "Aşısız (Yavru/Yeni Bulundu)", "Bilinmiyor"], ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "ic_dis_parazit_sahiplendirme", label: "İç/Dış Parazit Tedavisi", tip: "select", secenekler: ["Düzenli Yapılıyor/Yakın Zamanda Yapıldı", "Yapılacak", "Bilinmiyor"], ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "karakter_ozellikleri_sahiplendirme", label: "Karakter Özellikleri", tip: "multiselect_text_tags", secenekler_onerilen: ["Oyuncu", "Sakin", "Uysal", "Çocuklarla İyi Anlaşır", "Diğer Hayvanlarla İyi Anlaşır", "Yalnız Kalabilir", "Enerjik", "Kucakçı", "Bağımsız", "Ürkek/Çekingen", "Meraklı", "Sadık", "Koruyucu (Köpekler için)"], ai_importance: 0.9, zorunlu: false, aciklama: "Hayvanınızın öne çıkan karakter özelliklerini seçin veya ekleyin."} # Önerilenler ve text_tags eklendi
+        - { alan_adi: "egitim_seviyesi_tuvalet_sahiplendirme", label: "Tuvalet Eğitimi", tip: "select", secenekler: ["Tuvalet Eğitimi Var", "Kısmen Var/Devam Ediyor", "Yok/Yeniden Alışması Gerekebilir"], ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "egitim_seviyesi_temel_itaat_sahiplendirme", label: "Temel İtaat Eğitimi (Köpekler İçin)", tip: "select", secenekler: ["Temel Komutları Biliyor (Otur, Yat, Gel vb.)", "Kısmen Biliyor/Eğitilebilir", "Eğitimi Yok"], hayvan_turu_bagimliligi: "Köpek", ai_importance: 0.75, zorunlu: false }
+        - { alan_adi: "bulundugu_yer_sahiplendirme", label: "Bulunduğu Yer (Şehir, İlçe)", tip: "location_text_city_district", aciklama: "Hayvanın şu anda bulunduğu şehir ve ilçe. (Geçici yuva veya barınak ise belirtilebilir)", ai_importance: 0.9, zorunlu: true } # Tip detaylandırıldı
+        - { alan_adi: "sahiplendirme_sartlari_sahiplendirme", label: "Sahiplendirme Şartları ve Beklentiler", tip: "textarea_rich", aciklama: "Yeni sahibinden beklentileriniz (takip, sözleşme, ev ziyareti, kısırlaştırma taahhüdü, yaşam koşulları vb.). Lütfen net ve makul şartlar belirtin.", ai_importance: 0.7, zorunlu: false } # Rich text eklendi
+        - { alan_adi: "neden_yuva_ariyor_sahiplendirme", label: "Neden Yuva Arıyor? (Hikayesi)", tip: "textarea_rich", aciklama: "Hayvanın platforma nasıl geldiği (sokaktan kurtarma, barınaktan, sahibinin vefatı, terk edilme vb.). Kısaca hikayesini paylaşabilirsiniz.", ai_importance: 0.65, zorunlu: false } # Rich text eklendi
+        - { alan_adi: "gecici_yuva_olur_mu_sahiplendirme", label: "Geçici Yuva Desteği Aranıyor Mu?", tip: "boolean_unknown", secenekler: ["Evet, acil geçici yuvaya da ihtiyacı var", "Hayır, sadece kalıcı yuva aranıyor", "Bilinmiyor/Değerlendirilir"], aciklama: "Kalıcı yuva bulunana kadar geçici bir yuvada kalması mümkün mü?", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "ozel_ihtiyac_detay_sahiplendirme", label: "Özel İhtiyaçları (Bakım, Davranış, Diyet)", tip: "textarea", aciklama: "Varsa özel mama, düzenli ilaç kullanımı, bilinen alerjiler, davranışsal problemler (korku, agresyon) ve nasıl yönetilebileceği hakkında bilgi.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "cocuklu_aile_uygunlugu_sahiplendirme", label: "Çocuklu Aileye Uygunluk Durumu", tip: "select_aciklamali", secenekler_map: {"Çok Uygun/Çocuklarla Arası İyi":false, "Uygun (Deneyimli ve Gözetimli Aile Şartıyla)":true, "Küçük Çocuklar İçin Tavsiye Edilmez":true, "Uygun Değil/Bilinmiyor":true}, aciklama_label: "Uygunluk Detayı/Yaş Grubu", ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "apartman_hayatina_uygunluk_sahiplendirme", label: "Apartman Yaşamına Uygunluk", tip: "select", secenekler: ["Çok Uygun (Sessiz, az egzersiz ihtiyacı)", "Uygun (Düzenli egzersiz ve ilgiyle)", "Bahçeli Ev Tercih Edilir/Gerekli", "Uygun Değil"], ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "ilk_kez_hayvan_sahiplenecek_kisiye_uygunluk_sahiplendirme", label: "İlk Kez Hayvan Sahiplenecek Kişiye Uygunluk", tip: "select", secenekler: ["Çok Uygun/Kolay Bakım", "Uygun (Araştırma ve sabırla)", "Deneyim Tercih Edilir", "Uygun Değil (Özel ihtiyaçları var)"], ai_importance: 0.75, zorunlu: false }
+        - { alan_adi: "sahiplendiren_iletisim_tercihi_sahiplendirme", label: "İletişim Tercihleri (İlan Sahibi)", tip: "multiselect", secenekler: ["Platform Üzerinden Mesaj (Önerilir)", "Telefon Numarası (Doğrulanmış, İsteğe Bağlı Paylaşılır)", "E-posta (Doğrulanmış, İsteğe Bağlı Paylaşılır)"], ai_importance: 0.5, zorunlu: true }
+        - { alan_adi: "mikrocip_durumu_sahiplendirme", label: "Mikroçip Durumu", tip: "select", secenekler: ["Var ve Kayıtlı", "Var ama Kaydı Güncellenmeli", "Yok", "Bilinmiyor"], ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "kopekler_icin_enerji_seviyesi_sahiplendirme", label: "Enerji Seviyesi (Köpekler için)", tip: "select", secenekler: ["Düşük (Sakin, az hareketli)", "Orta (Günlük oyun ve yürüyüş yeterli)", "Yüksek (Aktif, uzun egzersiz ihtiyacı)", "Çok Yüksek (Sporcu, sürekli aktivite)"], hayvan_turu_bagimliligi: "Köpek", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "kediler_icin_tuy_tipi_sahiplendirme", label: "Tüy Tipi ve Bakımı (Kediler için)", tip: "select_aciklamali", secenekler_map: {"Kısa Tüylü (Az Bakım)":false, "Orta Uzunlukta (Haftalık Bakım)":true, "Uzun Tüylü (Günlük Bakım Gerekir)":true}, aciklama_label: "Tüy Bakım Notu", hayvan_turu_bagimliligi: "Kedi", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "kuslar_icin_tur_detay_sahiplendirme", label: "Kuş Türü Detayı (Kuş ise)", tip: "text", aciklama: "Örn: Muhabbet Kuşu (Jumbo), Sultan Papağanı (Lutino).", hayvan_turu_bagimliligi: "Kuş", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "fotograf_video_yukleme_sahiplendirme", label: "Fotoğraf ve Video Yükleme", tip: "multiple_file_upload_with_preview", kurallar: {min_fotograf: 3, max_fotograf: 10, onerilen_video_suresi_saniye: 60, kabul_edilen_formatlar: ["jpg", "jpeg", "png", "mp4", "mov"]}, aciklama: "Hayvanın net, aydınlık ve güncel en az 3 fotoğrafını yükleyin. Mümkünse kısa bir videosu da sahiplenme şansını artırır.", ai_importance: 0.9, zorunlu: true } # Zorunluluk ve tip detaylandırıldı
+    platform_ayarlari_sahiplendirme:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SINIRSIZ_AKTIF_KULLANICI_KONTROLLU"
+        # Açıklama: Ücretsiz sahiplendirme ilanları, hayvan yuva bulana kadar veya ilan sahibi tarafından kaldırılana kadar yayında kalır.
+        # Platform, ilanın güncelliğini korumak için düzenli kontroller ve kullanıcı etkileşimleri bekler.
+        politika_detaylari_sahiplendirme:
+        otomatik_ilan_guncellik_sorgulama_periyodu_gun: 45
+        # Açıklama: Sistem, 45 günde bir ilan sahibine "Hayvan hala yuva arıyor mu? İlan bilgileri güncel mi?" şeklinde bir bildirim gönderir.
+        guncellik_teyidi_yapilmayan_ilan_durumu_degisikligi_gun_sonra: 15
+        # Açıklama: Sorgulamaya 15 gün içinde yanıt vermeyen ilanlar, geçici olarak "Pasif (Güncellenmedi)" durumuna alınabilir veya arama sonuçlarında önceliği düşürülebilir.
+        kullanici_tarafindan_kolay_ilan_yenileme_guncelleme_imkani_aktif_mi: true
+        sahiplendirildi_olarak_isaretleme_zorunlulugu_ve_tesvik_sistemi_aktif_mi: true
+        # Açıklama: Hayvan sahiplendirildiğinde ilanı "Sahiplendirildi" olarak işaretlemek zorunludur. Başarılı sahiplendirme bildiren kullanıcılara platform içi küçük ödüller (rozet, sonraki ilanlarda öncelik vb.) sunulabilir.
+      onceliklendirme_ve_gorunurluk_ayarlari:
+        ai_temelli_oncelik_puani_sahiplendirme: 1.8
+        # Açıklama: Detaylı bilgi, kaliteli fotoğraf/video, hızlı yanıt veren kullanıcılar ve olumlu geri bildirimler (varsa) öncelik puanını artırır.
+        acil_yuva_bekleyen_ve_ozel_ihtiyacli_canlar_icin_ek_gorunurluk_secenekleri_aktif_mi: true
+        # Örn: "Haftanın Acil Yuva Arayanları" bölümü, "Özel Bakıma İhtiyaç Duyanlar" filtresi.
+        basarili_sahiplendirme_hikayelerini_one_cikarma_aktif_mi: true # Topluluğa ilham vermek için.
+      moderasyon_ayarlari:
+        seviye: "YUKSEK_HAYVAN_REFAHI_VE_KULLANICI_GÜVENİ_ODAKLI_DETAYLI_INCELEME"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_ON_ONAY_BEKLIYOR"
+        # Açıklama: Tüm yeni sahiplendirme ilanları, yayınlanmadan önce temel hayvan refahı standartları, yanıltıcı bilgi ve platform kuralları açısından incelenir.
+        yaniltici_bilgi_ve_kotu_niyetli_ilan_tolerans_politikasi: "SIFIR_TOLERANS_DERHAL_KALDIRMA_VE_KULLANICI_KISITLAMASI"
+        hayvan_refahini_riske_atan_icerik_kontrol_kriterleri:
+        - "Hayvanın sağlık durumu hakkında yanıltıcı veya eksik bilgi verilmesi."
+        - "Uygun olmayan yaşam koşullarının (kirli, çok küçük kafes vb.) fotoğraflarla sergilenmesi."
+        - "Yavru hayvanların çok erken yaşta (anne sütünden kesilmeden) sahiplendirilmeye çalışılması."
+        - "Sahiplendirme şartlarında hayvanın refahını gözetmeyen veya istismara açık maddelerin bulunması."
+        kullanici_sikayetlerini_ve_geri_bildirimlerini_degerlendirme_sureci_aktif_mi: true
+      dogrulama_gereklilikleri_ve_guven_artirici_onlemler:
+        ozel_dogrulama_sureci_aktif_mi: true
+        dogrulama_genel_aciklama_kullanici: "Ücretsiz sahiplendirme kategorisindeki ilanların güvenilirliğini artırmak, hayvan refahını en üst düzeyde korumak ve sorumlu sahiplendirmeyi teşvik etmek amacıyla, platformumuz bazı ek bilgiler veya belgeler talep edebilir. Bu, hem sizin hem de potansiyel yeni sahiplerin güvenliği içindir."
+        talep_edilebilecek_dogrulama_unsurlari_sahiplendirme:
+        - unsur_kodu: "VETERINER_SAGLIK_KAYITLARI_SAHIPLENDIRME"
+          gosterilecek_ad_kullanici: "Veteriner Sağlık Kayıtları (Aşı Kartı vb.)"
+          zorunluluk_seviyesi: "ONCELIKLI_TAVSIYE_EDILEN_VE_GUVEN_ARTIRICI"
+          beklenen_format_aciklama_kullanici: "Hayvanın güncel aşılarını, sağlık geçmişini ve kısırlaştırma durumunu gösteren resmi veteriner kayıtları veya aşı kartı. (PDF, JPG, PNG formatında yüklenebilir)"
+          moderator_kontrol_notlari: "Belgenin güncelliği, veteriner bilgileri ve temel sağlık uygulamalarının varlığı kontrol edilir. Bu, ilanın güvenilirliğini önemli ölçüde artırır."
+          ai_belge_analizi_aktif_mi: false
+  
+        - unsur_kodu: "SAHIPLENDIRME_SOZLESMESI_KULLANIMI_SAHIPLENDIRME"
+          gosterilecek_ad_kullanici: "Sahiplendirme Sözleşmesi Kullanımı"
+          zorunluluk_seviyesi: "SIDDETLE_TAVSIYE_EDILEN_VE_PLATFORM_SABLONU_SUNULUR"
+          beklenen_format_aciklama_kullanici: "Sahiplendirme sürecinde yeni sahip ile karşılıklı hak ve sorumlulukları belirleyen bir sözleşme kullanmanız, hayvanın gelecekteki refahı için önemlidir. Platformumuz örnek bir sözleşme taslağı sunar. Kendi taslağınızı da kullanabilirsiniz."
+          moderator_kontrol_notlari: "Kullanıcının sözleşme kullanma niyetinde olması ve platform şablonunu incelemesi teşvik edilir. Zorunlu yükleme olmasa da, şartlarda 'sözleşmeli sahiplendirme' ibaresi varsa olumlu değerlendirilir."
+          ai_belge_analizi_aktif_mi: false
+  
+        - unsur_kodu: "BARINMA_ALANI_VE_HAYVAN_GORSELLERI_DETAYLI_SAHIPLENDIRME"
+          gosterilecek_ad_kullanici: "Hayvanın ve Yaşam Alanının Güncel Fotoğrafları/Videoları"
+          zorunluluk_seviyesi: "ZORUNLU_YUKLEME_KALITE_KONTROLLU"
+          kosul_aciklamasi_kullanici: "Hayvanın net, farklı açılardan çekilmiş en az 3-5 adet güncel fotoğrafı ve mümkünse yaşadığı ortamı da gösteren kısa bir video yüklenmelidir."
+          beklenen_format_aciklama_kullanici: "Fotoğraflar hayvanın genel durumunu, boyutunu ve varsa özel işaretlerini göstermelidir. Videolar, hayvanın hareketlerini ve karakterini yansıtabilir."
+          moderator_kontrol_notlari: "Görsellerin kalitesi, hayvanın refah durumu hakkında ipucu verir. Uygunsuz (kirli, dar, karanlık) ortam görselleri veya hayvanın kötü durumda olduğunu düşündüren fotoğraflar varsa ilan onaylanmaz veya ek bilgi istenir."
+          ai_belge_analizi_aktif_mi: false # Gelecekte AI ile görsel analizi (refah tespiti)
+  
+        - unsur_kodu: "ILAN_SAHIBI_KIMLIK_VE_ILETISIM_DOGRULAMASI_TEMEL_SAHIPLENDIRME"
+          gosterilecek_ad_kullanici: "İlan Sahibi İletişim Bilgileri Doğrulaması"
+          zorunluluk_seviyesi: "ZORUNLU_PLATFORM_UYESI_DOGRULAMASI"
+          beklenen_format_aciklama_kullanici: "Platforma kayıtlı e-posta adresiniz ve (isteğe bağlı paylaşırsanız) telefon numaranız doğrulanmış olmalıdır. Bu, güvenli iletişim için gereklidir."
+          moderator_kontrol_notlari: "Kullanıcının temel platform üyelik doğrulamaları (e-posta onayı vb.) tamamlanmış olmalı."
+          ai_belge_analizi_aktif_mi: false
+        dogrulama_basarili_ilan_etiketi_kullanici: "Doğrulanmış Bilgilerle Yuva Arıyor"
+        dogrulama_puan_katkisi_sahiplendirme: 30 # Daha yüksek puan, çünkü güven çok önemli.
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_sahiplendirme:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+        - { hedef_form_alani_kodu: "ILAN_BASLIK_SAHIPLENDIRME", oneri_basligi_kullanici: "Etkili ve Bilgilendirici Bir Başlık Oluşturun", oneri_detayi_kullanici: "Başlığınızda hayvanınızın türünü, genel yaşını (yavru, genç vb.), cinsiyetini (biliniyorsa) ve bulunduğu şehri/ilçeyi eklemek, doğru kişilerin ilanınızı daha kolay bulmasına yardımcı olur. 'Yuva Arıyor' veya 'Kalıcı Ailesini Bekliyor' gibi ifadeler kullanabilirsiniz.", neden_onemli_aciklamasi_kullanici: "SEO (Arama Motoru Optimizasyonu) için kritik olan bu bilgiler, ilanınızın arama sonuçlarında üst sıralarda çıkma olasılığını artırır ve ilk izlenimi güçlendirir.", iyi_ornek_metni_kullanici: "Örn: '1 Yaşında Erkek Tekir Kedi 'Bulut' - İstanbul/Kadıköy Acil Yuva Arıyor' veya 'Yavru Golden Retriever Kardeşler (2 Aylık) - Ankara'da Sahiplenilmeyi Bekliyor'", kotu_ornek_metni_kullanici: "Örn: 'Kedimi veriyorum acil'", ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI", ideal_uzunluk_min: 40, ideal_uzunluk_max: 90 }
+        - { hedef_form_alani_kodu: "ILAN_ACIKLAMA_OZET_SAHIPLENDIRME", oneri_basligi_kullanici: "İlan Özetinizi Güçlendirin (Arama Sonuçları İçin)", oneri_detayi_kullanici: "Açıklamanızın ilk 150-160 karakteri, arama motorları tarafından ilanınızın özeti (meta description) olarak kullanılabilir. Hayvanınızın en çarpıcı özelliklerini, temel ihtiyaçlarını ve neden yuva aradığını burada net bir şekilde vurgulayın.", neden_onemli_aciklamasi_kullanici: "Kullanıcıların arama sonuçlarında veya sosyal medya paylaşımlarında ilanınıza tıklama olasılığını artırır.", iyi_ornek_metni_kullanici: "Enerjik, oyuncu ve çocuklarla arası harika olan 2 yaşındaki melez köpeğimiz Zeytin, taşınma nedeniyle acil olarak sevgi dolu, bahçeli bir yuva arıyor. Tüm aşıları tam, kısır.", ipucu_tipi: "IYILESTIRME_ONERISI", ideal_uzunluk_max: 160 }
+        - { hedef_form_alani_kodu: "ILAN_ACIKLAMA_HIKAYE_SAHIPLENDIRME", oneri_basligi_kullanici: "Hayvanın Hikayesini ve Kişiliğini İçtenlikle Anlatın", oneri_detayi_kullanici: "Hayvanın geçmişi (biliniyorsa), karakteri (sevdiği/sevmediği şeyler, korkuları, alışkanlıkları), sağlık durumu (detaylı), eğitim seviyesi, çocuklarla/diğer hayvanlarla uyumu ve yeni ailesinden beklentileriniz hakkında samimi ve detaylı bilgiler verin. Onun için neden ideal bir yuva aradığınızı ve nasıl bir ailede mutlu olacağını anlatın.", neden_onemli_aciklamasi_kullanici: "Potansiyel sahiplenicilerin hayvanı daha iyi tanımasını, onunla duygusal bir bağ kurmasını ve doğru bir karar vermesini sağlar. Bu, kalıcı bir yuva bulma şansını artırır.", alt_oneri_maddeleri: ["Pozitif ve geliştirilebilecek özelliklerini dengeli bir şekilde belirtin.", "Günlük rutininden, enerji seviyesinden ve egzersiz ihtiyaçlarından bahsedin.", "Özel bir diyeti veya sağlık takibi gerekiyorsa açıkça yazın.", "Net, okunabilir paragraflar ve mümkünse madde işaretleri kullanın.", "Sahiplendirme şartlarınızı (sözleşme, takip vb.) bu bölümde de netleştirin."], ipucu_tipi: "BILGILENDIRME_KAPSAMLI_VE_DUYGUSAL_BAG_KURMA" }
+        semantik_zenginlik_onemi_katsayisi: 0.95
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "PetAdoption" # Bu schema tipi tam olarak mevcut olmayabilir, "Product" veya "Event" (Adoption Event) üzerinden genişletilebilir. En yakını "Product" ve "animal" özelliği ile.
+          # Alternatif olarak "Product" schema'sı kullanılabilir ve "isAccessoryOrSparePartFor" yerine hayvanın kendisi "itemOffered" olarak tanımlanabilir.
+          # Schema.org'da direkt "PetAdoption" yok, bu nedenle genellikle "Product" kullanılır ve "category" ile "Evcil Hayvan Sahiplenme" belirtilir.
+          alan_eslestirmeleri: # "Product" schema'sına göre uyarlama:
+            - { schema_alani: "name", platform_alani_kaynagi: "ilan.baslik_schema_icin" } # Genellikle hayvanın adı ve kısa tanımı
+            - { schema_alani: "description", platform_alani_kaynagi: "ilan.aciklama_uzun_schema_icin" }
+            - { schema_alani: "category", sabit_deger: "Evcil Hayvanlar > Sahiplenme" }
+            - { schema_alani: "productID", platform_alani_kaynagi: "ilan.id_unique" } # Platform içi benzersiz ilan ID'si
+            - { schema_alani: "image", platform_alani_kaynagi: "ilan.fotograflar_url_listesi_schema_icin" }
+            - { schema_alani: "url", platform_alani_kaynagi: "ilan.canonical_url" }
+            - { schema_alani: "offers", schema_alt_tipi: "Offer", alan_eslestirmeleri_alt_tip: [
+                { schema_alani: "price", sabit_deger: "0" }, # Ücretsiz sahiplendirme olduğu için
+                { schema_alani: "priceCurrency", sabit_deger: "TRY" }, # Para birimi yine de belirtilebilir.
+                { schema_alani: "availability", sabit_deger: "https://schema.org/InStock" } # Hala sahiplenilebilir
+            ]}
+            - { schema_alani: "brand", schema_alt_tipi: "Brand", alan_eslestirmeleri_alt_tip: [ # Hayvanın ırkı "brand" olarak düşünülebilir.
+                { schema_alani: "name", platform_alani_kaynagi: "hayvan.irk_sahiplendirme_metin" }
+            ]}
+            - { schema_alani: "additionalProperty", schema_alt_tipi: "PropertyValue", # Hayvana ait diğer özellikler
+              coklu_deger_kaynagi: "ilan.hayvan_ozellikleri_schema_icin_property_value_listesi",
+              # Bu liste backend'de oluşturulur: [{name:"Tür", value:"Kedi"}, {name:"Yaş", value:"2 Yaşında"}, {name:"Cinsiyet", value:"Dişi"}, {name:"Kısırlaştırma", value:"Kısırlaştırılmış"}]
+            }
+            - { schema_alani: "itemCondition", sabit_deger: "https://schema.org/UsedCondition"} # Yeni bir ürün olmadığı için "Kullanılmış" durumu daha uygun.
+        ozel_meta_etiketler_sahiplendirme:
+        - { etiket_adi: "petplatform:adoption_animal_type", icerik_kaynagi: "hayvan.tur_sahiplendirme_metin" }
+        - { etiket_adi: "petplatform:adoption_animal_age", icerik_kaynagi: "hayvan.yas_sahiplendirme_metin" }
+        - { etiket_adi: "petplatform:adoption_location_city", icerik_kaynagi: "ilan.konum_sehir_metin" }
+        - { etiket_adi: "petplatform:adoption_sterilized_status", icerik_kaynagi: "hayvan.kisirlastirma_durumu_sahiplendirme_metin" }
+        - { etiket_adi: "petplatform:adoption_health_note", icerik_kaynagi: "ilan.saglik_durumu_aciklamasi_metin_kisa" } # Varsa kısa bir sağlık notu
+        - { etiket_adi: "petplatform:adoption_urgency", icerik_kaynagi: "ilan.aciliyet_seviyesi_sahiplendirme_metin" } # (Eğer formda ayrı bir aciliyet alanı varsa)
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        veri_paylasim_formatlari_destegi_sahiplendirme:
+        - { format_adi: "Petfinder_API_Uyumlu_XML_Ozet", aktif_mi: false, aciklama: "Gelecekte uluslararası standartlara uyum için değerlendirilebilir." } # Örnek
+        - { format_adi: "JSON_LD_Sahiplendirme_Schema", aktif_mi: true, aciklama: "Yapılandırılmış verinin JSON-LD formatında sunulması." }
+        - { format_adi: "RSS_Feed_Yeni_Sahiplendirme_Ilanlari", aktif_mi: true, aciklama: "Yeni eklenen sahiplendirme ilanları için RSS beslemesi." }
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_sahiplendirme:
+        standart_gorsel_boyutlari_url_sablonu_aktif_mi: true
+        gorsel_alt_metin_stratejisi_sahiplendirme: "HAYVAN_TUR_IRK_YAS_SEHIR_SAHIPLENDIRME_ILANI"
+        # Şablon: "[Hayvan Türü] ([Irk]) [Yaş] [Şehir] - Yuva Arıyor Sahiplendirme İlanı"
+        gorsel_site_haritasi_xml_aktif_mi: true
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_sahiplendirme:
+        ilan_detay_ve_fotograf_kalite_skoru_meta: "petplatform:adoption_post_quality_score" # (Platform içi bir skorlama olabilir)
+        sahiplendirme_sartlari_seffaflik_duzeyi_meta: "petplatform:adoption_terms_clarity_level" # (BELIRGIN, KISMEN_BELIRGIN, BELIRTILMEMIS)
+        kullanici_profil_dogrulanma_seviyesi_meta_sahiplendiren: "petplatform:rehoming_user_verification_level"
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: Çok Yüksek (Toplumsal duyarlılık ve ihtiyaç yüksek)"
+        - "Başarılı sahiplendirme oranı hedefi: %75-85 (Doğru eşleşme, şeffaflık ve platform desteği ile)"
+        - "Ortalama sahiplendirme süresi: 15-45 gün (Hayvanın türü, yaşı, özellikleri ve lokasyona göre değişkenlik gösterir)"
+        - "Topluluk katılımı ve sosyal medya paylaşım oranı: Çok Yüksek"
+        - "Platforma olan güven ve pozitif imaj katkısı: En Yüksek Seviyede"
+        - "Barınaklara giden hayvan sayısını azaltmaya yönelik dolaylı katkı: Ölçülebilir ve Önemli"
+    kayip_buluntu:
+    id: "cat_ucretsiz_kayipbuluntu"
+    temel_kimlik:
+      ad: "Kayıp / Buluntu Hayvan İlanları" # İsim biraz daha resmi ve net.
+      slug: "kayip-buluntu-hayvan-ilanlari"
+      aciklama: "Kaybolan can dostlarımızı bulmak veya bulunan sahipsiz hayvanları güvenle sahiplerine ya da yeni yuvalarına kavuşturmak için açılan acil yardım ve dayanışma ilanları." # Amaç genişletildi.
+      gorsel_kimlik: { renk_kodu: "#FDE047", tema_notu: "Limon Sarısı (Dikkat, Aciliyet ve Umut)", ikon_adi: "fas fa-search-location", emoji: "🔍🆘" } # Emoji eklendi.
+    kategori_tipi: "ucretsiz_acil_yardim" # Kategori tipi daha spesifik.
+    arama_sistemi:
+      alternatif_kelimeler: ["kayıp kedi", "kayıp köpek", "bulunan hayvan", "sahibi aranıyor", "evcil hayvanım kayboldu", "sokakta bulundu", "tasmalı bulundu", "yardım kayıp", "pet bul", "evini arıyor", "kayıp ilanları", "buluntu ilanları", "acil kayıp", "sahibine ulaştır", "afiş (kayıp hayvan)", "gören oldu mu", "nerede bu can", "kayıp kuş", "kayıp egzotik", "buldum eve aldım", "kayıp pet alarmı"] # Eklemeler yapıldı.
+      ai_intent_keywords: ["kayıp hayvan bildirimi yap", "buluntu hayvan ilanı ver", "sahibini arıyorum acil", "petimi kaybettim ne yapmalıyım", "hayvan buldum sahibine nasıl ulaşırım", "acil kayıp pet platformu"] # Kullanıcıların arama niyetleri.
+      semantic_tags: ["lost_pet_alert", "found_pet_report", "animal_search_rescue", "reunite_pet_owner", "missing_animal_network", "urgent_animal_search", "pet_finder_service", "community_animal_watch"] # Daha detaylı etiketler.
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "ilan_tipi_kb", label: "İlan Tipi", tip: "select", secenekler: ["Kayıp Hayvan Bildirimi (Hayvanımı Arıyorum)", "Buluntu Hayvan Bildirimi (Hayvan Buldum, Sahibini Arıyorum/Koruyorum)"], ai_importance: 0.98, zorunlu: true }
+        - { alan_adi: "hayvan_turu_kb", label: "Hayvan Türü", tip: "select", secenekler: ["Köpek", "Kedi", "Kuş", "Kemirgen/Küçük Evcil", "Sürüngen", "Diğer (Egzotik olmayan)"], ai_importance: 0.9, zorunlu: true } # Egzotik olmayan vurgusu.
+        - { alan_adi: "hayvan_irk_kb", label: "Hayvan Irkı/Cinsi", tip: "text", aciklama: "Belirginse veya tahmin ediliyorsa (örn: Tekir, Golden kırması).", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "hayvan_yas_tahmini_kb", label: "Hayvanın Tahmini Yaşı", tip: "select_text", secenekler: ["Yavru (0-6 ay)", "Genç (6 ay-2 yaş)", "Yetişkin (2-7 yaş)", "Yaşlı (7+ yaş)", "Bilinmiyor"], aciklama_text: "Yaklaşık yaşını belirtin veya seçin.", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "hayvan_cinsiyet_kb", label: "Cinsiyet", tip: "select", secenekler: ["Erkek", "Dişi", "Bilinmiyor/Belirsiz"], ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "hayvan_renk_desen_kb", label: "Hayvanın Rengi/Desenleri", tip: "textarea", aciklama: "Belirgin renkleri, lekeleri, desenleri tarif edin (örn: Siyah-beyaz smokin kedi, sarı-kahve benekli köpek).", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "ayirt_edici_ozellikler_kb", label: "Ayırt Edici Özellikleri/İşaretleri", tip: "textarea_rich", aciklama: "Yara izi, kesik kulak, farklı renkte göz, topallama, özel bir ben, vücudunda leke, takılı olan özel bir aksesuar (tasma dışında) vb. Fotoğrafla destekleyin.", ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "kayboldugu_bulundugu_tarih_saat_kb", label: "Kaybolduğu/Bulunduğu Tarih ve Yaklaşık Saat", tip: "datetime_flexible", aciklama: "Mümkün olduğunca net tarih ve saat aralığı belirtin.", ai_importance: 0.9, zorunlu: true } # Tip esnekleştirildi.
+        - { alan_adi: "kayboldugu_bulundugu_adres_detay_kb", label: "Kaybolduğu/Bulunduğu Yer (Detaylı Adres/Konum)", tip: "location_map_input_text", aciklama: "Mahalle, Cadde/Sokak, Apartman/Site Adı, Park, Önemli Bir Nokta Yakını. Haritadan da işaretleyebilirsiniz.", ai_importance: 0.95, zorunlu: true } # Harita entegrasyonu eklendi.
+        - { alan_adi: "kayboldugu_bulundugu_sehir_ilce_kb", label: "Şehir ve İlçe", tip: "location_dependent_selects", ana_konum_alani_kodu: "kayboldugu_bulundugu_adres_detay_kb", ai_importance: 0.9, zorunlu: true } # Bağımlı seçilebilir alanlar.
+        - { alan_adi: "tasma_aksesuar_durumu_kb", label: "Üzerindeki Tasma/Aksesuar Bilgileri", tip: "textarea", aciklama: "Tasması var mıydı? Ne renk, malzemesi ne? Künyesi, isimlik, GPS takip cihazı, kıyafet vb. var mıydı? Detay verin.", ai_importance: 0.75, zorunlu: false }
+        - { alan_adi: "mikrocip_bilgisi_kb", label: "Mikroçip Durumu ve Numarası", tip: "select_aciklamali_text", secenekler_map: { "Var (Numarası Biliniyor)": true, "Var (Numarası Bilinmiyor/Okutulmalı)": true, "Yok": false, "Bilinmiyor/Kontrol Edilmedi": false }, aciklama_label: "Mikroçip Numarası (Biliniyorsa)", ai_importance: 0.8, zorunlu: false } # Text input eklendi.
+        - { alan_adi: "son_goruldugu_yer_ve_davranis_kayip_kb", label: "Son Görüldüğü Yer ve Davranışları (Kayıp İse)", tip: "textarea_rich", bagimli_alan_goster: "ilan_tipi_kb", bagimli_degerler_goster: ["Kayıp Hayvan Bildirimi (Hayvanımı Arıyorum)"], aciklama: "En son nerede, ne zaman, kim tarafından görüldü? O sırada ne yapıyordu, korkmuş muydu, bir yöne mi gidiyordu?", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "bulundugundaki_davranis_ve_saglik_durumu_buluntu_kb", label: "Bulunduğundaki Davranış ve Sağlık Durumu (Buluntu İse)", tip: "textarea_rich", bagimli_alan_goster: "ilan_tipi_kb", bagimli_degerler_goster: ["Buluntu Hayvan Bildirimi (Hayvan Buldum, Sahibini Arıyorum/Koruyorum)"], aciklama: "Bulduğunuzda ürkek miydi, cana yakın mıydı? Yaralı, hasta, bitkin veya bakımsız görünüyor muydu? Herhangi bir acil müdahale yapıldı mı?", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "iletisim_bilgileri_acil_kb", label: "Acil Ulaşım İçin İletişim Bilgileri", tip: "phone_primary_secondary_email_optional", aciklama: "Birincil Telefon (zorunlu, SMS doğrulamalı), İkincil Telefon (isteğe bağlı), E-posta (isteğe bağlı, doğrulanmış). Bu bilgiler sadece eşleşme durumunda veya yetkili kişilerle paylaşılacaktır.", ai_importance: 0.98, zorunlu: true } # Tip detaylandırıldı.
+        - { alan_adi: "kayip_ilani_icin_odul_kb", label: "Ödül Bilgisi (Kayıp İse, İsteğe Bağlı)", tip: "number_currency_text", para_birimi: "TRY", aciklama: "Hayvanınızı bulana bir ödül teklif ediyor musunuz? Miktarını veya 'Görüşülür' yazabilirsiniz.", ai_importance: 0.4, zorunlu: false } # Text input eklendi.
+        - { alan_adi: "buluntu_hayvan_gecici_bakim_yeri_kb", label: "Geçici Bakım Yeri ve Koşulları (Buluntu İse)", tip: "textarea", bagimli_alan_goster: "ilan_tipi_kb", bagimli_degerler_goster: ["Buluntu Hayvan Bildirimi (Hayvan Buldum, Sahibini Arıyorum/Koruyorum)"], aciklama: "Hayvan şu anda nerede tutuluyor (ev, iş yeri, veteriner klinik, geçici yuva)? Güvende mi? Temel ihtiyaçları (mama, su, sıcak yer) karşılanıyor mu?", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "fotograf_video_kb", label: "Hayvanın Fotoğrafları/Videoları", tip: "multiple_file_upload_with_preview_guidance", kurallar: {min_fotograf: 1, max_fotograf: 5, onerilen_video_suresi_saniye: 30, kabul_edilen_formatlar: ["jpg", "jpeg", "png", "mp4"]}, aciklama: "HAYATİ ÖNEMDE! Hayvanın yüzünün, vücudunun ve ayırt edici özelliklerinin net göründüğü, iyi ışıklandırılmış en az 1 (tercihen 3-5) fotoğraf yükleyin. Varsa kısa bir video da çok yardımcı olur.", ai_importance: 0.95, zorunlu: true } # Min fotoğraf 1'e düşürüldü, aciliyetten dolayı.
+        - { alan_adi: "ilan_verenin_rolu_kb", label: "İlanı Veren Kişinin Rolü", tip: "select", secenekler: ["Hayvanın Sahibiyim (Kayıp Bildirimi)", "Hayvanı Bulan Kişiyim (Buluntu Bildirimi)", "Görgü Tanığıyım/Yardımcı Olmak İstiyorum"], ai_importance: 0.7, zorunlu: true }
+        - { alan_adi: "hayvanin_genel_karakteri_kisaca_kb", label: "Hayvanın Genel Karakteri (Sahibi Biliyorsa/Bulan Gözlemlediyse)", tip: "textarea", aciklama: "Kısaca: Oyuncu, ürkek, insan canlısı, sakin vb.", ai_importance: 0.6, zorunlu: false }
+        - { alan_adi: "yakalanma_ve_tutma_zorlugu_buluntu_kb", label: "Yakalanma/Tutulma Zorluğu (Buluntu İse)", tip: "select_aciklamali", secenekler_map: {"Kolayca Yakalandı/Tutuluyor":false, "Ürkek Ama Zararsız, Sabırla Yaklaşılabilir":true, "Çok Korkak/Kaçıyor, Yakalamak Zor":true, "Agresif Tepki Veriyor, Profesyonel Yardım Gerekebilir":true, "Bilgim Yok/Denemedim":false}, aciklama_label: "Yaklaşım ve Güvenlik Notu", bagimli_alan_goster: "ilan_tipi_kb", bagimli_degerler_goster: ["Buluntu Hayvan Bildirimi (Hayvan Buldum, Sahibini Arıyorum/Koruyorum)"], ai_importance: 0.65, zorunlu: false }
+        - { alan_adi: "beslenme_su_durumu_gozlem_buluntu_kb", label: "Beslenme ve Su Durumu Gözlemi (Buluntu İse)", tip: "textarea", bagimli_alan_goster: "ilan_tipi_kb", bagimli_degerler_goster: ["Buluntu Hayvan Bildirimi (Hayvan Buldum, Sahibini Arıyorum/Koruyorum)"], aciklama: "Çok aç veya susuz görünüyor muydu? Bir şey yiyip içti mi? Ne tür yiyeceklere ilgi gösterdi?", ai_importance: 0.5, zorunlu: false }
+        - { alan_adi: "ihbar_yapilan_kurumlar_ve_sonuc_kb", label: "İhbar Yapılan Kurumlar ve Sonuçları (Varsa)", tip: "multiselect_text_tags_status", secenekler_onerilen: ["Belediye Veteriner İşleri", "En Yakın Barınak", "Polis/Jandarma", "Yerel Hayvan Koruma Dernekleri"], aciklama: "Hangi kurumlara ne zaman başvurdunuz ve ne sonuç aldınız?", ai_importance: 0.4, zorunlu: false } # Statü eklendi.
+        - { alan_adi: "sosyal_medya_ve_diger_platform_paylasim_linkleri_kb", label: "Sosyal Medya ve Diğer Platform Paylaşım Linkleri", tip: "url_list_platform_detected", aciklama: "Varsa, bu ilan için yaptığınız Facebook, Instagram, Twitter, PetArkadaş vb. paylaşımların linklerini ekleyebilirsiniz. Bu, aramanın yayılmasına yardımcı olur.", ai_importance: 0.3, zorunlu: false } # Platform tespiti eklendi.
+    platform_ayarlari_kayip_buluntu:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURESIZ_PERIYODIK_KULLANICI_ONAYLI_AKTIF_TUTMA"
+        politika_detaylari_kayip_buluntu:
+        periyodik_kullanici_onay_mekanizmasi_aktif_mi: true
+        onay_periyodu_gun: 7 # Daha sık, çünkü durum hızla değişebilir.
+        hatirlatma_bildirimi_gun_oncesi_onay_icin: 2
+        onay_verilmezse_uygulanacak_aksiyon_detayli:
+          aksiyon_tipi: "ILANI_GECICI_PASIFE_AL_VE_KULLANICIYI_BILGILENDIR_SON_UYARI_ILE"
+          pasif_kalma_suresi_gun_son_uyari_sonrasi: 7 # Bu süre sonunda hala onay yoksa otomatik arşive taşı.
+          otomatik_arsivleme_gun_sayisi_ilk_yayindan_itibaren_maks_onaysiz: 90 # En fazla 3 ay onaysız kalabilir.
+        kullanici_tarafindan_kolay_ilan_yeniden_aktive_etme_imkani_aktif_mi: true
+        hayvan_bulundu_olarak_isaretleme_mekanizmasi_ve_tesvik:
+          aktif_mi: true
+          kavusma_hikayesi_paylasma_secenegi_sunulur_mu: true # Topluluğa ilham için.
+          basarili_kavusma_sonrasi_platform_rozet_odulu_verilir_mi: true
+      operasyonel_onceliklendirme_ve_gorunurluk_ayarlari:
+        oncelik_katsayisi_platform_ici_kayip_buluntu: 2.5 # Çok yüksek öncelik.
+        anasayfa_ozel_bolum_gosterimi_aktif_mi_kayip_buluntu: true # "Son Kayıp/Buluntu İlanları" gibi.
+        harita_tabanli_arama_ve_gosterim_ozelligi_aktif_mi: true # Konum bu kategoride çok kritik.
+        acil_durum_bildirim_sistemi_entegrasyonu_planlaniyor_mu: true # (Gelecekte) Belirli bir bölgedeki kullanıcılara anlık bildirim.
+      moderasyon_ayarlari:
+        seviye: "HIZLI_ON_KONTROL_VE_YAYIN_SUREKLI_IZLEME_VE_YUKSEK_ONCELIKLI_DETAYLI_INCELEME"
+        yeni_ilan_varsayilan_durum: "YAYINDA_ACIL_MODERASYON_KUYRUGUNDA"
+        # Açıklama: İlanlar çok hızlı (belki otomatik temel filtrelerle) yayına alınır, ancak moderatörler tarafından anlık olarak en yüksek öncelikle incelenir.
+        yaniltici_veya_kotu_niyetli_ilan_tespit_protokolu_hizli_mudahale:
+        - "Dolandırıcılık amaçlı ödül talepleri, sahte sahiplik iddiaları, hayvan ticareti şüphesi olan ilanlara karşı sıfır tolerans."
+        - "Şüpheli ilanlar derhal askıya alınır, kullanıcı ile iletişime geçilir, gerekirse yasal mercilere bildirilir."
+        otomatik_spam_ve_uygunsuz_icerik_filtreleme_aktif_mi: true
+        kullanici_raporlama_sistemine_entegre_acil_mudahale_ekibi_aktif_mi: true # Kullanıcıların şüpheli ilanları bildirmesi.
+      dogrulama_ve_guvenlik_protokolleri_kayip_buluntu:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Kayıp ve buluntu ilanlarında, sürecin güvenliğini sağlamak, yanlış kişilere hayvan teslimini önlemek ve gerçek mağdurlara yardımcı olmak amacıyla platformumuz, özellikle sahiplik iddialarında ve kritik durumlarda bazı doğrulama adımları uygulayabilir veya ek bilgiler talep edebilir. Amacımız, can dostlarımızın güvenle yuvalarına dönmesine yardımcı olmaktır."
+        uygulanabilecek_dogrulama_senaryolari_kayip_buluntu:
+        - senaryo_kodu: "BULUNTU_HAYVANA_SAHIPLIK_IDDIASI_DETAYLI_KANIT_SURECI_KB"
+          senaryo_aciklamasi_kullanici: "Eğer bulunan bir hayvan için sahiplik iddiasında bulunuyorsanız, hayvanın gerçekten size ait olduğunu şüpheye yer bırakmayacak şekilde kanıtlamanız istenecektir. Bu, hayvanın yanlış ellere geçmesini önlemek için çok önemlidir."
+          talep_edilebilecek_kanitlar_kullanici_listesi_detayli:
+            - "Hayvanın size ait olduğunu gösteren, farklı zamanlarda çekilmiş, net ve ayırt edici özelliklerini (lekeler, yara izleri, özel işaretler) açıkça gösteren birden fazla fotoğraf ve mümkünse video."
+            - "Hayvanın adınıza düzenlenmiş resmi veteriner sağlık karnesi, aşı kayıtları, tedavi faturaları veya mikroçip kayıt belgesi."
+            - "Varsa, hayvanın mikroçip numarası ve bu numaranın kayıtlı olduğu sistemdeki sahip bilgileri."
+            - "Hayvanın özel alışkanlıkları, bildiği özel komutlar, korkuları, sevdiği oyuncaklar veya size özel gösterdiği tepkiler hakkında sadece gerçek sahibinin bilebileceği detaylı bilgiler."
+            - "Gerekirse, hayvanı bulan kişiyle veya platform moderatörüyle görüntülü görüşme yaparak hayvanla olan bağınızı göstermeniz istenebilir."
+          moderator_kontrol_rehberi_detayli: "Sunulan tüm kanıtlar (görsel, yazılı, sözlü) bir bütün olarak değerlendirilir. Fotoğraflardaki hayvanla ilandaki hayvanın birebir eşleşmesi, belgelerin gerçekçiliği ve tarihleri, anlatılan özel bilgilerin tutarlılığı titizlikle incelenir. En ufak bir şüphe durumunda ek teyitler istenir veya sahiplik iddiası reddedilebilir. Hayvanı bulan kişinin de güvenliği ve rızası gözetilir."
+          basarisiz_dogrulama_durumunda_aksiyon_onerisi_detayli: "Sahiplik kesin olarak kanıtlanamazsa, hayvan bulan kişinin korumasında kalmaya devam eder ve bulan kişi, hayvan için yasal prosedürleri (belediyeye bildirim, barınakla iletişim) işletmekte özgürdür. Platform, yasal bir otorite değildir ancak arabuluculuk ve bilgilendirme yapabilir."
+  
+        - senaryo_kodu: "KAYIP_ILANI_SAHIBI_ILETISIM_VE_KIMLIK_DOGRULAMA_ONCELIKLI_KB"
+          senaryo_aciklamasi_kullanici: "Kayıp ilanınızda paylaştığınız iletişim bilgilerinin doğruluğu ve size ait olduğu, hayvanınız bulunduğunda size en hızlı ve güvenli şekilde ulaşılabilmesi için teyit edilebilir. Bu, özellikle ödüllü ilanlarda veya hassas durumlarda önemlidir."
+          uygulanabilecek_dogrulama_yontemleri_listesi_oncelikli:
+            - "Telefon numarasına SMS ile tek kullanımlık kod göndererek doğrulama (Zorunlu)."
+            - "E-posta adresine doğrulama linki göndererek teyit alma (Önerilir)."
+            - "Çok kritik veya şüpheli durumlarda, platform üzerinden kısa bir kimlik teyidi (video selfie veya resmi belge yükleme - sadece moderatör tarafından görülür, sonra silinir) talep edilebilir (Nadir uygulanır)."
+          moderator_kontrol_rehberi_oncelikli: "İletişim bilgilerinin aktif ve ulaşılabilir olması sağlanır. Özellikle yüksek ödüllü ilanlarda veya dolandırıcılık şüphesi olan durumlarda kimlik teyidi adımı gerekebilir. Kullanıcı verilerinin gizliliği esastır."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_kayip_buluntu:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+        - { hedef_form_alani_kodu: "ILAN_BASLIK_KB", oneri_basligi_kullanici: "ACİL DURUM BAŞLIĞI: Net, Bilgilendirici ve Konum Odaklı!", oneri_detayi_kullanici: "Başlıkta büyük harflerle 'KAYIP' veya 'BULUNDU' ibaresini, hayvanın türünü (örn: KEDİ, KÖPEK), belirgin bir özelliğini (örn: TEKİR, SARI TASMALI) ve en son görüldüğü/bulunduğu ŞEHİR/İLÇE/MAHALLE bilgisini MUTLAKA belirtin.", neden_onemli_aciklamasi_kullanici: "Acil durumlarda saniyeler önemlidir! Başlığınız, arama motorlarında, sosyal medyada ve platform içinde ilk bakışta en kritik bilgileri vermelidir.", iyi_ornek_metni_kullanici: "Örn: 'KAYIP KEDİ TEKİR - İstanbul/Beşiktaş, Akaretler Civarı, YEŞİL TASMALI!' veya 'BULUNDU KÖPEK Golden Retriever Yavrusu - Ankara/Çankaya, Atakule Parkı'nda Bulundu, SAHİBİ ARANIYOR!'", ipucu_tipi: "KRITIK_ONERI_ACILIYET_VURGUSU", ideal_uzunluk_max: 100 }
+        - { hedef_form_alani_kodu: "HAYVANIN_DETAYLI_TARIFI_VE_OZEL_ISARETLERI_KB", oneri_basligi_kullanici: "Hayvanı Eşsiz Kılan HER DETAYI Yazın!", oneri_detayi_kullanici: "Hayvanın rengi, deseni, tüy yapısı, boyutu, kilosu (tahmini), göz rengi, kuyruk yapısı, kulak şekli gibi fiziksel özelliklerini detaylıca yazın. En önemlisi, sadece onu tanıyanların bilebileceği özel işaretler: Vücudundaki yara izi, ben, leke, farklı renkte bir pati, kesik veya kıvrık kulak, özel bir yürüyüş şekli, takılı olan farklı bir aksesuar (çip, dövme, özel kolye vb.).", neden_onemli_aciklamasi_kullanici: "Bu detaylar, hayvanın doğru teşhis edilmesini, benzer hayvanlardan ayırt edilmesini ve kötü niyetli kişilerin yanlış iddialarını engellemeyi sağlar.", ipucu_tipi: "BILGILENDIRME_COK_ONEMLI_DETAY_GEREKLI" }
+        - { hedef_form_alani_kodu: "FOTOGRAF_VIDEO_KB", oneri_basligi_kullanici: "EN NET ve GÜNCEL Fotoğraflar/Videolar Hayat Kurtarır!", oneri_detayi_kullanici: "Hayvanın yüzünün, tüm vücudunun ve varsa ayırt edici işaretlerinin ÇOK NET göründüğü, iyi ışıklandırılmış, MÜMKÜNSE FARKLI AÇILARDAN çekilmiş birden fazla GÜNCEL fotoğrafını yükleyin. Eğer kayıpsa, kaybolmadan önceki EN SON hallerini gösteren fotoğraflar idealdir. Bulanık, uzaktan çekilmiş, hayvanın zor seçildiği fotoğraflar arama sürecini olumsuz etkiler. Kısa bir video da çok faydalı olabilir.", neden_onemli_aciklamasi_kullanici: "Görsel kanıt, kayıp/buluntu ilanlarında en hayati unsurdur ve hızlı teşhisi sağlar.", ipucu_tipi: "KRITIK_UYARI_GORSEL_KALITESI_HAYATI" }
+        semantik_zenginlik_onemi_katsayisi: 1.0
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "Report" # Kayıp/Buluntu bir "rapor" veya "bildirim"dir.
+          # Alternatif: "Event" (kaybolma/bulunma olayı) veya "Observation".
+          alan_eslestirmeleri:
+            - { schema_alani: "name", platform_alani_kaynagi: "ilan.baslik_kb_schema_icin" } # "Kayıp Kedi Tekir - İstanbul"
+            - { schema_alani: "description", platform_alani_kaynagi: "ilan.detay_aciklama_kb_kisa_ozet" }
+            - { schema_alani: "reportType", platform_alani_kaynagi: "ilan.ilan_tipi_kb_schema_uyumlu_metin" } # "LostPetReport", "FoundPetReport"
+            - { schema_alani: "dateCreated", platform_alani_kaynagi: "ilan.yayin_tarihi_kb_iso" }
+            - { schema_alani: "locationCreated", platform_alani_kaynagi: "ilan.kayboldugu_bulundugu_yer_schema_place_objesi" , schema_alt_tipi: "Place"}
+            - { schema_alani: "image", platform_alani_kaynagi: "ilan.ana_fotograf_url_kb_schema_icin" }
+            - { schema_alani: "keywords", platform_alani_kaynagi: "ilan.anahtar_kelimeler_kb_virgulle_ayrilmis" } # (kayıp, kedi, tekir, istanbul, beşiktaş, yeşil tasma)
+            - { schema_alani: "mainEntity", schema_alt_tipi: "Pet", # Kaybolan/bulunan hayvanın kendisi
+              alan_eslestirmeleri_alt_tip: [
+                { schema_alani: "animalType", platform_alani_kaynagi: "hayvan.tur_kb_metin" },
+                { schema_alani: "breed", platform_alani_kaynagi: "hayvan.irk_kb_metin" },
+                { schema_alani: "color", platform_alani_kaynagi: "hayvan.renk_kb_metin" },
+                { schema_alani: "gender", platform_alani_kaynagi: "hayvan.cinsiyet_kb_metin_schema_uyumlu" },
+                { schema_alani: "identifier", platform_alani_kaynagi: "hayvan.mikrocip_numarasi_kb_metin_varsa" } # Mikroçip no
+              ]}
+        ozel_meta_etiketler_kayip_buluntu:
+        - { etiket_adi: "petplatform:kb_report_type", icerik_kaynagi: "ilan.ilan_tipi_kb_metin" } # LOST / FOUND
+        - { etiket_adi: "petplatform:kb_animal_species", icerik_kaynagi: "ilan.hayvan_turu_kb" }
+        - { etiket_adi: "petplatform:kb_animal_breed", icerik_kaynagi: "ilan.hayvan_irk_kb" }
+        - { etiket_adi: "petplatform:kb_location_city_district", icerik_kaynagi: "ilan.sehir_ilce_mahalle_kb_metin" }
+        - { etiket_adi: "petplatform:kb_event_datetime_iso", icerik_kaynagi: "ilan.kayboldugu_bulundugu_tarih_saat_kb_iso" }
+        - { etiket_adi: "petplatform:kb_distinguishing_features", icerik_kaynagi: "ilan.ayirt_edici_ozellikler_kb_kisa_ozet_meta_icin" }
+        - { etiket_adi: "petplatform:kb_contact_verified", icerik_kaynagi: "ilan.iletisim_bilgisi_dogrulanma_durumu_boolean" } # True/False
+        - { etiket_adi: "petplatform:kb_image_count", icerik_kaynagi: "ilan.yuklenen_fotograf_sayisi_integer" }
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        otomatik_sosyal_medya_paylasim_entegrasyonu_aktif_mi: true # Kullanıcı onayıyla Facebook, Twitter gibi platformlara otomatik paylaşım.
+        yerel_yonetim_barinak_kayip_buluntu_sistemleri_ile_api_entegrasyonu_potansiyeli_arastiriliyor_mu: true # (Gelecek hedefi)
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_kayip_buluntu:
+        gorsel_alt_metin_stratejisi_kayip_buluntu: "KAYIP_VEYA_BULUNTU_HAYVAN_TUR_IRK_YER_TARIH"
+        # Örn: "KAYIP KEDİ TEKİR İSTANBUL BEŞİKTAŞ 10-HAZIRAN-2025"
+        acil_durum_ilanlari_icin_gorsel_cdn_onceliklendirme_aktif_mi: true # Görsellerin çok hızlı yüklenmesi için.
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_kayip_buluntu:
+        ilan_guncellik_ve_aktiflik_durumu_meta: "petplatform:kb_post_activity_status" # (AKTIF_ARANIYOR, ONAY_BEKLIYOR, BULUNDU_KAPATILDI, ARSIVLENDI)
+        sunulan_kanit_seviyesi_meta_kb: "petplatform:kb_evidence_level_provided" # (FOTOGRAF_SADECE, FOTOGRAF_VE_DETAYLI_BILGI, VETERINER_KAYDI_EKLI)
+        topluluk_etkilesim_ve_destek_skoru_meta_kb: "petplatform:kb_community_engagement_score" # (Paylaşım, yorum, yardım teklifi sayısı gibi metriklerden türetilebilir)
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme (ilk 24-48 saat): Çok Yüksek, viral olma potansiyeli"
+        - "Başarılı kavuşma/sonuçlanma oranı hedefi: %50-60 (Hızlı ve doğru bilgi girişi, yaygın paylaşım ve topluluk desteği ile artar)"
+        - "Ortalama bulunma/kavuşma süresi: 1-7 gün (ilk 72 saat kritik), ancak haftalar/aylar sürebilir."
+        - "Platformun toplumsal fayda ve acil durum yönetimi rolünün en belirgin olduğu kategori."
+        - "Kullanıcıların platforma olan güvenini ve duygusal bağını pekiştirir."
+        - "Yanlış ihbar ve dolandırıcılık girişimlerini engelleme başarısı: %99 (hedeflenen, sıkı moderasyon ve doğrulama ile)."
+  
+  acil_durum:
+    id: "cat_ucretsiz_acildurum"
+    temel_kimlik:
+      ad: "Acil Durum / İvedi Yardım Çağrısı"
+      slug: "acil-durum-ivedi-yardim-cagrisi"
+      aciklama: "Kaza, yaralanma, terk edilme, kötü muamele gibi acil müdahale gerektiren durumdaki hayvanlar için yardım talepleri. Hızlı ve etkili müdahale hayat kurtarır."
+      gorsel_kimlik: { renk_kodu: "#EF4444", tema_notu: "Parlak Kırmızı (ACİL!)", ikon_adi: "fas fa-ambulance", alternatif_ikonlar: "fas fa-siren-on", emoji: "🚨" }
+    kategori_tipi: "ucretsiz"
+    arama_sistemi:
+      alternatif_kelimeler: ["acil veteriner", "yaralı hayvan", "kaza geçiren hayvan", "hayvan kurtarma", "acil yardım pet", "ihbar (hayvana şiddet)", "terk edilmiş bebek hayvan", "acil klinik masrafı", "kan bağışı (hayvan)", "acil geçici yuva (travma)", "doğal afet mağduru hayvan", "zehirlenme şüphesi", "acil nakil aracı", "itfaiye (hayvan sıkışması)", "acil mama desteği (afet bölgesi)", "sokakta donmak üzere", "acil tedavi ihtiyacı", "hayvan hakları ihlali", "acil müdahale ekibi"]
+      ai_intent_keywords: ["acil yardım çağrısı", "yaralı pet ihbarı", "hayvan tehlikede", "ivedi müdahale talebi", "hayvan kurtarma operasyonu"]
+      semantic_tags: ["emergency_rescue", "animal_injury", "urgent_help", "animal_abuse_report", "disaster_relief_pets", "immediate_veterinary_need", "life_saving_intervention"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "acil_durum_tipi", label: "Acil Durum Tipi", tip: "select", secenekler: ["Kaza/Yaralanma", "Hastalık Krizi", "Terk Edilme (savunmasız)", "Kötü Muamele/İhmal", "Doğal Afet", "Yangın", "Zehirlenme Şüphesi", "Sıkışma/Mahsur Kalma"], ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "hayvan_turu_acil", label: "Hayvan Türü", tip: "text", aciklama: "Köpek, Kedi, Kuş, Yabani Hayvan (mümkünse türü)", ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "hayvan_sayisi_acil", label: "Etkilenen Hayvan Sayısı", tip: "number_integer", ai_importance: 0.7, zorunlu: true, varsayilan: 1 }
+        - { alan_adi: "olay_yeri_adres_acil", label: "Olay Yeri Adresi", tip: "location_text", aciklama: "Net adres veya konum tarifi.", ai_importance: 0.98, zorunlu: true }
+        - { alan_adi: "olay_yeri_sehir_ilce_acil", label: "Şehir/İlçe", tip: "location_selects", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "olay_tarih_saat_acil", label: "Olay Tarih ve Saati", tip: "datetime", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "hayvanin_durumu_detay_acil", label: "Hayvanın Durumu (Detaylı)", tip: "textarea", aciklama: "Gözlemlenen belirtiler, yaralanmanın boyutu.", ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "talep_edilen_yardim_turu_acil", label: "Talep Edilen Yardım Türü", tip: "multiselect", secenekler: ["Acil Veteriner Müdahalesi", "Nakil Desteği", "Geçici Güvenli Yuva", "Maddi Destek (klinik masrafı)", "Mama/Malzeme Desteği", "Yasal Yardım/İhbar", "Kurtarma Ekibi"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "iletisim_bilgileri_cok_acil", label: "ÇOK ACİL İletişim Bilgileri", tip: "phone_validated_multiline", aciklama: "Telefon (zorunlu), WhatsApp", ai_importance: 1.0, zorunlu: true }
+        - { alan_adi: "fotograf_video_durum_acil", label: "Fotoğraf/Video (Durumu Gösteren)", tip: "file_upload_optional", aciklama: "Mümkünse.", ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "ihbar_yapan_kisi_rolu_acil", label: "İhbar Yapan Kişinin Rolü", tip: "select", secenekler: ["Gören Kişi", "İlk Müdahaleyi Yapan", "Hayvan Sahibi (eğer acilse)"], ai_importance: 0.6, zorunlu: true }
+        # ... (GitHub dosyasındaki diğer ACİL DURUM filtreleri buraya eklenecek, yukarıdaki formatta) ...
+    platform_ayarlari_acil_durum: # Anahtar ismini kategoriye özel hale getirdik
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_DURUM_KONTROLLU_OTOMATIK_KAPANABILIR"
+        # Açıklama: İlanlar belirli bir süre aktif kalır, bu süre sonunda veya durum çözüldüğünde otomatik kapanır/arşivlenir.
+        # Kullanıcıdan periyodik olarak "Durum Devam Ediyor mu?" onayı istenebilir.
+        
+        varsayilan_aktif_kalma_suresi_gun: 7
+        durum_guncelleme_hatirlatma_periyodu_gun: 3 # Kaç günde bir "Durum nedir?" diye sorulabilir.
+        cozuldu_olarak_isaretlenince_yapilacak_aksiyon: "ILANI_ARSIVLE_VE_BASARI_HIKAYESI_OLARAK_ISARETLEME_ONER"
+        sure_dolumunda_otomatik_aksiyon: "ILANI_PASIFE_AL_VE_KULLANICIYA_GUNCELLEME_SOR"
+
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 2.5 # (1.0: Normal, 3.0: En Yüksek Öncelik)
+        # Bu, moderasyon kuyruğunda en üste çıkmasını, anasayfada özel bir "ACİL DURUMLAR" bölümünde gösterilmesini tetikleyebilir.
+        acil_durum_bildirim_sistemi_entegrasyonu:
+        # (Opsiyonel, eğer varsa)
+        # ilgili_gonullu_gruplarina_otomatik_bildirim_gonder_mi: true
+        # yakin_bolgedeki_veterinerlere_uyari_sistemi_aktif_mi: false 
+
+      moderasyon_ayarlari:
+        seviye: "MAKSIMUM_HIZ_VE_YUKSEK_ONCELIKLI_DENETIM"
+        # Açıklama: İlanlar, minimum uygunsuzluk kontrolünden sonra derhal yayına alınır.
+        # Moderatörler bu ilanları en yüksek öncelikle ve sürekli olarak denetler. Yanlış veya kötü niyetli kullanıma karşı tolerans sıfırdır.
+        yeni_ilan_varsayilan_durum: "YAYINDA_ACIL_DENETIM_BEKLIYOR"
+        kritik_ihlal_durumunda_aninda_mudahale_protokolu: "ILANI_DERHAL_KALDIR_VE_KULLANICIYI_GEREKIRSE_ENGELLE_YASAL_SUREC_BASLATILABILIR_BILGISI_VER"
+        otomatik_kufur_ve_siddet_icerigi_filtresi_aktif_mi: true # Temel bir filtreleme
+
+      dogrulama_ve_guvenlik_protokolleri:
+        protokol_aktif_mi: true
+        protokol_genel_aciklama_kullanici: "Acil durum ilanlarının ciddiyeti ve hassasiyeti nedeniyle, platformumuz ihbarın doğruluğunu teyit etmek ve müdahalenin etkinliğini artırmak için ek bilgiler veya kanıtlar talep edebilir. Amacımız, gerçekten yardıma ihtiyacı olan canlara en hızlı ve doğru şekilde ulaşmaktır."
+        
+        uygulanabilecek_dogrulama_senaryolari:
+        - senaryo_kodu: "FOTOGRAF_VIDEO_KANIT_TALEBI"
+          senaryo_aciklamasi_kullanici: "Mümkünse, acil durumu ve hayvanın halini gösteren net bir fotoğraf veya kısa bir video yüklemeniz, durumun ciddiyetinin anlaşılmasına ve doğru yardımın planlanmasına yardımcı olacaktır."
+          onemi: "YUKSEK_ONCELIKLI_TAVSIYE"
+          moderator_kontrol_rehberi: "Görsel kanıt, durumun aciliyetini ve türünü teyit etmede kritiktir. Manipülatif veya alakasız görsellere karşı dikkatli olunmalıdır."
+
+        - senaryo_kodu: "MADDİ_DESTEK_TALEBI_DOGRULAMASI"
+          senaryo_aciklamasi_kullanici: "Eğer acil durum için maddi destek (örn: veteriner masrafı) talep ediliyorsa, bu talebi destekleyici belgeler (veteriner raporu, tedavi proforması, klinik iletişim bilgileri) sunmanız istenebilir."
+          onemi: "ZORUNLU_BELGE_YUKLEME_ONCESI_YAYIN_KISITLI_OLABILIR"
+          moderator_kontrol_rehberi: "Belgelerin gerçekliği, kliniğin varlığı ve beyan edilen masrafların makullüğü incelenmelidir. Para toplama süreçlerinin şeffaflığı sağlanmalıdır."
+
+        - senaryo_kodu: "IHBARI_YAPAN_KISININ_GECMIS_GÜVENILIRLIGI_KONTROLU"
+          senaryo_aciklamasi_kullanici: "Platformdaki geçmiş aktiviteleriniz ve güvenilirliğiniz, ihbarınızın değerlendirilmesinde dikkate alınabilir."
+          onemi: "OTOMATIK_SISTEM_KONTROLU_VE_MODERATOR_DEGERLENDIRMESI"
+          moderator_kontrol_rehberi: "Daha önce yanıltıcı veya kötü niyetli ilanlar vermiş kullanıcıların acil durum ilanları özel bir dikkatle incelenmeli, gerekirse ek teyitler istenmelidir."
+
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_acil_durum:
+      semantik_icerik_ve_seo_ayarlari:
+        # Acil durum ilanlarında kullanıcıyı en kritik bilgileri vermeye yönlendirecek temel öneriler.
+        akilli_ilan_asistani_icerik_onerileri:
+        - hedef_form_alani_kodu: "ILAN_BASLIK_ACIL"
+          oneri_basligi_kullanici: "ACİLİYETİ Başlıkta Vurgulayın!"
+          oneri_detayi_kullanici: "Başlıkta 'ACİL', 'YARALI', 'TEHLİKEDE' gibi durumu netleştiren bir ifade, hayvanın türünü ve olayın yaşandığı ŞEHİR/İLÇE bilgisini mutlaka belirtin."
+          neden_onemli_aciklamasi_kullanici: "Bu, ilanın anında dikkat çekmesini ve doğru kişilere/kurumlara hızla ulaşmasını sağlar."
+          iyi_ornek_metni_kullanici: "Örn: 'ACİL YARALI KEDİ - İSTANBUL/ŞİŞLİ - ARAÇ ÇARPMASI'"
+          ipucu_tipi: "KRITIK_ONERI"
+
+        - hedef_form_alani_kodu: "OLAY_YERI_ADRES_ACIL"
+          oneri_basligi_kullanici: "Konumu Mümkün Olduğunca NET Belirtin"
+          oneri_detayi_kullanici: "Açık adres, mahalle, cadde, sokak, yakındaki önemli bir nokta (okul, cami, market vb.) veya harita üzerindeki kesin konumu paylaşın. Tarifiniz, yardım ekiplerinin veya gönüllülerin olay yerine hızla ulaşabilmesi için çok önemli."
+          neden_onemli_aciklamasi_kullanici: "Yanlış veya eksik konum bilgisi, hayati önem taşıyan zamanın kaybına neden olabilir."
+          ipucu_tipi: "KRITIK_ONERI"
+
+        - hedef_form_alani_kodu: "TALEP_EDILEN_YARDIM_TURU_ACIL"
+          oneri_basligi_kullanici: "Ne Tür Bir Yardıma İhtiyaç Var?"
+          oneri_detayi_kullanici: "Acil veteriner müdahalesi mi, güvenli bir yere nakil mi, geçici yuva mı, yoksa başka bir yardım mı gerekiyor? İhtiyacınızı net bir şekilde belirtin."
+          neden_onemli_aciklamasi_kullanici: "Doğru yardım türünün belirtilmesi, kaynakların etkin kullanılmasını sağlar."
+          ipucu_tipi: "IYILESTIRME_ONERISI"
+
+        semantik_zenginlik_onemi_katsayisi: 1.0 # Acil durumda her kelime önemli.
+
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        # Acil durumlar için Schema.org'da "Report" veya "Event" (özellikle "SocialEvent" alt türleri "EmergencyEvent" gibi) kullanılabilir.
+        # Odak, olayın türü, aciliyeti, konumu ve etkilenen hayvan hakkında net sinyaller vermek olmalı.
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "Report" # Veya "Event" -> "EmergencyEvent" (varsa)
+          alan_eslestirmeleri:
+            - schema_alani: "headline"
+            platform_alani_kaynagi: "ilan.baslik_acil"
+            - schema_alani: "reportType" # Olayın türü
+            platform_alani_kaynagi: "ilan.acil_durum_tipi_metin"
+            - schema_alani: "location"
+            platform_alani_kaynagi: "ilan.konum_yapilandirilmis_acil"
+            schema_alt_tipi: "Place"
+            - schema_alani: "description"
+            platform_alani_kaynagi: "ilan.hayvanin_durumu_detay_acil"
+            - schema_alani: "dateCreated"
+            platform_alani_kaynagi: "ilan.olay_tarih_saat_acil_iso"
+            - schema_alani: "image" # Durumu gösteren görsel
+            platform_alani_kaynagi: "ilan.fotograf_url_acil"
+            - schema_alani: "keywords"
+            platform_alani_kaynagi: "acil, yardim, ilan.acil_durum_tipi_metin, ilan.hayvan_turu_acil, ilan.sehir_ilce_acil_metin"
+        
+        ozel_meta_etiketler_acil_durum:
+        - etiket_adi: "petplatform:emergency_type"
+          icerik_kaynagi: "ilan.acil_durum_tipi_metin"
+        - etiket_adi: "petplatform:emergency_location"
+          icerik_kaynagi: "ilan.sehir_ilce_acil_metin_ve_detay"
+        - etiket_adi: "petplatform:urgency_level_signal" # Harici sistemlere net sinyal
+          sabit_deger: "CRITICAL" # Bu kategori için her zaman kritik
+        - etiket_adi: "petplatform:action_needed" # Talep edilen yardım
+          icerik_kaynagi: "ilan.talep_edilen_yardim_turu_acil_metin_listesi"
+
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        # Acil durum verilerinin yetkili kurumlarla veya büyük hayvan kurtarma ağlarıyla paylaşımı için protokoller (çok dikkatli ve güvenli olmalı).
+        veri_paylasim_protokolleri_acil_durum_icin:
+        - protokol_adi: "ACIL_DURUM_XML_FEED_YETKILI_KURUMLAR_ICIN"
+          aktif_mi: false # Çok dikkatli planlama gerektirir
+          aciklama: "Sadece önceden tanımlanmış ve doğrulanmış resmi kurumlar veya büyük STK'larla güvenli bir şekilde acil durum verisi paylaşımı."
+        
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+        gorsel_alt_metin_stratejisi: "OTOMATIK_OLUSTURMA_SABLONU_ACIL"
+        # Şablon: "ACİL DURUM - [Hayvan Türü] - [Konum] - [Acil Durum Tipi]"
+
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin:
+        ilan_dogrulanma_seviyesi_meta_etiketi: "petplatform:verification_level_emergency" 
+        # Değerler: "KANIT_SUNULDU", "ILETISIM_DOGRULANDI", "DOGRULANMAMIS_ACIL_CAGRI"
+        rapor_guncellenme_zamani_meta_etiketi: "petplatform:emergency_report_last_updated"
+
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: Anlık olarak çok yüksek (özellikle bildirimlerle)"
+        - "Başarılı müdahale/yardım oranı hedefi: %80 (hızlı koordinasyona bağlı)"
+        - "Ortalama müdahale başlama süresi: 1-3 saat (kritik)"
+        - "Platformun sosyal sorumluluk ve hayat kurtarma misyonunun zirvesi."
+
+  topluluk:
+    id: "cat_ucretsiz_topluluk"
+    temel_kimlik:
+      ad: "Topluluk Etkinlikleri ve Buluşmaları"
+      slug: "topluluk-etkinlikleri-bulusmalari"
+      aciklama: "Hayvanseverleri bir araya getiren etkinlikler, eğitim seminerleri, köpek gezdirme grupları, barınak ziyaretleri, online sohbetler ve diğer tüm sosyal, eğitici ve dayanışma odaklı aktiviteler." # Açıklama zenginleştirildi.
+      gorsel_kimlik: { renk_kodu: "#A3E635", tema_notu: "Açık Yeşil (Canlılık, Büyüme ve Birliktelik)", ikon_adi: "fas fa-users-cog", emoji: "🧑‍🤝‍🧑🎉" } # İkon ve emoji güncellendi (fas fa-users-cog: organize topluluk).
+    kategori_tipi: "ucretsiz_etkinlik_sosyal" # Kategori tipi daha spesifik.
+    arama_sistemi:
+      alternatif_kelimeler: ["hayvansever buluşması", "pet etkinliği", "köpek parkı buluşması", "barınak gönüllülüğü", "eğitim semineri (hayvan)", "online hayvan sohbeti", "ırk özel buluşması", "pati festivali", "hayvan hakları yürüyüşü", "kermes (hayvan yararına)", "grup gezisi (hayvanlarla)", "sosyal sorumluluk projesi (hayvan)", "atölye çalışması (pet)", "webinar (hayvan sağlığı)", "yerel hayvansever grubu", "pet fuarı", "tanışma etkinliği", "ortak ilgi alanı", "dayanışma etkinliği", "pet workshop", "hayvan refahı etkinliği"] # Eklemeler yapıldı.
+      ai_intent_keywords: ["hayvan etkinliği bul", "pet buluşması ara", "gönüllülük etkinliği katıl", "hayvansever topluluğu istanbul", "online pet semineri", "köpek gezdirme grubu ankara"] # Lokasyon ve online vurgusu.
+      semantic_tags: ["community_event_pets", "pet_owner_meetup", "animal_lover_network", "animal_welfare_volunteer_activity", "pet_care_seminar", "online_pet_community_gathering", "social_event_for_pet_enthusiasts"] # Daha detaylı etiketler.
+    akilli_filtreler: # Bu kategori için örnek akıllı filtreler
+      ozel_filtre_alanlari:
+        - { alan_adi: "etkinlik_tipi_topluluk", label: "Etkinlik Tipi", tip: "multiselect", secenekler: ["Sosyal Buluşma/Tanışma", "Eğitim/Seminer/Webinar", "Gönüllülük/Barınak Ziyareti", "Gezdirme Grubu", "Farkındalık/Protesto Etkinliği", "Festival/Şenlik", "Kermes/Bağış Etkinliği", "Online Sohbet/Forum", "Atölye Çalışması", "Spor/Aktivite Etkinliği (Köpek Koşusu vb.)", "Irk Özel Buluşması"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "hedef_kitle_hayvan_turu_topluluk", label: "Hangi Hayvan Türleriyle İlgili?", tip: "multiselect", secenekler: ["Tüm Hayvanseverler", "Köpek Sahipleri/Severleri", "Kedi Sahipleri/Severleri", "Kuş Severler", "Kemirgen Severler", "Egzotik Hayvan Sahipleri (Bilgili)", "Belirli Bir Irka Özel"], ai_importance: 0.75, zorunlu: false }
+        - { alan_adi: "etkinlik_formati_topluluk", label: "Etkinlik Formatı", tip: "select", secenekler: ["Fiziksel (Belirli Bir Yerde)", "Online (Çevrimiçi)", "Hibrit (Fiziksel ve Online)"], ai_importance: 0.85, zorunlu: true }
+        - { alan_adi: "etkinlik_yeri_sehir_ilce_topluluk", label: "Etkinlik Yeri (Şehir/İlçe)", tip: "location_dependent_selects", bagimli_alan_goster: "etkinlik_formati_topluluk", bagimli_degerler_goster: ["Fiziksel (Belirli Bir Yerde)", "Hibrit (Fiziksel ve Online)"], ai_importance: 0.9, zorunlu: false } # Sadece fiziksel veya hibrit ise zorunlu.
+        - { alan_adi: "etkinlik_yeri_adres_detay_topluluk", label: "Detaylı Adres / Online Platform Linki", tip: "textarea_map_link", aciklama: "Fiziksel ise açık adres, mekan adı. Online ise Zoom, Teams, YouTube linki vb.", ai_importance: 0.8, zorunlu: true }
+        - { alan_adi: "etkinlik_tarih_araligi_topluluk", label: "Etkinlik Tarihi ve Saati", tip: "datetime_range_recurring", aciklama: "Başlangıç ve bitiş tarihi/saati. Tekrarlayan bir etkinlikse belirtin.", ai_importance: 0.95, zorunlu: true }
+        - { alan_adi: "katilim_ucreti_durumu_topluluk", label: "Katılım Ücreti", tip: "select_aciklamali_text", secenekler_map: {"Ücretsiz":false, "Ücretli":true, "Bağış Esaslı":true, "Belirli Koşullarda Ücretsiz":true}, aciklama_label: "Ücret/Bağış Miktarı ve Detayları", ai_importance: 0.7, zorunlu: true }
+        - { alan_adi: "kayit_kontenjan_durumu_topluluk", label: "Kayıt ve Kontenjan Durumu", tip: "select_text_area", secenekler: ["Kayıt Gerekli", "Kayıt Gerekmiyor (Serbest Katılım)", "Kontenjan Sınırlı", "Kontenjan Doldu", "Kayıtlar Henüz Açılmadı"], aciklama_text: "Kayıt linki, son kayıt tarihi, kontenjan sayısı ve doluluk durumu hakkında bilgi.", ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "hayvan_katilimi_izin_durumu_topluluk", label: "Etkinliğe Hayvan Getirilebilir Mi?", tip: "select_aciklamali", secenekler_map: {"Evet (Belirli Kurallarla)":true, "Hayır (Sadece İnsan Katılımcılar)":false, "Sadece Belirli Tür Hayvanlar":true, "Danışınız":false}, aciklama_label: "Hayvan Katılım Kuralları", ai_importance: 0.65, zorunlu: false }
+        - { alan_adi: "organizator_bilgisi_topluluk", label: "Organizatör/Düzenleyen", tip: "text_url", aciklama: "Kişi, grup, dernek veya kurum adı. Varsa web sitesi/sosyal medya linki.", ai_importance: 0.7, zorunlu: false }
+        - { alan_adi: "etkinlik_ana_temasi_etiketler_topluluk", label: "Etkinlik Ana Teması/Etiketleri", tip: "multiselect_text_tags", secenekler_onerilen: ["eğitim", "sosyalleşme", "gönüllülük", "farkındalık", "sağlık", "bakım", "davranış", "yasalar", "barınak yardımı", "köpek gezdirme", "kedi sevgisi", "kuş gözlemi"], aciklama: "Etkinliğin anahtar kelimelerini seçin veya ekleyin.", ai_importance: 0.8, zorunlu: false }
+    platform_ayarlari_topluluk:
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "ETKINLIK_TARIHINE_GORE_YONETILEN_DONGU"
+        politika_detaylari_topluluk:
+        etkinlik_baslangic_tarihine_kadar_aktif_kalma_kurali_aktif_mi: true
+        etkinlik_oncesi_yayindan_kaldirma_suresi_gun_manuel_kullanici: 0 # Kullanıcı istediği zaman kaldırabilir.
+        etkinlik_sonrasi_gorunurluk_ve_arsivleme_sureci:
+          aktif_mi: true
+          gecmis_etkinlik_olarak_listelenme_suresi_gun: 7
+          uygulanacak_aksiyon_sonrasi: "ILANI_GECMIS_ETKINLIK_OLARAK_ISARETLE_VE_ARSIVLE_YORUMLARA_ACIK_KALABILIR"
+        erken_kayit_kontenjan_dolumu_kullanici_yonetimi:
+          ilan_durumunu_guncelleme_secenekleri_sunulur_mu: true # (Örn: "Kayıtlar Kapandı", "Kontenjan Dolu", "Yakında Başlıyor")
+          otomatik_durum_guncelleme_kontenjan_takibi_entegrasyonu_planlaniyor_mu: false # (Gelecekte, eğer platform kayıt alıyorsa)
+      operasyonel_onceliklendirme_ve_gorunurluk_ayarlari:
+        oncelik_katsayisi_platform_ici_topluluk: 1.2
+        yaklasan_etkinlikler_icin_anasayfa_ve_bildirim_gorunurlugu_aktif_mi: true
+        takvim_entegrasyonu_kullanici_ve_platform_geneli:
+        kullanicilar_icin_takvime_ekle_butonu_destegi_aktif_mi: true # (Google Calendar, iCal, Outlook vb.)
+        platform_genel_etkinlik_takvimi_sayfasi_ve_filtreleri_aktif_mi: true
+        yerel_etkinlikler_icin_konum_bazli_oneri_sistemi_aktif_mi: true
+      moderasyon_ayarlari:
+        seviye: "ORTA_RISK_PROAKTIF_ICERIK_VE_ORGANIZATOR_KONTROLU"
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_YAYIN_ONAYI_BEKLIYOR"
+        tekrar_eden_ve_guvenilir_organizator_etkinlikleri_icin_hizlandirilmis_onay_sureci_aktif_mi: true
+        etkinlik_icerigi_uygunluk_kontrol_listesi_moderator:
+        - "Etkinlik amacı platformun misyonu ve hayvan refahı ilkeleriyle uyumlu mu?"
+        - "Etkinlik tanımı, tarihi, yeri, katılım koşulları (ücret, yaş sınırı, kayıt gerekliliği vb.) net, doğru ve yanıltıcı olmayan bilgiler içeriyor mu?"
+        - "Organizatör bilgileri (kişi/kurum) şeffaf ve ulaşılabilir mi? Şüpheli bir profil mi?"
+        - "Eğer ücretli bir etkinlikse, ücretin makuliyeti ve ne için talep edildiği açık mı? Dolandırıcılık riski var mı?"
+        - "Etkinlik, yasa dışı faaliyetleri, nefret söylemini veya hayvanlara zarar verebilecek uygulamaları teşvik ediyor mu?"
+        - "Görseller ve kullanılan dil platformun topluluk kurallarına uygun mu?"
+        kullanici_raporlamalarina_gore_acil_inceleme_ve_mudahale_protokolu_aktif_mi: true
+      dogrulama_ve_guvenlik_protokolleri_topluluk:
+        protokol_aktif_mi: true # Özellikle geniş katılımlı, ücretli veya hassas içerikli etkinlikler için.
+        protokol_genel_aciklama_kullanici: "Platformumuzda listelenen topluluk etkinliklerinin güvenilirliğini, kalitesini ve katılımcı güvenliğini sağlamak amacıyla, özellikle geniş katılımlı, ücretli, özel izin gerektiren veya hassas konuları içeren etkinlikler için organizatörlerden ek bilgiler, belgeler veya kimlik/kurum doğrulaması talep edilebilir. Bu, tüm topluluk üyeleri için daha güvenli ve olumlu bir deneyim sağlamayı amaçlar."
+        uygulanabilecek_dogrulama_senaryolari_topluluk:
+        - senaryo_kodu: "UCRETLI_VEYA_BUYUK_CAPLI_ETKINLIK_ORGANIZATOR_DOGRULAMASI_TOPLULUK"
+          senaryo_aciklamasi_kullanici: "Eğer ücretli bir etkinlik düzenliyorsanız, bağış topluyorsanız veya etkinliğiniz geniş bir katılım (örn: 50+ kişi) hedefliyorsa, organizatör olarak kimliğinizi (bireysel ise) veya kurumunuzu (tüzel kişilik ise) doğrulamanız ve etkinliğin meşruiyetini kanıtlamanız istenebilir."
+          talep_edilebilecek_bilgiler_kullanici_listesi_detayli:
+            - "Organizatörün tam adı/soyadı veya kurumun resmi adı ve iletişim bilgileri (doğrulanabilir telefon, e-posta)."
+            - "Kurumsal etkinlikler için: Vergi levhası, dernek/vakıf tüzüğü veya resmi kurum belgesi örneği."
+            - "Varsa, etkinlikle ilgili resmi web sitesi, geçmiş etkinlik referansları veya sosyal medya hesap linkleri."
+            - "Ücretli etkinlikler için: Bilet satış platformu linki veya ücret toplama yönteminin şeffaf açıklaması."
+          onemi: "KOSULLU_ZORUNLU_GÜVEN_VE_ŞEFFAFLIK_İÇİN"
+          moderator_kontrol_rehberi_detayli: "Organizatörün ve etkinliğin meşruiyeti, geçmişi (varsa) ve güvenilirliği teyit edilmelidir. Özellikle para toplama içeren etkinliklerde, amacın ve fonların kullanımının netliği önemlidir. Şüpheli durumlarda ek araştırma yapılmalı veya ilan reddedilmelidir."
+  
+        - senaryo_kodu: "ETKINLIK_YERI_VE_IZIN_DOGRULAMASI_OZEL_DURUMLAR_TOPLULUK"
+          senaryo_aciklamasi_kullanici: "Etkinliğiniz kamuya açık bir alanda (park, meydan vb.) yapılıyorsa, özel bir mekanda (otel, konferans salonu) düzenleniyorsa veya yasal izinler (belediye izni, valilik onayı vb.) gerektiriyorsa, bu izinlere sahip olduğunuzu veya mekanla anlaşmanız olduğunu gösteren belgeler sunmanız talep edilebilir."
+          onemi: "NADİREN_TALEP_EDILIR_RISK_ANALIZINE_VE_SIKAYETE_GORE"
+          moderator_kontrol_rehberi_detayli: "Özellikle büyük çaplı veya potansiyel olarak kamu düzenini etkileyebilecek etkinliklerde, şikayet veya şüphe durumunda, etkinliğin yasalara, yerel yönetmeliklere ve mekan kurallarına uygunluğu araştırılmalıdır. Gerekirse organizatörden resmi izin belgeleri istenmelidir."
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_topluluk:
+      semantik_icerik_ve_seo_ayarlari:
+        akilli_ilan_asistani_icerik_onerileri:
+        - { hedef_form_alani_kodu: "ETKINLIK_ADI_TOPLULUK", oneri_basligi_kullanici: "Etkinliğinize Dikkat Çekici ve Açıklayıcı Bir Ad Verin!", oneri_detayi_kullanici: "Etkinliğinizin ana temasını, türünü ve mümkünse hedef kitlesini veya yerini yansıtan, merak uyandıran ve kolay hatırlanır bir ad seçin. Anahtar kelimeler (örn: 'Barınak Gönüllüleri Buluşması', 'Online Kedi Bakım Semineri', 'Ankara Köpek Parkı Tanışma Günü') kullanmak, ilanınızın ilgili kişiler tarafından daha kolay bulunmasını sağlar.", neden_onemli_aciklamasi_kullanici: "Doğru bir ad, etkinliğinizin arama sonuçlarında ve platform içi listelemelerde öne çıkmasına yardımcı olur.", iyi_ornek_metni_kullanici: "Örn: 'Minik Patilerle Bahar Şenliği ve Mama Bağış Kampanyası' veya 'Uzman Veteriner Hekim ile Online Köpek Sağlığı Soru-Cevap Etkinliği'", ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI", ideal_uzunluk_max: 100 }
+        - { hedef_form_alani_kodu: "ETKINLIK_ACIKLAMASI_DETAYLI_TOPLULUK", oneri_basligi_kullanici: "Etkinliğinizin Tüm Detaylarını ve Cazibesini Anlatın!", oneri_detayi_kullanici: "Etkinlikte neler yapılacak (program akışı), kimler konuşmacı olacak, hangi konular ele alınacak? Katılımcıları neler bekliyor, etkinlikten ne gibi faydalar veya deneyimler elde edecekler? Katılım şartları (ücret, kayıt, yaş sınırı, özel ekipman vb.) nelerdir? Ulaşım, konaklama (gerekirse), yiyecek-içecek imkanları hakkında bilgi verin. Etkinliğin amacını ve topluluğa katkısını vurgulayın.", neden_onemli_aciklamasi_kullanici: "Kapsamlı ve çekici bir açıklama, potansiyel katılımcıların ilgisini çeker, soru işaretlerini giderir ve katılım kararını olumlu etkiler.", alt_oneri_maddeleri: ["Etkinlik programını saatleriyle birlikte (mümkünse) belirtin.", "Hedef kitlenizi ve kimler için daha uygun olduğunu açıklayın.", "Etkinliğin online mı, fiziksel mi, hibrit mi olacağını netleştirin.", "Fiziksel etkinlikler için mekanın erişilebilirliğini ve olanaklarını (otopark, engelli erişimi vb.) belirtin.", "Varsa, sponsorlar veya destekleyen kurumlar hakkında bilgi verin.", "Etkileyici görseller veya kısa bir tanıtım videosu eklemeyi düşünün."], ipucu_tipi: "BILGILENDIRME_KAPSAMLI_VE_IKNA_EDICI" }
+        - { hedef_form_alani_kodu: "ETKINLIK_KATILIM_CAGRISI_TOPLULUK", oneri_basligi_kullanici: "Katılımcıları Harekete Geçirin: Net Bir Çağrı Yapın!", oneri_detayi_kullanici: "İlanınızın sonunda, potansiyel katılımcıları etkinliğe kayıt olmaya, bilet almaya, daha fazla bilgi talep etmeye veya etkinliği sosyal medyada paylaşmaya teşvik eden açık, net ve motive edici bir çağrı mesajı (Call to Action) ekleyin. 'Hemen Kaydolun, Kontenjan Sınırlı!', 'Bu Eşsiz Deneyimi Kaçırmayın, Yerinizi Ayırtın!', 'Detaylı Bilgi ve Kayıt İçin Web Sitemizi Ziyaret Edin:', 'Etkinliğimizi Paylaşarak Daha Fazla Hayvansevere Ulaşmamıza Yardımcı Olun!' gibi.", neden_onemli_aciklamasi_kullanici: "Güçlü bir eylem çağrısı, kullanıcıların ilgisini somut bir adıma dönüştürme olasılığını artırır.", ipucu_tipi: "PAZARLAMA_ODAKLI_ONERI" }
+        semantik_zenginlik_onemi_katsayisi: 0.7
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "Event" # Genel etkinlik tipi
+          # Alt tiplerden biri daha uygun olabilir: SocialEvent, EducationEvent, Festival, BusinessEvent (eğer bir kurum düzenliyorsa), Hackathon (eğer bir fikir maratonu ise) vb.
+          # Platform, etkinlik tipine göre dinamik olarak en uygun schema.org alt tipini seçebilir.
+          alan_eslestirmeleri:
+            - { schema_alani: "name", platform_alani_kaynagi: "ilan.etkinlik_adi_topluluk_schema_icin" }
+            - { schema_alani: "description", platform_alani_kaynagi: "ilan.etkinlik_aciklamasi_topluluk_uzun_schema_icin" }
+            - { schema_alani: "startDate", platform_alani_kaynagi: "ilan.etkinlik_tarihi_baslangic_topluluk_iso" }
+            - { schema_alani: "endDate", platform_alani_kaynagi: "ilan.etkinlik_tarihi_bitis_topluluk_iso_opsiyonel" }
+            - { schema_alani: "eventAttendanceMode", platform_alani_kaynagi: "ilan.etkinlik_formati_topluluk_schema_uyumlu" } # (OfflineEventAttendanceMode, OnlineEventAttendanceMode, MixedEventAttendanceMode)
+            - { schema_alani: "eventStatus", platform_alani_kaynagi: "ilan.etkinlik_durumu_topluluk_schema_uyumlu" } # (EventScheduled, EventCancelled, EventPostponed, EventRescheduled)
+            - { schema_alani: "location", platform_alani_kaynagi: "ilan.etkinlik_yeri_topluluk_schema_place_veya_virtual_objesi", schema_alt_tip_dinamik: true } # Place veya VirtualLocation
+            - { schema_alani: "image", platform_alani_kaynagi: "ilan.etkinlik_ana_gorseli_url_topluluk_schema_icin" }
+            - { schema_alani: "organizer", platform_alani_kaynagi: "ilan.organizator_bilgisi_topluluk_schema_person_veya_organization_objesi", schema_alt_tip_dinamik: true } # Person veya Organization
+            - { schema_alani: "performer", platform_alani_kaynagi: "ilan.etkinlik_konusmacilari_veya_katilimcilari_schema_listesi_opsiyonel", schema_alt_tip_dinamik: true } # Person veya Organization (konuşmacılar için)
+            - { schema_alani: "offers", platform_alani_kaynagi: "ilan.etkinlik_ucret_ve_kayit_bilgisi_schema_offer_objesi_opsiyonel", schema_alt_tip: "Offer" } # Ücret, bilet linki vb.
+            - { schema_alani: "audience", platform_alani_kaynagi: "ilan.hedef_kitle_topluluk_schema_audience_objesi_opsiyonel", schema_alt_tip: "Audience" }
+            - { schema_alani: "keywords", platform_alani_kaynagi: "ilan.etkinlik_ana_temasi_etiketler_topluluk_virgulle_ayrilmis" }
+            - { schema_alani: "url", platform_alani_kaynagi: "ilan.etkinlik_platform_url_canonical_topluluk" }
+        ozel_meta_etiketler_topluluk:
+        - { etiket_adi: "petplatform:event_main_theme", icerik_kaynagi: "ilan.etkinlik_tipi_topluluk_ana_kategori_metin" } # (Eğitim, Sosyal, Gönüllülük vb.)
+        - { etiket_adi: "petplatform:event_target_pet_type", icerik_kaynagi: "ilan.hedef_kitle_hayvan_turu_topluluk_virgulle_ayrilmis_liste" }
+        - { etiket_adi: "petplatform:event_is_online", icerik_kaynagi: "ilan.etkinlik_formati_online_mi_boolean" }
+        - { etiket_adi: "petplatform:event_city", icerik_kaynagi: "ilan.etkinlik_yeri_sehir_topluluk_metin_fizikselse" }
+        - { etiket_adi: "petplatform:event_requires_registration", icerik_kaynagi: "ilan.kayit_gerekli_mi_boolean" }
+        - { etiket_adi: "petplatform:event_organizer_type", icerik_kaynagi: "ilan.organizator_tipi_topluluk_metin" } # (Bireysel, Dernek, Şirket vb.)
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        otomatik_sosyal_medya_paylasimi_ve_takvim_entegrasyonu_kullanici_secenekleri_aktif_mi: true # Facebook Etkinlikleri, Google Calendar'a ekleme.
+        yerel_etkinlik_siteleri_ve_topluluk_gruplari_ile_veri_paylasimi_protokolleri_arastiriliyor_mu: true # (Meetup.com, Eventbrite gibi yerlere API ile gönderim - Gelecek hedefi)
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin_topluluk:
+        gorsel_alt_metin_stratejisi_topluluk: "ETKINLIK_ADI_TARIH_SEHIR_PETPLATFORM_TOPLULUK_ETKINLIGI"
+        # Örn: "Minik Patilerle Bahar Şenliği 15-Mayıs-2025 İstanbul PetPlatform Topluluk Etkinliği"
+        etkinlik_afisleri_icin_onerilen_boyut_ve_format_rehberi_sunulur_mu: true
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin_topluluk:
+        etkinlik_katilimci_degerlendirme_ve_yorum_sayisi_meta: "petplatform:event_attendee_rating_count_topluluk" # (Geçmiş etkinlikler için)
+        organizator_guvenilirlik_skoru_platform_ici_meta: "petplatform:event_organizer_trust_score_topluluk" # (Platform içi bir skorlama olabilir)
+        etkinlik_iptal_veya_degisiklik_gecmisi_meta: "petplatform:event_modification_history_flag_topluluk" # (SIK_DEGISTI, STABIL vb.)
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: Orta-Yüksek (Etkinliğin türüne, konumuna ve tanıtımına bağlı olarak değişkenlik gösterir)"
+        - "Katılım ve kayıt oranı hedefi: İlan edilen kontenjana ve etkinliğin çekiciliğine göre %30-70 arası"
+        - "Topluluk içi etkileşim, ağ oluşturma ve bilgi paylaşımı potansiyeli: Yüksek"
+        - "Platformun sosyal, eğitici ve birleştirici yönünü güçlendirir; kullanıcı bağlılığını artırır."
+        - "Başarılı ve iyi organize edilmiş etkinlikler, platformun genel itibarına olumlu katkı sağlar."
+        - "Hayvan refahı konusunda farkındalık yaratma ve gönüllülüğü teşvik etme potansiyeli: Yüksek"
+  destek_hizmeti:
+    id: "cat_ucretsiz_destekhizmeti"
+    temel_kimlik:
+      ad: "Gönüllü Destek Hizmetleri (Ücretsiz)"
+      slug: "gonullu-destek-hizmetleri-ucretsiz"
+      aciklama: "Hayvanseverlerin birbirlerine ücretsiz olarak sunduğu destekler: geçici bakım (acil olmayan), köpek gezdirme, deneyim paylaşımı, basit bakım yardımı vb."
+      gorsel_kimlik: { renk_kodu: "#FDBA74", tema_notu: "Açık Turuncu (Yardımlaşma ve Dostluk)", ikon_adi: "fas fa-hands-helping", emoji: "🤝" }
+    kategori_tipi: "ucretsiz"
+    arama_sistemi:
+      alternatif_kelimeler: ["gönüllü pet sitter", "ücretsiz köpek gezdirme", "deneyim paylaşımı (hayvan)", "komşu yardımı (pet)", "karşılıksız hayvan bakımı", "gönüllü geçici yuva (kısa süreli)", "hayvansever dayanışması", "ücretsiz danışmanlık (deneyimli sahip)", "acil olmayan bakım yardımı", "mama paylaşımı", "oyuncak değişimi", "hayvansever ağı", "yardım eli uzat", "gönüllü refakatçi (veteriner ziyareti)", "paylaşım ekonomisi (pet)", "iyilik hareketi", "gönüllü nakil (kısa mesafe)", "bilgi aktarımı", "manevi destek"]
+      ai_intent_keywords: ["gönüllü hayvan bakımı", "ücretsiz pet destek", "hayvansever yardımı", "geçici yuva gönüllüsü"]
+      semantic_tags: ["volunteer_pet_care", "free_support_pets", "animal_lover_network", "community_help_pets", "temporary_foster_volunteer"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "destek_tipi_gonullu", label: "Sunulan Destek Tipi", tip: "select", secenekler: ["Geçici Bakım (Evde)", "Köpek Gezdirme", "Kedi/Diğer Hayvan Ev Ziyareti (Besleme/Oyun)", "Deneyim/Bilgi Paylaşımı", "Basit Tıbbi Olmayan Bakım Yardımı (yaşlı/hasta hayvan için)", "Malzeme Paylaşımı (mama, oyuncak)"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "destek_sunulan_hayvan_turu_gonullu", label: "Destek Sunulan Hayvan Türü/Türleri", tip: "multiselect", secenekler: ["Köpek", "Kedi", "Kuş", "Kemirgen", "Diğer"], ai_importance: 0.8, zorunlu: true }
+        # ... (GitHub dosyasındaki diğer DESTEK HİZMETİ filtreleri buraya eklenecek, yukarıdaki formatta) ...
+    platform_ayarlari_destek_hizmeti: # Anahtar ismini kategoriye özel hale getirdik
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURELI_KULLANICI_GUNCELLEME_TESVIKLI"
+        # Açıklama: İlanlar belirli bir süre aktif kalır. Kullanıcı, hizmeti hala sunuyorsa ilanı güncelleyerek veya yeniden yayınlayarak süreyi uzatabilir.
+        
+        varsayilan_aktif_kalma_suresi_gun: 60
+        yenileme_bildirimi_gun_oncesi: 7 # Süre bitmeden kaç gün önce "Hizmetinizi hala sunuyor musunuz?" hatırlatması.
+        maksimum_yenileme_sayisi: -1 # Sınırsız yenileme (kullanıcı aktif olduğu sürece)
+        uzun_sure_guncellenmeyen_ilan_aksiyonu: "ILANI_PASIFE_AL_VE_KULLANICIYI_BILGILENDIR"
+
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 1.0 # (1.0: Normal, 3.0: En Yüksek Öncelik)
+        # Bu kategori genellikle aciliyet taşımaz, ancak güvenilir ve aktif gönüllülerin öne çıkarılması düşünülebilir.
+        aktif_ve_guvenilir_gonullu_rozet_sistemi_aktif_mi: true # (Platform geçmişi, tamamlanan destekler, pozitif geri bildirimlere dayalı)
+
+      moderasyon_ayarlari:
+        seviye: "ORTA_YUKSEK_GUVEN_ODAKLI_INCELEME"
+        # Açıklama: Gönüllü destek hizmetlerinde güven esastır. İlanlar, özellikle geçici bakım gibi hassas hizmetler için dikkatle incelenmelidir.
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_GUVENLIK_KONTROLU"
+        # Diğer seçenekler: "YAYINDA_ILK_KONTROL_SONRASI"
+        hizmet_tanimi_netlik_ve_gerceklik_kontrolu_aktif_mi: true
+        yaniltici_veya_ticari_amac_suphesi_icin_otomatik_isaretleme_kurallari:
+        - kural_kodu: "UCRET_TALEBI_IMA_EDEN_IFADELER"
+          aciklama: "Ücretsiz kategoride ücret talep eden veya ima eden ilanları işaretle."
+        - kural_kodu: "PROFESYONEL_HIZMET_GORUNUMU_VEREN_YAPAY_ILANLAR"
+          aciklama: "Gönüllülük dışı, ticari bir hizmet gibi sunulan ilanları işaretle."
+
+      dogrulama_ve_guvenlik_protokolleri:
+        protokol_aktif_mi: true # Özellikle güven gerektiren hizmetler için.
+        protokol_genel_aciklama_kullanici: "Gönüllü destek hizmetlerinin güvenilirliğini ve kalitesini sağlamak, hem hizmet sunan gönüllülerimizin hem de hizmet alanların güvenliğini korumak amacıyla platformumuz bazı doğrulama adımları ve ek bilgiler talep edebilir. Amacımız, güvene dayalı bir yardımlaşma ortamı oluşturmaktır."
+        
+        uygulanabilecek_dogrulama_senaryolari:
+        - senaryo_kodu: "GECICI_BAKIM_GONULLUSU_DOGRULAMASI"
+          senaryo_aciklamasi_kullanici: "Eğer evinizde geçici bakım (foster) hizmeti sunmayı teklif ediyorsanız, hayvanın güvenli ve uygun bir ortamda bakılacağını teyit etmek amacıyla bazı bilgiler ve görseller talep edilebilir."
+          talep_edilebilecek_bilgiler_kullanici_listesi:
+            - "Kimlik bilgileri (isim, soyisim - platformda gizli tutulur, sadece doğrulama için)."
+            - "Hayvanın misafir edileceği evin/odanın genel durumunu gösteren net fotoğraflar veya kısa bir video (temizlik, güvenlik, hayvan için ayrılan alan vb.)."
+            - "Varsa, daha önceki geçici bakım deneyimleriniz hakkında kısa bilgi veya referans (isteğe bağlı)."
+            - "Evde başka hayvan veya çocuk varsa, bu durum hakkında bilgi."
+          onemi: "YUKSEK_ONCELIKLI_DOGRULAMA_GEREKLI"
+          moderator_kontrol_rehberi: "Sunulan görsellerin gerçekliği, ortamın hayvan refahına uygunluğu (temizlik, güvenlik, havalandırma, tehlikeli madde olmaması) dikkatle incelenmelidir. Gönüllünün profilindeki diğer bilgilerle (eğer varsa) tutarlılık kontrol edilmelidir."
+
+        - senaryo_kodu: "DENEYIM_PAYLASIMI_VE_DANISMANLIK_GONULLUSU_ITIBAR_KONTROLU"
+          senaryo_aciklamasi_kullanici: "Eğer hayvan bakımı, eğitimi veya sağlığı konularında deneyimlerinizi paylaşmayı veya danışmanlık vermeyi teklif ediyorsanız, platformdaki genel aktiviteniz, varsa daha önceki olumlu etkileşimleriniz ve profilinizdeki bilgiler, güvenilirliğinizin bir göstergesi olarak değerlendirilebilir."
+          onemi: "PLATFORM_ICI_ITIBAR_VE_AKTIVITE_DEGERLENDIRMESI"
+          moderator_kontrol_rehberi: "Kullanıcının platformdaki geçmiş yorumları, verdiği/aldığı destekler, profil tamamlama oranı gibi faktörler göz önünde bulundurulabilir. Tıbbi tavsiye niteliğinde kesin ifadelerden kaçınılması konusunda kullanıcılar uyarılmalıdır."
+
+        - senaryo_kodu: "KIMLIK_DOGRULAMA_GENEL_GUVENLIK_ICIN"
+          senaryo_aciklamasi_kullanici: "Tüm gönüllü destek hizmeti sunan kullanıcılarımızdan, platform güvenliğini artırmak amacıyla temel kimlik doğrulaması (örn: e-posta, telefon SMS onayı) talep edilebilir."
+          onemi: "TEMEL_GÜVENLİK_ADIMI"
+
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_destek_hizmeti:
+      semantik_icerik_ve_seo_ayarlari:
+        # Gönüllü destek hizmeti ilanlarında kullanıcıyı yönlendirecek temel içerik önerileri.
+        akilli_ilan_asistani_icerik_onerileri:
+        - hedef_form_alani_kodu: "HIZMET_BASLIGI_DESTEK" # Formda böyle bir alan olmalı
+          oneri_basligi_kullanici: "Sunduğunuz Desteği Net Bir Başlıkla İfade Edin"
+          oneri_detayi_kullanici: "Ne tür bir gönüllü destek sunduğunuzu (örn: 'Ücretsiz Kısa Süreli Kedi Bakımı', 'Deneyimli Köpek Gezdirme Gönüllüsü', 'Yavru Hayvan Bakım Danışmanlığı') ve ideal olarak hangi bölgede (şehir/ilçe) hizmet verebileceğinizi başlıkta belirtin."
+          neden_onemli_aciklamasi_kullanici: "Net bir başlık, doğru kişilerin ilanınızı bulmasına ve ne bekleyeceğini anlamasına yardımcı olur."
+          iyi_ornek_metni_kullanici: "Örn: 'Kadıköy'de Ücretsiz Tatil Dönemi Kedi Bakımı (Evde)' veya 'Ankara - Emekli Öğretmenden Köpek Gezdirme Desteği'"
+          ipucu_tipi: "IYILESTIRME_ONERISI"
+
+        - hedef_form_alani_kodu: "HIZMET_ACIKLAMASI_DETAY_DESTEK" # Formda böyle bir alan olmalı
+          oneri_basligi_kullanici: "Desteğinizin Kapsamını ve Koşullarını Açıklayın"
+          oneri_detayi_kullanici: "Hangi hayvan türlerine destek verebilirsiniz? Ne kadar süreyle? Hangi koşullarda (örn: kendi evinizde mi, hayvanın evinde mi)? Varsa özel uzmanlık alanlarınız veya deneyimleriniz nelerdir? Beklentilerinizi ve sunabileceğiniz hizmetin sınırlarını net bir şekilde ifade edin."
+          neden_onemli_aciklamasi_kullanici: "Açık ve dürüst bilgi, yanlış anlaşılmaları önler ve güven oluşturur."
+          alt_oneri_maddeleri:
+            - "Destek verebileceğiniz gün ve saat aralıklarını belirtin."
+            - "Ulaşım imkanlarınızdan bahsedin (eğer gerekliyse)."
+            - "Kabul edemeyeceğiniz durumları (örn: 'Agresif hayvanlara bakamam') nazikçe ifade edin."
+            - "Bu hizmeti neden gönüllü olarak sunduğunuzu kısaca anlatmak, samimiyetinizi artırabilir."
+          ipucu_tipi: "BILGILENDIRME"
+
+        - hedef_form_alani_kodu: "GONULLU_PROFIL_REFERANSI_DESTEK" # (Profil bağlantısı veya özet)
+          oneri_basligi_kullanici: "Güven Oluşturmak İçin Kendinizi Tanıtın"
+          oneri_detayi_kullanici: "Profilinizi eksiksiz doldurmanız, varsa platformdaki diğer olumlu etkileşimleriniz ve hayvanlarla ilgili genel deneyiminiz, hizmet arayan kişilerin size güvenmesine yardımcı olur. İlanınızda profilinize atıfta bulunabilirsiniz."
+          neden_onemli_aciklamasi_kullanici: "Gönüllü hizmetlerde karşılıklı güven çok önemlidir."
+          ipucu_tipi: "IYILESTIRME_ONERISI"
+
+        semantik_zenginlik_onemi_katsayisi: 0.75
+
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        # Gönüllü destek hizmetleri için Schema.org'da "Service" ana tipi ve "provider" (sağlayıcı), "serviceType" (hizmet türü) gibi alanlar kullanılabilir.
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "Service"
+          alan_eslestirmeleri:
+            - schema_alani: "name" # Hizmetin adı/başlığı
+            platform_alani_kaynagi: "ilan.hizmet_basligi_destek"
+            - schema_alani: "description" # Hizmetin detaylı açıklaması
+            platform_alani_kaynagi: "ilan.hizmet_aciklamasi_detay_destek_uzun"
+            - schema_alani: "serviceType" # Sunulan destek tipi
+            platform_alani_kaynagi: "ilan.destek_tipi_gonullu_metin"
+            - schema_alani: "provider" # Hizmeti sunan gönüllü (Person)
+            platform_alani_kaynagi: "ilan.gonullu_kullanici_profil_schema" # Kullanıcı profili verilerinden
+            schema_alt_tipi: "Person"
+            - schema_alani: "areaServed" # Hizmet verilen bölge
+            platform_alani_kaynagi: "ilan.hizmet_bolgesi_yapilandirilmis_destek"
+            schema_alt_tipi: "Place" # veya "AdministrativeArea"
+            - schema_alani: "is 비슷한By" # Benzer hizmet (varsa, platform içi kategorilendirme)
+            platform_alani_kaynagi: "ilan.ana_kategori_slug" # Yani "gonullu-destek-hizmetleri-ucretsiz"
+            - schema_alani: "termsOfService" # Hizmet koşulları (kullanıcının belirttiği)
+            platform_alani_kaynagi: "ilan.hizmet_kosullari_destek_metin"
+        
+        ozel_meta_etiketler_destek_hizmeti:
+        - etiket_adi: "petplatform:service_category_dh"
+          sabit_deger: "Gönüllü Destek Hizmeti"
+        - etiket_adi: "petplatform:support_type_dh"
+          icerik_kaynagi: "ilan.destek_tipi_gonullu_metin"
+        - etiket_adi: "petplatform:volunteer_experience_level_dh" # (Self-declared veya platform tarafından atanmış)
+          icerik_kaynagi: "ilan.gonullu_deneyim_seviyesi_metin"
+        - etiket_adi: "petplatform:availability_dh" # (Örn: "Hafta Sonları", "Esnek")
+          icerik_kaynagi: "ilan.musaitlik_durumu_destek_metin"
+
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        # Bu kategori için harici entegrasyon ihtiyacı daha düşük olabilir, ancak API ile listeleme faydalı olabilir.
+        veri_paylasim_formatlari_destegi:
+        - format_adi: "JSON_API_Destek_Hizmetleri"
+          aktif_mi: true
+          aciklama: "Platformdaki gönüllü destek hizmetlerini listeleyen API."
+        
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+        # Genellikle bu kategoride "hayvan görseli" olmaz, "hizmet ortamı" veya "gönüllü profil resmi" olabilir.
+        gorsel_alt_metin_stratejisi: "DURUMA_OZEL_DEGISKEN_DESTEK"
+        # Örn: Geçici bakım için: "Gönüllü [Kullanıcı Adı]'nın Geçici Bakım Ortamı"
+
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin:
+        gonullu_dogrulama_durumu_meta_etiketi: "petplatform:volunteer_verification_status_dh"
+        # Değerler: "KIMLIK_DOGRULANDI", "ORTAM_KONTROLU_YAPILDI", "TEMEL_DOGRULAMA"
+        kullanici_geri_bildirim_puani_meta_etiketi_dh: "petplatform:volunteer_rating_dh" # Eğer bir geri bildirim sistemi varsa
+
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: Orta (ihtiyaca göre)"
+        - "Başarılı eşleşme/yardım oranı hedefi: %60"
+        - "Topluluk içi güven ve dayanışma artışı: Çok Yüksek"
+        - "Platformun 'sevgi' ve 'yardımlaşma' misyonunu pekiştirir."
+
+  bilgi_egitim:
+    id: "cat_ucretsiz_bilgiegıtım" # Orijinaldeki egitim
+    temel_kimlik:
+      ad: "Bilgi Paylaşımı ve Eğitim (Ücretsiz Kaynaklar)"
+      slug: "bilgi-paylasimi-egitim-ucretsiz-kaynaklar"
+      aciklama: "Hayvan bakımı, sağlığı, davranışı, eğitimi ve hakları konularında ücretsiz bilgi notları, rehberler, makaleler, faydalı linkler ve deneyimlerin paylaşıldığı bölüm."
+      gorsel_kimlik: { renk_kodu: "#93C5FD", tema_notu: "Açık Mavi (Bilgi ve Huzur)", ikon_adi: "fas fa-book-open-reader", alternatif_ikonlar: "fas fa-graduation-cap", emoji: "📚" }
+    kategori_tipi: "ucretsiz"
+    arama_sistemi:
+      alternatif_kelimeler: ["hayvan bakımı rehberi", "köpek eğitimi ipuçları", "kedi sağlığı bilgileri", "pet davranış sorunları", "hayvan hakları", "ücretsiz pet eğitimi", "doğru mama seçimi", "yavru hayvan bakımı", "yaşlı hayvan bakımı", "pozitif eğitim metotları", "türlere özel bakım", "ilk yardım (hayvan)", "faydalı makaleler (pet)", "uzman görüşleri (özet)", "eğitici videolar (link)", "soru-cevap (deneyim)", "yerel veteriner listesi (tavsiye)", "güvenilir kaynaklar", "bilinçli hayvan sahipliği"]
+      ai_intent_keywords: ["hayvan bakımı öğren", "pet eğitimi kaynakları", "hayvan sağlığı bilgisi", "ücretsiz evcil hayvan rehberi"]
+      semantic_tags: ["pet_care_guide", "animal_training_tips", "pet_health_information", "animal_behavior", "animal_rights_education", "free_pet_resources"]
+    akilli_filtreler:
+      ozel_filtre_alanlari:
+        - { alan_adi: "bilgi_kategorisi_ana_be", label: "Bilgi Ana Kategorisi", tip: "select", secenekler: ["Bakım", "Sağlık", "Davranış/Eğitim", "Beslenme", "Hayvan Hakları/Yasalar", "Irk Bilgileri", "Genel Bilgiler", "Ekipman/Malzeme Önerileri"], ai_importance: 0.9, zorunlu: true }
+        - { alan_adi: "hedef_hayvan_turu_be", label: "Hedef Hayvan Türü", tip: "multiselect", secenekler: ["Köpek", "Kedi", "Kuş", "Kemirgen", "Sürüngen", "Balık", "Tüm Hayvanlar"], ai_importance: 0.8, zorunlu: false }
+        - { alan_adi: "icerik_formati_be", label: "İçerik Formatı", tip: "select", secenekler: ["Makale/Yazı", "Rehber/Kontrol Listesi", "Video Linki", "Podcast Linki", "İnfografik Linki", "Soru-Cevap Başlığı", "Deneyim Paylaşımı"], ai_importance: 0.7, zorunlu: true }
+        # ... (GitHub dosyasındaki diğer BİLGİ/EĞİTİM filtreleri buraya eklenecek, yukarıdaki formatta) ...
+    platform_ayarlari_bilgi_egitim: # Anahtar ismini kategoriye özel hale getirdik
+      ilan_yasam_dongusu_ayarlari:
+        varsayilan_politika: "SURESIZ_PERIYODIK_GUNCELLEME_TESVIKLI"
+        # Açıklama: Bilgi içerikleri genellikle zamanla eskir. İçerikler süresiz yayında kalabilir,
+        # ancak kullanıcılardan belirli aralıklarla içeriklerini gözden geçirmeleri ve güncelliğini teyit etmeleri istenir.
+        
+        icerik_gozden_gecirme_hatirlatma_periyodu_ay: 6 # Kaç ayda bir "İçeriğiniz hala güncel mi?" hatırlatması.
+        uzun_sure_gozden_gecirilmeyen_icerik_aksiyonu: "ICERIGI_ARSIVLE_VE_KULLANICIYI_BILGILENDIR_GUNCELLEME_SECENEGI_SUN"
+        topluluk_tarafindan_guncel_olmayan_icerik_isaretleme_mekanizmasi_aktif_mi: true # Kullanıcılar "Bu bilgi güncel değil" diye işaretleyebilir.
+
+      operasyonel_onceliklendirme_ve_gorunurluk:
+        oncelik_katsayisi_platform_ici: 0.8 # (1.0: Normal, 3.0: En Yüksek Öncelik)
+        # Faydalı ve popüler içeriklerin öne çıkarılması için mekanizmalar:
+        en_cok_okunan_ve_faydali_bulunan_icerikleri_one_cikarma_aktif_mi: true
+        # (Örn: Anasayfada "Popüler Bilgiler" bölümü, kategori listelemelerinde üst sıralar)
+        icerik_kalite_puanlamasi_sistemi_aktif_mi: false # (Gelecekte eklenebilir: Okunabilirlik, kaynak gösterimi, güncellik vb. göre)
+
+      moderasyon_ayarlari:
+        seviye: "ORTA_KAYNAK_VE_DOGRULUK_ODAKLI_KONTROL"
+        # Açıklama: Özellikle sağlık, beslenme ve yasal konularda paylaşılan bilgilerin doğruluğu ve kaynağı önemlidir.
+        # Yanıltıcı veya zararlı olabilecek bilgiler engellenmelidir.
+        yeni_ilan_varsayilan_durum: "INCELEMEDE_YAYIN_ONAYI_BEKLIYOR"
+        uzman_olmayan_kisilerin_kesin_tibbi_veya_yasal_tavsiye_vermesini_engelleme_politikasi:
+        aktif_mi: true
+        uyari_metni_kullanici_arayuzu: "Lütfen unutmayın, bu platformdaki bilgiler genel bilgilendirme amaçlıdır ve profesyonel veteriner hekim veya hukuk danışmanlığı yerine geçmez. Özellikle sağlık ve yasal konularda kendi uzmanınıza danışmanız önemlidir."
+        moderator_kontrol_kriteri: "İçerik, 'kesin teşhis/tedavi' veya 'yasal olarak bağlayıcı' gibi ifadeler içeriyorsa ve kaynak/uzmanlık belirtilmemişse işaretlenir."
+        kaynak_gosterme_tesviki_ve_kontrolu:
+        tesvik_aktif_mi: true
+        tesvik_metni_kullanici_arayuzu: "Bilgilerinizin güvenilirliğini artırmak için, eğer varsa, faydalandığınız kaynakları (makale linki, kitap adı vb.) belirtmeniz önerilir."
+        moderator_kontrol_kriteri: "Özellikle bilimsel veya teknik konularda kaynak belirtilmemişse, kullanıcıya kaynak eklemesi için nazikçe hatırlatma yapılabilir."
+
+      dogrulama_ve_guvenlik_protokolleri:
+        protokol_aktif_mi: true # Özellikle hassas bilgi paylaşımları için.
+        protokol_genel_aciklama_kullanici: "Platformumuzda paylaşılan bilgilerin doğruluğu ve topluluğumuz için faydalı olması en büyük önceliğimizdir. Bu nedenle, özellikle sağlık, beslenme ve yasal gibi hassas konularda paylaşılan içeriklerin kaynağı ve güvenilirliği konusunda ek bilgiler talep edilebilir veya editöryal bir gözden geçirme yapılabilir."
+        
+        uygulanabilecek_dogrulama_senaryolari:
+        - senaryo_kodu: "TIBBI_ICERIK_KAYNAK_DOGRULAMASI"
+          senaryo_aciklamasi_kullanici: "Hayvan sağlığı, hastalıkları veya tedavileri hakkında detaylı bilgi paylaşıyorsanız, bu bilgilerin bilimsel bir temele dayandığını veya güvenilir bir kaynaktan alındığını (varsa kaynak belirterek) göstermeniz beklenir."
+          onemi: "YUKSEK_ONCELIKLI_KONTROL"
+          moderator_kontrol_rehberi: "İçeriğin genel kabul görmüş veterinerlik bilgileriyle çelişip çelişmediği, abartılı veya kanıtlanmamış iddialar içerip içermediği kontrol edilmelidir. Kaynak belirtilmişse, kaynağın güvenilirliği (bilimsel yayın, tanınmış kurum vb.) değerlendirilmelidir."
+
+        - senaryo_kodu: "YASAL_BILGILENDIRME_ICERIK_DOGRULAMASI"
+          senaryo_aciklamasi_kullanici: "Hayvan hakları, sahiplenme yasaları veya ilgili yasal süreçler hakkında bilgi paylaşıyorsanız, bu bilgilerin güncel ve doğru olduğundan emin olmanız ve mümkünse resmi kaynaklara atıfta bulunmanız önemlidir."
+          onemi: "YUKSEK_ONCELIKLI_KONTROL"
+          moderator_kontrol_rehberi: "Paylaşılan yasal bilgilerin yanlış yorumlamalara veya hak kayıplarına yol açmaması için dikkatli olunmalıdır. İçerik, 'yasal tavsiye' niteliğinde olmamalı, genel bilgilendirme düzeyinde kalmalıdır."
+
+        - senaryo_kodu: "KULLANICI_UZMANLIK_BEYANI_DEGERLENDIRMESI" # (Eğer kullanıcı profilde uzmanlık belirtiyorsa)
+          senaryo_aciklamasi_kullanici: "Eğer profilinizde belirli bir alanda (örn: veteriner teknikerliği, köpek eğitmenliği) uzmanlığınız olduğunu belirttiyseniz, bu kategorideki paylaşımlarınız bu beyanınızla birlikte değerlendirilebilir."
+          onemi: "ITIBAR_VE_GUVENILIRLIK_FAKTORU"
+          moderator_kontrol_rehberi: "Kullanıcının beyan ettiği uzmanlıkla paylaştığı içeriğin tutarlılığı ve kalitesi gözlemlenir. Yanıltıcı uzmanlık beyanlarına karşı dikkatli olunmalıdır."
+
+    veri_yapilandirma_ve_dis_ai_optimizasyonu_bilgi_egitim:
+      semantik_icerik_ve_seo_ayarlari:
+        # Bilgi/Eğitim içeriklerinde kullanıcıyı yönlendirecek temel öneriler.
+        akilli_ilan_asistani_icerik_onerileri:
+        - hedef_form_alani_kodu: "ICERIK_BASLIGI_BE" # Formda böyle bir alan olmalı
+          oneri_basligi_kullanici: "Anlaşılır ve İlgi Çekici Bir Başlık Seçin"
+          oneri_detayi_kullanici: "Paylaşacağınız bilginin konusunu net bir şekilde ifade eden, okuyucunun ilgisini çekecek ve ne öğreneceğini anlamasını sağlayacak bir başlık kullanın. Anahtar kelimeler eklemek, içeriğinizin bulunabilirliğini artırır."
+          neden_onemli_aciklamasi_kullanici: "İyi bir başlık, doğru kitlenin içeriğinize ulaşmasını sağlar ve okunma oranını artırır."
+          iyi_ornek_metni_kullanici: "Örn: 'Yavru Kediler İçin Temel Bakım Rehberi' veya 'Köpeklerde Ayrılık Kaygısıyla Başa Çıkma Yolları'"
+          ipucu_tipi: "IYILESTIRME_ONERISI"
+
+        - hedef_form_alani_kodu: "ICERIK_METNI_BE" # Formda böyle bir alan olmalı
+          oneri_basligi_kullanici: "Bilgiyi Açık, Anlaşılır ve Yapılandırılmış Sunun"
+          oneri_detayi_kullanici: "Karmaşık konuları bile basit bir dille anlatmaya çalışın. Kısa paragraflar, madde işaretleri, numaralandırılmış listeler ve (mümkünse) alt başlıklar kullanarak okunabilirliği artırın. Okuyucunun bilgiyi kolayca sindirmesini hedefleyin."
+          neden_onemli_aciklamasi_kullanici: "Anlaşılır ve iyi yapılandırılmış içerikler daha çok okunur, daha iyi anlaşılır ve daha fazla paylaşılır."
+          alt_oneri_maddeleri:
+            - "Hedef kitlenizin bilgi seviyesini göz önünde bulundurun."
+            - "Görsel materyallerle (fotoğraf, infografik linki - eğer uygunsa) desteklemeyi düşünün."
+            - "Pratik örnekler veya uygulanabilir ipuçları verin."
+            - "İçeriğinizin sonunda bir özet veya ana çıkarımları vurgulayın."
+          ipucu_tipi: "BILGILENDIRME"
+
+        - hedef_form_alani_kodu: "KAYNAK_BELIRTME_ALANI_BE" # Formda böyle bir alan olmalı (opsiyonel)
+          oneri_basligi_kullanici: "Kaynaklarınızı Belirterek Güvenilirliğinizi Artırın"
+          oneri_detayi_kullanici: "Eğer paylaştığınız bilgiler belirli bir araştırmaya, uzman görüşüne, kitaba veya makaleye dayanıyorsa, kaynaklarınızı belirtmeniz içeriğinizin güvenilirliğini ve değerini artırır. Bu, özellikle sağlık, beslenme ve davranış gibi konularda önemlidir."
+          neden_onemli_aciklamasi_kullanici: "Kaynak göstermek, bilginin doğruluğunu destekler ve okuyuculara daha derin araştırma yapma imkanı sunar."
+          ipucu_tipi: "IYILESTIRME_ONERISI_ONEMLI"
+
+        semantik_zenginlik_onemi_katsayisi: 0.6 # Bilginin doğruluğu ve anlaşılırlığı daha öncelikli.
+
+      yapilandirilmis_veri_ve_meta_etiket_stratejileri:
+        # Bilgi/Eğitim içerikleri için Schema.org'da "Article", "HowTo", "FAQPage", "EducationalResource", "ScholarlyArticle" gibi tipler kullanılabilir.
+        kullanilacak_schema_org_tipleri:
+        - schema_tipi: "Article" # Veya "EducationalResource", "HowTo" vb. içeriğe göre seçilir
+          alan_eslestirmeleri:
+            - schema_alani: "headline" # İçerik başlığı
+            platform_alani_kaynagi: "ilan.icerik_basligi_be"
+            - schema_alani: "description" # İçeriğin kısa özeti
+            platform_alani_kaynagi: "ilan.icerik_ozeti_be" # (Otomatik veya manuel girilen)
+            - schema_alani: "articleBody" # İçeriğin tam metni
+            platform_alani_kaynagi: "ilan.icerik_metni_be_tam"
+            - schema_alani: "author" # Yazar (kullanıcı profili)
+            platform_alani_kaynagi: "ilan.kullanici_profil_schema_be"
+            schema_alt_tipi: "Person"
+            - schema_alani: "publisher" # Yayıncı (Platform Adı)
+            sabit_deger_objesi: { "@type": "Organization", "name": "Evcil Hayvan Platformu Adı", "logo": "URL_TO_PLATFORM_LOGO" }
+            - schema_alani: "datePublished" # Yayınlanma tarihi
+            platform_alani_kaynagi: "ilan.yayin_tarihi_be_iso"
+            - schema_alani: "dateModified" # Son güncellenme tarihi
+            platform_alani_kaynagi: "ilan.guncellenme_tarihi_be_iso"
+            - schema_alani: "keywords" # Anahtar kelimeler
+            platform_alani_kaynagi: "ilan.anahtar_kelimeler_be_listesi"
+            - schema_alani: "about" # İçeriğin konusu (hayvan türü, konu kategorisi)
+            platform_alani_kaynagi: "ilan.konu_etiketleri_schema_be" # Örn: [{ "@type": "Thing", "name": "Köpek Bakımı" }]
+            - schema_alani: "educationalLevel" # (Eğer uygunsa)
+            platform_alani_kaynagi: "ilan.egitim_seviyesi_be_metin" # Örn: "Başlangıç", "Orta Düzey"
+            - schema_alani: "learningResourceType" # (Eğer uygunsa)
+            platform_alani_kaynagi: "ilan.kaynak_tipi_be_metin" # Örn: "Rehber", "Makale"
+        
+        ozel_meta_etiketler_bilgi_egitim:
+        - etiket_adi: "petplatform:content_category_be"
+          icerik_kaynagi: "ilan.bilgi_kategorisi_ana_be_metin"
+        - etiket_adi: "petplatform:target_pet_type_be"
+          icerik_kaynagi: "ilan.hedef_hayvan_turu_be_metin_listesi"
+        - etiket_adi: "petplatform:content_format_be"
+          icerik_kaynagi: "ilan.icerik_formati_be_metin"
+        - etiket_adi: "petplatform:source_provided_be" # Kaynak belirtilip belirtilmediği
+          icerik_kaynagi: "ilan.kaynak_belirtildi_mi_boolean"
+        - etiket_adi: "petplatform:last_reviewed_date_be" # İçeriğin en son editöryal veya kullanıcı tarafından gözden geçirilme tarihi
+          icerik_kaynagi: "ilan.son_gozden_gecirme_tarihi_be_iso"
+
+      harici_platform_ve_api_entegrasyon_hazirligi:
+        # Bilgi içeriklerinin RSS feed ile sunulması veya eğitim odaklı platformlarla paylaşım.
+        veri_paylasim_formatlari_destegi:
+        - format_adi: "RSS_Feed_Bilgi_Egitim"
+          aktif_mi: true
+          aciklama: "Yeni eklenen bilgi ve eğitim içerikleri için RSS feed."
+        - format_adi: "JSON_API_Bilgi_Egitim_Icerikleri"
+          aktif_mi: true
+        
+        gorsel_erisimi_ve_optimizasyonu_harici_sistemler_icin:
+        # Bu kategoride görseller genellikle içeriği destekleyici olur.
+        gorsel_alt_metin_stratejisi: "ICERIK_BASLIGI_VE_KONUSU_BE"
+        # Şablon: "[İçerik Başlığı] - [Ana Konu] - Evcil Hayvan Bilgi Kaynağı"
+
+      icerik_kalitesi_ve_guvenilirlik_sinyalleri_harici_sistemler_icin:
+        icerik_faydalilik_puani_meta_etiketi_be: "petplatform:content_helpfulness_score_be" # Kullanıcı oylamalarına dayalı
+        yazar_itibari_meta_etiketi_be: "petplatform:author_reputation_score_be" # Yazarın platformdaki genel itibarı (varsa)
+        bilgi_guncelligi_sinyali_meta_etiketi_be: "petplatform:content_freshness_be" # Son güncelleme/gözden geçirme tarihine göre
+
+    istatistikler:
+      beklenen_performans_metrikleri:
+        - "Ortalama ilan görüntülenme: İçeriğin kalitesine ve popülerliğine göre değişken"
+        - "Faydalı bulunma ve paylaşılma oranı: Yüksek (kaliteli içerik için)"
+        - "Topluluğun bilinçlenmesi ve hayvan refahına katkı: Çok Yüksek"
+        - "Platformun güvenilir bir bilgi kaynağı olarak konumlanmasını sağlar."
